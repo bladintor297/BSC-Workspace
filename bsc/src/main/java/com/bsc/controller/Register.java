@@ -72,13 +72,17 @@ public class Register extends HttpServlet {
 	}
 
 	/**
+	 * @return 
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		System.out.println("Test");
 		// TODO Auto-generated method stub
 		String name = request.getParameter("name");
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
+		
 		
 		Users rb = new Users();
 		
@@ -94,7 +98,7 @@ public class Register extends HttpServlet {
 		// out.println(email);
 		// out.println(password);
 		request.setAttribute("name", name);
-		request.getRequestDispatcher("jsp/Welcome.jsp").forward(request, response);;
+		request.getRequestDispatcher("index.jsp").forward(request, response);;
 	}
 
 }

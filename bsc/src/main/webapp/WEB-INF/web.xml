@@ -10,6 +10,12 @@
   	<description></description>
   	<servlet-class>com.bsc.controller.Register</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>Registration</servlet-name>
+  	<display-name>Registration</display-name>
+  	<description></description>
+  	<servlet-class>com.bsc.controller.Registration</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>Register</servlet-name>
   	<url-pattern>/Register</url-pattern>
