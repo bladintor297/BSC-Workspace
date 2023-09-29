@@ -2,7 +2,7 @@
 <!-- Remove "navbar-sticky" class to make navigation bar scrollable with the page -->
 <header class="header navbar navbar-expand-lg bg-light navbar-sticky">
 	<div class="container ps-3">
-		<a href="index.html" class="navbar-brand pe-1"> <img src="assets/img/BSC1.png" width="200" alt="Silicon">
+		<a href="index.html" class="navbar-brand pe-1"> <img src="assets/img/logonew.png" width="200" alt="Black Screen Cinema">
 
 		</a>
 		<div id="navbarNav" class="offcanvas offcanvas-end">
