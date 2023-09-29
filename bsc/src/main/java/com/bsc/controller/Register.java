@@ -98,7 +98,7 @@ public class Register extends HttpServlet {
 		// out.println(email);
 		// out.println(password);
 		request.setAttribute("name", name);
-		request.getRequestDispatcher("index.jsp").forward(request, response);;
+		request.getRequestDispatcher("login.jsp").forward(request, response);;
 	}
 
 }

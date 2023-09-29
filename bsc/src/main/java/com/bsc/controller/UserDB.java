@@ -8,7 +8,7 @@ import com.bsc.beans.Users;
 import com.bsc.model.DBConnection;
 
 public class UserDB {
-	
+
 	String s1 = null;
 
 	public String insertUser(Users rb) {
