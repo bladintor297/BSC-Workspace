@@ -55,7 +55,7 @@
 	          <div class="w-100 align-self-end pt-1 pt-md-4 pb-4" style="max-width: 526px;">
 	            <h1 class="text-center text-xl-start">Welcome Back</h1>
 	            <p class="text-center text-xl-start pb-3 mb-3">New to Black Screen Cinema? <a href="register.jsp" class="text-warning">Register here.</a></p>
-	            <form class="needs-validation mb-2" action="/bsc/Login" novalidate>
+	            <form class="needs-validation mb-2" action="/bsc/Login" method="POST" novalidate>
 	              <div class="position-relative mb-4">
 	                <label for="email" class="form-label fs-base">Email</label>
 	                <input type="email" id="email" name="email" class="form-control form-control-lg" required>
