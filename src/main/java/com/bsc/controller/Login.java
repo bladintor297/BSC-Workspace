@@ -53,13 +53,15 @@ public class Login extends HttpServlet {
 			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bsc?useSSL=false", "root", "@dmin123");
 			PreparedStatement pst = con.prepareStatement("select * from users where email='" + email + "' and password='" + password + "'");
 			ResultSet rs = pst.executeQuery();
+			System.out.println("RS: " + rs);
 			if(rs.next()) {
+				System.out.println("Before session");
 				
 				// Create Session
 				session.setAttribute("email", rs.getString("email"));
 				session.setAttribute("nama", rs.getString("name"));
+				System.out.println("After session");
 
-//				dispatcher = request.getRequestDispatcher("welcome.jsp");
 				response.sendRedirect("welcome.jsp");
 			}else {
 				session.setAttribute("status", "failed");
