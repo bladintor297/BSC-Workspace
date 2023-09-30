@@ -29,10 +29,6 @@
   	<servlet-class>com.bsc.controller.Logout</servlet-class>
   </servlet>
   <servlet>
-  	<servlet-name>Movie</servlet-name>
-  	<display-name>Movie</display-name>
-  	<description></description>
-  	<servlet-class>com.bsc.controller.Movie</servlet-class>
   </servlet>
   <servlet-mapping>
   	<servlet-name>Register</servlet-name>
@@ -47,7 +43,6 @@
   	<url-pattern>/Logout</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-  	<servlet-name>Movie</servlet-name>
-  	<url-pattern>/Movie</url-pattern>
+
   </servlet-mapping>
 </web-app>

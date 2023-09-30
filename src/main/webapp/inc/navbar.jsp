@@ -21,16 +21,16 @@
 			</div>
 			<div class="offcanvas-header border-top">
 				<a
-					href="/profile"
+					href="../profile"
 					class="btn btn-warning w-100" target="_blank" rel="noopener"> <i
 					class="bx bx-cart fs-4 lh-1 me-1"></i> &nbsp;My Profile
 				</a>
 			</div>
 		</div>
 		<a
-			href="/profile"
+			href="/bsc/profile.jsp"
 			class="btn btn-warning btn-sm fs-sm rounded d-none d-lg-inline-flex"
-			target="_blank" rel="noopener"> <i
+			target="_self" rel="noopener"> <i
 			class='bx bxs-user-circle fs-5 lh-1 me-1'></i> &nbsp;My Profile
 		</a>
 		<a href="/bsc/Logout" class="btn btn-link text-warning btn-sm fs-sm rounded d-none d-lg-inline-flex ms-1 rounded-pill"> 
