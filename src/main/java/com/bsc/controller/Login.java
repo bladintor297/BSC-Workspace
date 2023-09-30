@@ -59,10 +59,15 @@ public class Login extends HttpServlet {
 				
 				// Create Session
 				session.setAttribute("email", rs.getString("email"));
-				session.setAttribute("nama", rs.getString("name"));
+				session.setAttribute("name", rs.getString("name"));
+				session.setAttribute("phone", rs.getString("phonenumber"));
 				System.out.println("After session");
-
-				response.sendRedirect("welcome.jsp");
+				
+				/*
+				 * session.getAttribute("email"); session.getAttribute("nama");
+				 * System.out.println("After session");
+				 * 
+				 */				response.sendRedirect("welcome.jsp");
 			}else {
 				session.setAttribute("status", "failed");
 				System.out.println("Wrong email or password");
