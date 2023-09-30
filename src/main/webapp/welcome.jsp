@@ -98,7 +98,7 @@
 
 				<div
 					class="col-3 card-hover shadow-none bg-none position-relative mb-4 mb-lg-5">
-					<a href=mall.jsp"
+					<a href="
 					
 					<% if (session != null && session.getAttribute("email") != null) { %>
 						/Seats
