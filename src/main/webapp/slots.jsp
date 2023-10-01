@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@page import="java.util.ArrayList"%>
+
+<%@page import="com.bsc.beans.Halls"%>
+<%@page import="com.bsc.beans.Malls"%>
+<%@page import="com.bsc.beans.Movies"%>
+<%@page import="com.bsc.beans.MovieSlots"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -37,27 +43,33 @@
 			<h2 class="h1 pt-2 pt-lg-0"> Movie Showtime </h2>
 			
 			<div class="row pb-lg-3 d-flex justify-content-center">
-
+				<%
+				Movies m = (Movies) request.getAttribute("movie");;
+					if (m != null ) {
+				%>
+		
 				<!-- Item -->
 				<div class="col-md-3 ">
 					<div class="card card-portfolio">
 						<div class="card-img">
 							<img
-								src="https://www.grimoireofhorror.com/wp-content/uploads/2023/07/Untitled-design-1.png"
-								alt="Image"
+								src="<%= m.getImagePortrait() %>"
+								alt="<%= m.getTitle() %>"
 								style="height: 300px; width: 100%; object-fit: cover;">
 						</div>
 						<div class="card-body text-center">
 							<h2 class="h4 mb-2">
-								<a  class="stretched-link">Talk
-									to Me (2023)</a>
+								<a  class="stretched-link"><%= m.getTitle() %></a>
 							</h2>
 							<div class="card-portfolio-meta">
-								<span class="text-muted">Horror/Thriller/Drama</span>
+								<span class="text-muted"><%= m.getGenre().replace(", ", "/") %></span>
 							</div>
 						</div>
 					</div>
 				</div>
+				
+				<%} %>
+				
 			</div>
 		</section>
 		
@@ -82,8 +94,11 @@
 				  
 				  <li class="nav-item" role="presentation">
 				  
-				  <% java.util.Calendar calendar = java.util.Calendar.getInstance();
-				  calendar.add(java.util.Calendar.DAY_OF_YEAR, 1); %>
+				  <% 
+				  java.util.Calendar calendar = java.util.Calendar.getInstance();
+				  calendar.add(java.util.Calendar.DAY_OF_YEAR, 1); 
+				  String day2 = new java.text.SimpleDateFormat("yyyy-MM-dd").format(calendar.getTime());
+				  %>
 				  
 				  	<span><%= new java.text.SimpleDateFormat("E").format(calendar.getTime())%></span>
 				    <button class="nav-link rounded-pill" id="day2-tab" data-bs-toggle="tab" data-bs-target="#day2" type="button" role="tab" aria-controls="day2" aria-selected="false">
@@ -95,14 +110,17 @@
 				  
 				  <li class="nav-item" role="presentation">
 				  
-				  <% calendar = java.util.Calendar.getInstance();
-				  calendar.add(java.util.Calendar.DAY_OF_YEAR, 2); %>
+				  <% 
+				  java.util.Calendar calendar2 = java.util.Calendar.getInstance();
+				  calendar2.add(java.util.Calendar.DAY_OF_YEAR, 2);
+				  String day3 = new java.text.SimpleDateFormat("yyyy-MM-dd").format(calendar2.getTime());
+				  %>
 				  
-				  	<span><%= new java.text.SimpleDateFormat("E").format(calendar.getTime())%></span>
+				  	<span><%= new java.text.SimpleDateFormat("E").format(calendar2.getTime())%></span>
 				    <button class="nav-link rounded-pill" id="day3-tab" data-bs-toggle="tab" data-bs-target="#day3" type="button" role="tab" aria-controls="day3" aria-selected="false">
-				    	<span class="h4 p-2 my-auto"><%= new java.text.SimpleDateFormat("dd").format(calendar.getTime()) %></span>
+				    	<span class="h4 p-2 my-auto"><%= new java.text.SimpleDateFormat("dd").format(calendar2.getTime()) %></span>
 				    </button>
-				    <span class="text-uppercase fw-bold"><%= new java.text.SimpleDateFormat("MMM").format(calendar.getTime()) %></span>
+				    <span class="text-uppercase fw-bold"><%= new java.text.SimpleDateFormat("MMM").format(calendar2.getTime()) %></span>
 				    
 				  </li>
 				  
@@ -123,97 +141,67 @@
 		  		  <div class="tab-pane active" id="day1" role="tabpanel" aria-labelledby="day1-tab" tabindex="0">
 				  	<div class="accordion-item border-0 mt-3">
 					  
-					  	<h2 class="accordion-header">
-					      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-					        Berjaya Times Square
-					      </button>
-					    </h2>
-					    <div id="flush-collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionFlushExample">
-					      <div class="accordion-body">
-					      	<div class="row">
-					      	    <div class="col-2">
-					              <div class="position-relative text-center border-end mx-n1">
-					                <a href="#" class="btn-link text-decoration-none">
-						                 <div class="pt-4">
-						                  <h5 class="mb-1">03.30 pm</h5>
-						                  <hr class="bg-warning bg-opacity-10 border border-warning border-start-0 rounded-end mx-5">
-						                  <p class="fs-sm text-muted mb-0">2D</p>
-						                </div>
-					                </a>
-					                
-					              </div>
-					            </div>
-					            <div class="col-2">
-					              <div class="position-relative text-center border-end mx-n1">
-					                <a href="#" class="btn-link text-decoration-none">
-						                 <div class="pt-4">
-						                  <h5 class="mb-1">05.30 pm</h5>
-						                  <hr class="bg-warning bg-opacity-10 border border-warning border-start-0 rounded-end mx-5">
-						                  <p class="fs-sm text-muted mb-0">PC</p>
-						                </div>
-					                </a>
-					                
-					              </div>
-					            </div>
-					            <div class="col-2">
-					              <div class="position-relative text-center border-end mx-n1">
-					                <a href="#" class="btn-link text-decoration-none">
-						                 <div class="pt-4">
-						                  <h5 class="mb-1">08.30 pm</h5>
-						                  <hr class="bg-warning bg-opacity-10 border border-warning border-start-0 rounded-end mx-5">
-						                  <p class="fs-sm text-muted mb-0">2D</p>
-						                </div>
-					                </a>
-					                
-					              </div>
-					            </div>
-					      	</div> 	
-					      </div>
-					      
-					    </div>
+					  <%
+					  	ArrayList<Malls> mall =  (ArrayList<Malls>)request.getAttribute("malls");
+						
+						for(Malls ml:mall){%>
+						
+						  	<h2 class="accordion-header">
+						      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse<%= ml.getMallID() %>" aria-expanded="false" aria-controls="flush-collapse<%= ml.getMallID() %>">
+						        <%= ml.getMallName() %>
+						      </button>
+						    </h2>
+						    
+							
+						    <div id="flush-collapse<%= ml.getMallID() %>" class="accordion-collapse collapse show" data-bs-parent="#accordionFlushExample">
+						      <div class="accordion-body">
+						      	<div class="row">
+						      	    <%
+						      	    
+						      	    
+						      	    int count = 0;
+						      	    ArrayList<MovieSlots> movieslot =  (ArrayList<MovieSlots>)request.getAttribute("movieslots");
+						      	    
+									
+									for(MovieSlots ms:movieslot){
+										if ((new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date())).equals(ms.getDate())){%>
+										
+							            <div class="col-2 ">
+							              <div class="position-relative text-center my-3 <% if (++count % 6 != 0) {%>border-end <%} %> mx-n1">
+							                <a href="/bsc/seats.jsp" class="btn-link text-decoration-none">
+								                 <div class="pt-4">
+								                  <h5 class="mb-1"> <%= ms.getSlot() %></h5>
+								                  <hr class="bg-warning bg-opacity-10 border border-warning border-start-0 rounded-end mx-5">
+								                  <p class="fs-sm text-muted mb-0">
+								                  <%
+								                		  ArrayList<Halls> hall =  (ArrayList<Halls>)request.getAttribute("halls");
+													
+														for(Halls h:hall){
+															if (h.getHallID() == ms.getHall()){ %>
+																<%=  h.getCategory() %>
+															<%	break;
+															}
+															
+														}
+								                  
+								                  %>
+								                  </p>
+								                </div>
+							                </a>
+							                
+							              </div>
+							            </div>
+							            <%}
+							            
+							            }%>
+						      	</div> 	
+						      </div>
+						      
+						    </div>
+					    <%}%>
 					    
 					 </div>
-					 <div class="accordion-item border-0 mt-3">
-					  
-					  	<h2 class="accordion-header">
-					      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-					        Mid Valley Megamall
-					      </button>
-					    </h2>
-					    <div id="flush-collapseTwo" class="accordion-collapse collapse show" data-bs-parent="#accordionFlushExample">
-					    	
-					       <div class="accordion-body">
-					      	<div class="row">
-					      	    <div class="col-2">
-					              <div class="position-relative text-center border-end mx-n1">
-					                <a href="#" class="btn-link text-decoration-none">
-						                 <div class="pt-4">
-						                  <h5 class="mb-1">11.30 am</h5>
-						                  <hr class="bg-warning bg-opacity-10 border border-warning border-start-0 rounded-end mx-5">
-						                  <p class="fs-sm text-muted mb-0">2D</p>
-						                </div>
-					                </a>
-					                
-					              </div>
-					            </div>
-					            <div class="col-2">
-					              <div class="position-relative text-center border-end mx-n1">
-					                <a href="#" class="btn-link text-decoration-none">
-						                 <div class="pt-4">
-						                  <h5 class="mb-1">02.30 pm</h5>
-						                  <hr class="bg-warning bg-opacity-10 border border-warning border-start-0 rounded-end mx-5">
-						                  <p class="fs-sm text-muted mb-0">PC</p>
-						                </div>
-					                </a>
-					                
-					              </div>
-					            </div>
-					      	</div> 	
-					      </div>
-					      
-					    </div>
-					    
-					 </div>
+					 
 				  </div>
 				  
 				  
@@ -221,11 +209,127 @@
 				  
 				  
 				  <div class="tab-pane" id="day2" role="tabpanel" aria-labelledby="day2-tab" tabindex="0">
-				  y
+				  	<div class="accordion-item border-0 mt-3">
+					  
+					  <%
+						
+						for(Malls ml:mall){%>
+						
+						  	<h2 class="accordion-header">
+						      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse<%= ml.getMallID() %>" aria-expanded="false" aria-controls="flush-collapse<%= ml.getMallID() %>">
+						        <%= ml.getMallName() %>
+						      </button>
+						    </h2>
+						    
+							
+						    <div id="flush-collapse<%= ml.getMallID() %>" class="accordion-collapse collapse show" data-bs-parent="#accordionFlushExample">
+						      <div class="accordion-body">
+						      	<div class="row">
+						      	    <%
+						      	    int count = 0;
+						      	    ArrayList<MovieSlots> movieslot =  (ArrayList<MovieSlots>)request.getAttribute("movieslots");
+						      	    
+									
+									for(MovieSlots ms:movieslot){
+										if ((day2).equals(ms.getDate().toString())){%>
+										
+							            <div class="col-2 ">
+							              <div class="position-relative text-center my-3 <% if (++count % 6 != 0) {%>border-end <%} %> mx-n1">
+							                <a href="/bsc/seats.jsp" class="btn-link text-decoration-none">
+								                 <div class="pt-4">
+								                  <h5 class="mb-1"> <%= ms.getSlot() %></h5>
+								                  <hr class="bg-warning bg-opacity-10 border border-warning border-start-0 rounded-end mx-5">
+								                  <p class="fs-sm text-muted mb-0">
+								                  <%
+								                		  ArrayList<Halls> hall =  (ArrayList<Halls>)request.getAttribute("halls");
+													
+														for(Halls h:hall){
+															if (h.getHallID() == ms.getHall()){ %>
+																<%=  h.getCategory() %>
+															<%	break;
+															}
+															
+														}
+								                  
+								                  %>
+								                  </p>
+								                </div>
+							                </a>
+							                
+							              </div>
+							            </div>
+							            <%}
+							            
+							            }%>
+						      	</div> 	
+						      </div>
+						      
+						    </div>
+					    <%}%>
+					    
+					 </div>
 				  </div>
 				  
 				  <div class="tab-pane" id="day3" role="tabpanel" aria-labelledby="day3-tab" tabindex="0">
-				  ...
+				  	<div class="accordion-item border-0 mt-3">
+					  
+					  <%
+						
+						for(Malls ml:mall){%>
+						
+						  	<h2 class="accordion-header">
+						      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse<%= ml.getMallID() %>" aria-expanded="false" aria-controls="flush-collapse<%= ml.getMallID() %>">
+						        <%= ml.getMallName() %>
+						      </button>
+						    </h2>
+						    
+							
+						    <div id="flush-collapse<%= ml.getMallID() %>" class="accordion-collapse collapse show" data-bs-parent="#accordionFlushExample">
+						      <div class="accordion-body">
+						      	<div class="row">
+						      	    <%
+						      	    int count = 0;
+						      	    ArrayList<MovieSlots> movieslot =  (ArrayList<MovieSlots>)request.getAttribute("movieslots");
+						      	    
+									
+									for(MovieSlots ms:movieslot){
+										if ((day3).equals(ms.getDate().toString())){%>
+										
+							            <div class="col-2 ">
+							              <div class="position-relative text-center my-3 <% if (++count % 6 != 0) {%>border-end <%} %> mx-n1">
+							                <a href="/seats.jsp" class="btn-link text-decoration-none">
+								                 <div class="pt-4">
+								                  <h5 class="mb-1"> <%= ms.getSlot() %></h5>
+								                  <hr class="bg-warning bg-opacity-10 border border-warning border-start-0 rounded-end mx-5">
+								                  <p class="fs-sm text-muted mb-0">
+								                  <%
+								                		  ArrayList<Halls> hall =  (ArrayList<Halls>)request.getAttribute("halls");
+													
+														for(Halls h:hall){
+															if (h.getHallID() == ms.getHall()){ %>
+																<%=  h.getCategory() %>
+															<%	break;
+															}
+															
+														}
+								                  
+								                  %>
+								                  </p>
+								                </div>
+							                </a>
+							                
+							              </div>
+							            </div>
+							            <%}
+							            
+							            }%>
+						      	</div> 	
+						      </div>
+						      
+						    </div>
+					    <%}%>
+					    
+					 </div>
 				  </div>
 				  
 			

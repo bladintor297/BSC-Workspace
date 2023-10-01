@@ -22,19 +22,21 @@ import com.bsc.model.DBConnection;
  */
 public class Register extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public Register() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public Register() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		PrintWriter out = response.getWriter();
@@ -44,18 +46,17 @@ public class Register extends HttpServlet {
 		ResultSet rs;
 		String query = "select * from user";
 		ArrayList<Users> userlist = new ArrayList<Users>();
-		
+
 		DBConnection db = new DBConnection();
 		try {
 			con = db.getCon();
-			if(con==null) {
-				out.println("Failed with connection"+con);
-			}else {
-				out.println("Successful with connection" +con);
-				stmt =con.createStatement();
-				rs=stmt.executeQuery(query);
-				while(rs.next())
-				{
+			if (con == null) {
+				out.println("Failed with connection" + con);
+			} else {
+				out.println("Successful with connection" + con);
+				stmt = con.createStatement();
+				rs = stmt.executeQuery(query);
+				while (rs.next()) {
 					Users user = new Users();
 					user.setName(rs.getString("name"));
 					user.setEmail(rs.getString("email"));
@@ -65,40 +66,42 @@ public class Register extends HttpServlet {
 				request.setAttribute("UserData", userlist);
 				request.getRequestDispatcher("jsp/UserList.jsp").forward(request, response);
 			}
-			
+
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		}
 	}
 
 	/**
-	 * @return 
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @return
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		System.out.println("Test");
 		// TODO Auto-generated method stub
 		String name = request.getParameter("name");
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
-		
-		
+
 		Users rb = new Users();
-		
+
 		rb.setName(name);
 		rb.setEmail(email);
 		rb.setPassword(password);
-		
+
 		UserDB ud = new UserDB();
 		String s1 = ud.insertUser(rb);
-		
+
 		System.out.println(s1);
 		// out.println(name);
 		// out.println(email);
 		// out.println(password);
 		request.setAttribute("name", name);
-		request.getRequestDispatcher("login.jsp").forward(request, response);;
+		request.getRequestDispatcher("login.jsp").forward(request, response);
+		;
 	}
 
 }

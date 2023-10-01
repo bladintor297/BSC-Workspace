@@ -36,6 +36,7 @@
 </head>
 <body>
 
+
 	<table class="table table-bordered table-hover">
 		<thead>
 			<tr>
@@ -69,7 +70,7 @@
 						<%ArrayList<Malls> mall =  (ArrayList<Malls>)request.getAttribute("malls");
 							
 						for(Malls m:mall){%>
-							<option value="<%=  m.getMallName()%>"><%= m.getMallName()%></option>
+							<option value="<%= m.getMallID() %>"><%= m.getMallName()%></option>
 						<%}%>
 						</select>
 					</td>
@@ -171,9 +172,9 @@
 								for(Halls h:hall){%>
 									
 									  <div class="col-6">
-										  <input class="form-check-input" type="checkbox" value="<%= h.getHallID() %>" name="hall" id="hall<%= h.getHallID() %>">
-										  <label class="form-check-label" for="hall<%= h.getHallID() %>">
-										    <%= h.getHallName() %> (<%= h.getCategory() %>)
+										  <input class="form-check-input" type="checkbox" value="<%= h.getHallID() %>" name="halls" id="hall<%=h.getHallID()%>">
+										  <label class="form-check-label" for="hall<%=  h.getHallName() %>">
+										    <%=h.getHallName()%> (<%=h.getCategory()%>)
 										  </label>
 									  </div>
 									  

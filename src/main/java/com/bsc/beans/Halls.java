@@ -9,7 +9,8 @@ public class Halls {
 	private int Status;
 	
 	
-	public Halls(String hallName, String category, int capacity, int status) {
+	public Halls(int hallID, String hallName, String category, int capacity, int status) {
+		this.HallID = hallID;
 		this.HallName = hallName;
 		this.Category = category;
 		this.Capacity = capacity;

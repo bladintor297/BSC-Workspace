@@ -3,14 +3,10 @@ package com.bsc.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -26,13 +22,13 @@ import com.bsc.beans.Movies;
 /**
  * Servlet implementation class MovieSlot
  */
-public class MovieSlot extends HttpServlet {
+public class AddMovieSlot extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public MovieSlot() {
+	public AddMovieSlot() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -53,11 +49,9 @@ public class MovieSlot extends HttpServlet {
 			out.println("<title>Servlet StudentServlet</title>");
 			out.println("</head>");
 			out.println("<body>");
-			
-			int movieID = 1; //Tukar id to dynamic 
-			
+
 			ArrayList<Malls> malls = new ArrayList<>();
-			ArrayList<MovieSlots> movieslots = new ArrayList<>();
+			ArrayList<Movies> movies = new ArrayList<>();
 			ArrayList<Halls> halls = new ArrayList<>();
 
 			try {
@@ -67,35 +61,10 @@ public class MovieSlot extends HttpServlet {
 						"jdbc:mysql://localhost:3306/bsc?allowPublicKeyRetrieval=true&useSSL=false", "root",
 						"@dmin123");
 
-				
-				/*------  Retrieve Movies ------ */
-
-				// SQL query to retrieve movie data from the database
-			    String query2 = "SELECT * FROM movieslot WHERE movieID = ?";
-			    PreparedStatement preparedStatement2 = con.prepareStatement(query2);
-			    preparedStatement2.setInt(1, movieID); // Set the movieID parameter
-
-			    // Execute the query
-			    ResultSet resultSet2 = preparedStatement2.executeQuery();
-
-				// Iterate through the result set and populate the ArrayList
-				while (resultSet2.next()) {
-					int movieSlotID = resultSet2.getInt("MovieSlotID");
-					int mall = resultSet2.getInt("Mall");
-					int hall = resultSet2.getInt("Hall");
-					String slot = resultSet2.getString("Slot");
-					String date = resultSet2.getString("Date");
-
-					MovieSlots movieslot = new MovieSlots (movieSlotID, movieID, hall, mall, slot, date);
-					movieslots.add(movieslot);
-				}
-				
-				
 				/*------  Retrieve Malls ------ */
 
 				// SQL query to retrieve mall data from the database
-				String query = "SELECT mall.* FROM mall JOIN movieslot ON mall.MallID = movieslot.Mall WHERE movieslot.MovieID ='" + movieID + "'";
-				
+				String query = "SELECT MallID, MallName, Address FROM mall";
 				PreparedStatement preparedStatement = con.prepareStatement(query);
 
 				// Execute the query
@@ -107,20 +76,34 @@ public class MovieSlot extends HttpServlet {
 					String mallName = resultSet.getString("MallName");
 					String address = resultSet.getString("Address");
 
-					
 					Malls mall = new Malls(mallID, mallName, address);
 					malls.add(mall);
-					
-					// Create a Set to remove duplicates
-					Set<Malls> uniqueMalls = new HashSet<>(malls);
-
-					// Clear the original list and add unique malls back to it
-					malls.clear();
-					malls.addAll(uniqueMalls);
 				}
 
+				/*------  Retrieve Movies ------ */
 
-				
+				// SQL query to retrieve mall data from the database
+				String query2 = "SELECT MovieID, Title, Description, ReleaseDate, Classification, Genre, ImageLandscape, ImagePortrait FROM movie";
+				PreparedStatement preparedStatement2 = con.prepareStatement(query2);
+
+				// Execute the query
+				ResultSet resultSet2 = preparedStatement2.executeQuery();
+
+				// Iterate through the result set and populate the ArrayList
+				while (resultSet2.next()) {
+					int movieID = resultSet2.getInt("MovieID");
+					String title = resultSet2.getString("Title");
+					String description = resultSet2.getString("Description");
+					String releaseDate = resultSet2.getString("ReleaseDate");
+					int classification = resultSet2.getInt("Classification");
+					String genre = resultSet2.getString("Genre");
+					String imageLandscape = resultSet2.getString("ImageLandscape");
+					String imagePortrait = resultSet2.getString("ImagePortrait");
+
+					Movies movie = new Movies(movieID, title, description, releaseDate, classification, genre,
+							imageLandscape, imagePortrait);
+					movies.add(movie);
+				}
 
 				/*------  Retrieve Movies ------ */
 
@@ -130,7 +113,6 @@ public class MovieSlot extends HttpServlet {
 
 				// Execute the query
 				ResultSet resultSet3 = preparedStatement3.executeQuery();
-				
 
 				// Iterate through the result set and populate the ArrayList
 				while (resultSet3.next()) {
@@ -162,13 +144,12 @@ public class MovieSlot extends HttpServlet {
 			// Setting the attribute of the request object
 			// which will be later fetched by a JSP page
 			request.setAttribute("malls", malls);
-			//request.setAttribute("movie", movieslots.get(0));
+			request.setAttribute("movies", movies);
 			request.setAttribute("halls", halls);
-			request.setAttribute("movieslots", movieslots);
 
 			// Creating a RequestDispatcher object to dispatch
 			// the request the request to another resource
-			RequestDispatcher rd = request.getRequestDispatcher("slots.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("add-movie.jsp");
 
 			// The request will be forwarded to the resource
 			// specified, here the resource is a JSP named,
@@ -202,11 +183,6 @@ public class MovieSlot extends HttpServlet {
 			String[] selectedDates = request.getParameterValues("dates");
 			String[] selectedTimes = request.getParameterValues("times");
 			String[] selectedHalls = request.getParameterValues("halls");
-			
-			
-			//Format Date
-		    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); 
-		    
 
 			ArrayList<MovieSlots> movieslots = new ArrayList<>();
 
@@ -233,10 +209,9 @@ public class MovieSlot extends HttpServlet {
 							MovieSlots movieslot = new MovieSlots();
 
 							movieslot.setMovieID(movieID);
-							movieslot.setMall(Integer.parseInt(mall));
-							movieslot.setHall(Integer.parseInt(hall));
+							movieslot.setMall(mall);
+							movieslot.setHall(hall);
 							movieslot.setSlot(time);
-
 							movieslot.setDate(date);
 
 							movieslots.add(movieslot);

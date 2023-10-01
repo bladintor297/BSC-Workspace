@@ -1,37 +1,73 @@
 package com.bsc.beans;
 
+import java.sql.Date;
+
 public class MovieSlots {
 
+	private int movieSlotID;
+	private int movieID;
+	private int hall;
+	private int mall;
+	private String slot;
+	private String date;
+
+	public MovieSlots() {}
 	
-	private String movieID;
-	private String cinemaHallID;
-	private String place;
-	private int slot;
-	
-	public String getMovieID() {
+	public MovieSlots(int movieSlotID, int movieID, int hall, int mall, String slot, String date) {
+		this.movieSlotID = movieSlotID;
+		this.movieID = movieID;
+		this.hall = hall;
+		this.mall = mall;
+		this.slot = slot;
+		this.date = date;
+	}
+
+	public int getMovieID() {
 		return movieID;
 	}
-	public void setMovieID(String movieID) {
+
+	public void setMovieID(int movieID) {
 		this.movieID = movieID;
 	}
-	public String getCinemaHallID() {
-		return cinemaHallID;
+
+	public int getHall() {
+		return hall;
 	}
-	public void setCinemaHallID(String cinemaHallID) {
-		this.cinemaHallID = cinemaHallID;
+
+	public void setHall(int hall) {
+		this.hall = hall;
 	}
-	public String getPlace() {
-		return place;
+
+	public int getMall() {
+		return mall;
 	}
-	public void setPlace(String place) {
-		this.place = place;
+
+	public void setMall(int mall) {
+		this.mall = mall;
 	}
-	public int getSlot() {
+
+	public String getSlot() {
 		return slot;
 	}
-	public void setSlot(int slot) {
-		this.slot = slot;
+
+	public void setSlot(String time) {
+		this.slot = time;
 	}
-	
-	
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+
+	public int getMovieSlotID() {
+		return movieSlotID;
+	}
+
+	public void setMovieSlotID(int movieSlotID) {
+		this.movieSlotID = movieSlotID;
+	}
+
 }

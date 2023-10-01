@@ -1,5 +1,7 @@
 package com.bsc.beans;
 
+import java.util.Objects;
+
 public class Malls {
 	
 	private int MallID;
@@ -31,5 +33,24 @@ public class Malls {
 	public void setMallID(int mallID) {
 		MallID = mallID;
 	}
+	
+	@Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Malls otherMall = (Malls) obj;
+        return MallID == otherMall.MallID &&
+               Objects.equals(MallName, otherMall.MallName) &&
+               Objects.equals(Address, otherMall.Address);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(MallID, MallName, Address);
+    }
 
 }
