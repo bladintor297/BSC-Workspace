@@ -108,3 +108,17 @@
 	background-color: #F8BE52 !important;
 	box-shadow: none;
 }
+
+
+.nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link{
+	background-color: #e1a200 !important;
+}
+
+.header{
+	background-color: #141414 !important;
+}
+
+form-check-input:checked {
+	background-color: #e1a200 !important;
+	
+}

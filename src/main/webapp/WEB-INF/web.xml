@@ -34,6 +34,24 @@
   	<description></description>
   	<servlet-class>com.bsc.controller.Profile</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>Movie</servlet-name>
+  	<display-name>Movie</display-name>
+  	<description></description>
+  	<servlet-class>com.bsc.controller.Movie</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>MovieSlot</servlet-name>
+  	<display-name>MovieSlot</display-name>
+  	<description></description>
+  	<servlet-class>com.bsc.controller.MovieSlot</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>Welcome</servlet-name>
+  	<display-name>Welcome</display-name>
+  	<description></description>
+  	<servlet-class>com.bsc.controller.Welcome</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>Register</servlet-name>
   	<url-pattern>/Register</url-pattern>
@@ -49,5 +67,17 @@
   <servlet-mapping>
   	<servlet-name>Profile</servlet-name>
   	<url-pattern>/Profile</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>Movie</servlet-name>
+  	<url-pattern>/Movie</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>MovieSlot</servlet-name>
+  	<url-pattern>/MovieSlot</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>Welcome</servlet-name>
+  	<url-pattern>/Welcome</url-pattern>
   </servlet-mapping>
 </web-app>
