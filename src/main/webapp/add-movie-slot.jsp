@@ -61,38 +61,39 @@
 					<div class="modal-body">
 						<div class="mb-3" >
 							<label for="exampleFormControlInput1" class="form-label">Title
-							</label> <input type="text" class="form-control" placeholder="Barbie"
+							</label> <input name="Title" type="text" class="form-control" placeholder="Barbie"
 								id="exampleFormControlInput1" >
 						</div>
 						<div class="mb-3">
 							<label for="exampleFormControlTextarea1" class="form-label">Description</label>
-							<textarea class="form-control" id="exampleFormControlTextarea1" placeholder="A live-action musical film based on the popular Mattel toy line."
-								rows="3"></textarea>
+							<input name="Description" class="form-control" id="exampleFormControlTextarea1" placeholder="A live-action musical film based on the popular Mattel toy line."
+								rows="3"></input>
 						</div>
 						<div class="mb-3">
 							<label for="exampleFormControlTextarea1" class="form-label">Release Date</label>
-							<input type="date" class="form-control"
+							<input name="ReleaseDate" type="date" class="form-control"
 								id="exampleFormControlInput1" >
 						</div>
 						<div class="mb-3">
 							<label for="exampleFormControlTextarea1" class="form-label">Classification</label>
-							<input type="text" class="form-control" placeholder="13"
+							<input name="Classification" type="text" class="form-control" placeholder="13"
 								id="exampleFormControlInput1" >
 						</div>
 						<div class="mb-3">
 							<label for="exampleFormControlInput1" class="form-label">Genre</label>
-							<input type="text" class="form-control" placeholder="Musical, Comedy"
+							<input name="Genre" type="text" class="form-control" placeholder="Musical, Comedy"
 								id="exampleFormControlInput1">
 								
 						</div>
-												<div class="mb-3">
-							<label for="exampleFormControlInput1" class="form-label">Landscape image
-							</label> <input type="text" class="form-control" placeholder="https://www.kenosha.com/wp-content/uploads/2023/08/et00072466-jjadjvahwx-landscape-copy.png"
-								id="exampleFormControlInput1" >
-						</div>
-						<div class="mb-3">
+							<div class="mb-3">
+								<label for="exampleFormControlInput1" class="form-label">Landscape
+									image </label> <input name="ImageLandscape" type="text" class="form-control"
+									placeholder="https://www.kenosha.com/wp-content/uploads/2023/08/et00072466-jjadjvahwx-landscape-copy.png"
+									id="exampleFormControlInput1">
+							</div>
+							<div class="mb-3">
 							<label for="exampleFormControlTextarea1" class="form-label">Portrait image</label>
-							<input type="text" class="form-control" placeholder="https://media-cache.cinematerial.com/p/500x/q63ztpjf/barbie-movie-poster.jpg?v=1687352716"
+							<input name="ImagePortrait" type="text" class="form-control" placeholder="https://media-cache.cinematerial.com/p/500x/q63ztpjf/barbie-movie-poster.jpg?v=1687352716"
 								id="exampleFormControlInput1" >
 						</div>
 					</div>

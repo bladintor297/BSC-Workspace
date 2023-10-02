@@ -131,7 +131,7 @@ public class AddMovieSlot extends HttpServlet {
 				/*------  Retrieve Movies ------ */
 
 				// SQL query to retrieve mall data from the database
-				String query4 = "SELECT * FROM movieslots";
+				String query4 = "SELECT * FROM movieslot";
 				PreparedStatement preparedStatement4 = con.prepareStatement(query4);
 
 				// Execute the query
@@ -240,6 +240,7 @@ public class AddMovieSlot extends HttpServlet {
 							movieslot.setHall(Integer.parseInt(hall));
 							movieslot.setSlot(time);
 							movieslot.setDate(date);
+
 
 							movieslots.add(movieslot);
 
