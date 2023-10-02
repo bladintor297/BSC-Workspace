@@ -24,6 +24,17 @@ public class Movies {
 		this.ImagePortrait = imagePortrait;
 	}
 	
+	public Movies(String title, String description, String releaseDate, int classification, String genre,
+			String imageLandscape, String imagePortrait) {
+		this.Title = title;
+		this.Description = description;
+		this.ReleaseDate = releaseDate;
+		this.Classification = classification;
+		this.Genre = genre;
+		this.ImageLandscape = imageLandscape;
+		this.ImagePortrait = imagePortrait;
+	}
+
 	public int getMovieID() {
 		return MovieID;
 	}

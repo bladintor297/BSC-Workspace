@@ -41,8 +41,75 @@
 <%@include file="inc/navbar.jsp"%>
 	<section class="container text-center pt-2 mt-2 mt-md-4">			
 		<h2 class="h5 pt-2 pt-lg-0"> Manage Movies </h2>
+
+		<!-- Button trigger modal -->
+		<button type="button" class="btn btn-warning" data-bs-toggle="modal"
+			data-bs-target="#exampleModal"><i class="bx bx-movie"></i>Add New Movie</button>
+
+		<!-- Modal -->
+		<div class="modal fade" id="exampleModal" tabindex="-1"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title fs-5" id="exampleModalLabel">Movie Details</h1>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<!-- Form -->
+					<form class="text-start" action="/bsc/AddNewMovie" method="post">
+					<div class="modal-body">
+						<div class="mb-3" >
+							<label for="exampleFormControlInput1" class="form-label">Title
+							</label> <input type="text" class="form-control" placeholder="Barbie"
+								id="exampleFormControlInput1" >
+						</div>
+						<div class="mb-3">
+							<label for="exampleFormControlTextarea1" class="form-label">Description</label>
+							<textarea class="form-control" id="exampleFormControlTextarea1" placeholder="A live-action musical film based on the popular Mattel toy line."
+								rows="3"></textarea>
+						</div>
+						<div class="mb-3">
+							<label for="exampleFormControlTextarea1" class="form-label">Release Date</label>
+							<input type="date" class="form-control"
+								id="exampleFormControlInput1" >
+						</div>
+						<div class="mb-3">
+							<label for="exampleFormControlTextarea1" class="form-label">Classification</label>
+							<input type="text" class="form-control" placeholder="13"
+								id="exampleFormControlInput1" >
+						</div>
+						<div class="mb-3">
+							<label for="exampleFormControlInput1" class="form-label">Genre</label>
+							<input type="text" class="form-control" placeholder="Musical, Comedy"
+								id="exampleFormControlInput1">
+								
+						</div>
+												<div class="mb-3">
+							<label for="exampleFormControlInput1" class="form-label">Landscape image
+							</label> <input type="text" class="form-control" placeholder="https://www.kenosha.com/wp-content/uploads/2023/08/et00072466-jjadjvahwx-landscape-copy.png"
+								id="exampleFormControlInput1" >
+						</div>
+						<div class="mb-3">
+							<label for="exampleFormControlTextarea1" class="form-label">Portrait image</label>
+							<input type="text" class="form-control" placeholder="https://media-cache.cinematerial.com/p/500x/q63ztpjf/barbie-movie-poster.jpg?v=1687352716"
+								id="exampleFormControlInput1" >
+						</div>
+					</div>
+					<!--  -->
+					
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-bs-dismiss="modal">Close</button>
+						<button type="submit" class="btn btn-warning">Submit</button>
+					</div>
+					</form>
+				</div>
+			</div>
+		</div>
 	</section>
-	<table class="table table-bordered table-hover">
+
+	<table class="table table-bordered table-hover mt-2">
 		<thead>
 			<tr>
 				<th >Movie Title</th>

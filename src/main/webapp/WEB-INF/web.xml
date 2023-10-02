@@ -58,6 +58,12 @@
   	<description></description>
   	<servlet-class>com.bsc.controller.AddMovieSlot</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>AddNewMovie</servlet-name>
+  	<display-name>AddNewMovie</display-name>
+  	<description></description>
+  	<servlet-class>com.bsc.controller.AddNewMovie</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>Register</servlet-name>
   	<url-pattern>/Register</url-pattern>
@@ -89,5 +95,9 @@
   <servlet-mapping>
   	<servlet-name>AddMovieSlot</servlet-name>
   	<url-pattern>/AddMovieSlot</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>AddNewMovie</servlet-name>
+  	<url-pattern>/AddNewMovie</url-pattern>
   </servlet-mapping>
 </web-app>
