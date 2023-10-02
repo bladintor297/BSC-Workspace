@@ -28,7 +28,7 @@
 			target="_blank" rel="noopener"> <i class="bx bx-cog"></i>
 			&nbsp;Manage Movies
 		</a> 
-		<a href="/bsc/profile.jsp" class="btn btn-warning btn-sm fs-sm rounded d-none d-lg-inline-flex" target="_self" rel="noopener"> 
+		<a href="/bsc/Profile" class="btn btn-warning btn-sm fs-sm rounded d-none d-lg-inline-flex" target="_self" rel="noopener"> 
 			<i class='bx bxs-user-circle fs-5 lh-1 me-1'></i> &nbsp;My Profile
 		</a>
 		<a href="/bsc/Logout" class="btn btn-link text-warning btn-sm fs-sm rounded d-none d-lg-inline-flex ms-1 rounded-pill"> 

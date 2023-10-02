@@ -52,15 +52,17 @@ public class Login extends HttpServlet {
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bsc?allowPublicKeyRetrieval=true&useSSL=false", "root", "@dmin123");
 			PreparedStatement pst = con.prepareStatement("select * from users where email='" + email + "' and password='" + password + "'");
+			
 			ResultSet rs = pst.executeQuery();
-			System.out.println("RS: " + rs);
+
 			if(rs.next()) {
 				System.out.println("Before session");
 				
 				// Create Session
+				session.setAttribute("id", rs.getString("id"));
 				session.setAttribute("email", rs.getString("email"));
 				session.setAttribute("name", rs.getString("name"));
-				// session.setAttribute("phone", rs.getString("phonenumber"));
+				session.setAttribute("phone", rs.getString("phone"));
 				System.out.println("After session");
 				
 				/*
