@@ -25,8 +25,8 @@
 		</div>
 		<a href="/bsc/AddMovieSlot"
 			class="btn btn-warning btn-sm fs-sm rounded d-none d-lg-inline-flex me-1 "
-			target="_blank" rel="noopener"> <i class="bx bx-cart"></i>
-			&nbsp;Add Movie
+			target="_blank" rel="noopener"> <i class="bx bx-cog"></i>
+			&nbsp;Manage Movies
 		</a> 
 		<a href="/bsc/profile.jsp" class="btn btn-warning btn-sm fs-sm rounded d-none d-lg-inline-flex" target="_self" rel="noopener"> 
 			<i class='bx bxs-user-circle fs-5 lh-1 me-1'></i> &nbsp;My Profile
