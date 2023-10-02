@@ -53,7 +53,7 @@ public class AddMovieSlot extends HttpServlet {
 			ArrayList<Malls> malls = new ArrayList<>();
 			ArrayList<Movies> movies = new ArrayList<>();
 			ArrayList<Halls> halls = new ArrayList<>();
-			
+
 			ArrayList<MovieSlots> movieslots = new ArrayList<>();
 
 			try {
@@ -63,7 +63,6 @@ public class AddMovieSlot extends HttpServlet {
 						"jdbc:mysql://localhost:3306/bsc?allowPublicKeyRetrieval=true&useSSL=false", "root",
 						"@dmin123");
 
-				
 				/*------  Retrieve Malls ------ */
 
 				// SQL query to retrieve mall data from the database
@@ -108,8 +107,6 @@ public class AddMovieSlot extends HttpServlet {
 					movies.add(movie);
 				}
 
-				
-				
 				/*------  Retrieve Movies ------ */
 
 				// SQL query to retrieve mall data from the database
@@ -130,9 +127,7 @@ public class AddMovieSlot extends HttpServlet {
 					Halls hall = new Halls(id, hallName, category, capacity, status);
 					halls.add(hall);
 				}
-				
-				
-				
+
 				/*------  Retrieve Movies ------ */
 
 				// SQL query to retrieve mall data from the database
@@ -151,7 +146,7 @@ public class AddMovieSlot extends HttpServlet {
 					String slot = resultSet4.getString("Slot");
 					String date = resultSet4.getString("Date");
 
-					MovieSlots movieslot = new MovieSlots (movieSlotID, movieID, hall, mall, slot, date);
+					MovieSlots movieslot = new MovieSlots(movieSlotID, movieID, hall, mall, slot, date);
 					movieslots.add(movieslot);
 				}
 
@@ -165,7 +160,7 @@ public class AddMovieSlot extends HttpServlet {
 
 				resultSet3.close();
 				preparedStatement3.close();
-				
+
 				resultSet4.close();
 				preparedStatement4.close();
 
@@ -226,7 +221,7 @@ public class AddMovieSlot extends HttpServlet {
 						"@dmin123");
 
 				/*------  Retrieve Malls ------ */
-				
+
 				String query = " ";
 				PreparedStatement preparedStatement = null;
 				int resultSet = 0;
@@ -254,7 +249,6 @@ public class AddMovieSlot extends HttpServlet {
 							preparedStatement.setString(4, time);
 							preparedStatement.setString(5, date);
 
-
 							// Execute the query
 							resultSet = preparedStatement.executeUpdate();
 
@@ -268,7 +262,7 @@ public class AddMovieSlot extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
+
 			response.sendRedirect("/bsc/AddMovieSlot");
 			out.println("</body>");
 			out.println("</html>");
