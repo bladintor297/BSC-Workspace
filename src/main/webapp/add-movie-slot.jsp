@@ -3,6 +3,7 @@
 <%@page import="com.bsc.beans.Malls"%>
 <%@page import="com.bsc.beans.Movies"%>
 <%@page import="com.bsc.beans.Halls"%>
+<%@page import="com.bsc.beans.MovieSlots"%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -36,7 +37,11 @@
 </head>
 <body>
 
-
+<%@include file="inc/spinner.jsp"%>
+<%@include file="inc/navbar.jsp"%>
+	<section class="container text-center pt-2 mt-2 mt-md-4">			
+		<h2 class="h5 pt-2 pt-lg-0"> Manage Movies </h2>
+	</section>
 	<table class="table table-bordered table-hover">
 		<thead>
 			<tr>
@@ -50,8 +55,8 @@
 			</tr>
 		</thead>
 		<tbody>
-			<form action="/bsc/MovieSlot" method="POST">
-				<tr>
+			<tr>
+				<form action="/bsc/AddMovieSlot" method="POST">
 					<td>
 						<select name="movieID" class="form-select">
 							<option value="0" selected disabled><em>- Select movie -</em></option>
@@ -104,7 +109,7 @@
 					</td>
 
 					
-					<td >
+					<td>
 						<div class="form-check">
 						  <div class="row">
 							  <div class="col-4 mt-2">
@@ -167,9 +172,10 @@
 					<td>
 						<div class="form-check">
 							<div class="row">
-								<%ArrayList<Halls> hall =  (ArrayList<Halls>)request.getAttribute("halls");
-									
-								for(Halls h:hall){%>
+								<%
+								ArrayList<Halls> hall =  (ArrayList<Halls>)request.getAttribute("halls");
+								for(Halls h:hall){
+								%>
 									
 									  <div class="col-6">
 										  <input class="form-check-input" type="checkbox" value="<%= h.getHallID() %>" name="halls" id="hall<%=h.getHallID()%>">
@@ -194,8 +200,11 @@
 							<button type="reset" class="btn btn-danger btn-sm">Clear</button>
 						</div>
 					</td>
-				</tr>
-			</form>
+				</form>
+			</tr>
+			
+			
+			
 		</tbody>
 	</table>
 	

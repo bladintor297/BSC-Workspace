@@ -53,6 +53,8 @@ public class AddMovieSlot extends HttpServlet {
 			ArrayList<Malls> malls = new ArrayList<>();
 			ArrayList<Movies> movies = new ArrayList<>();
 			ArrayList<Halls> halls = new ArrayList<>();
+			
+			ArrayList<MovieSlots> movieslots = new ArrayList<>();
 
 			try {
 				// Load the MySQL JDBC driver
@@ -61,6 +63,7 @@ public class AddMovieSlot extends HttpServlet {
 						"jdbc:mysql://localhost:3306/bsc?allowPublicKeyRetrieval=true&useSSL=false", "root",
 						"@dmin123");
 
+				
 				/*------  Retrieve Malls ------ */
 
 				// SQL query to retrieve mall data from the database
@@ -105,6 +108,8 @@ public class AddMovieSlot extends HttpServlet {
 					movies.add(movie);
 				}
 
+				
+				
 				/*------  Retrieve Movies ------ */
 
 				// SQL query to retrieve mall data from the database
@@ -125,6 +130,30 @@ public class AddMovieSlot extends HttpServlet {
 					Halls hall = new Halls(id, hallName, category, capacity, status);
 					halls.add(hall);
 				}
+				
+				
+				
+				/*------  Retrieve Movies ------ */
+
+				// SQL query to retrieve mall data from the database
+				String query4 = "SELECT * FROM movieslots";
+				PreparedStatement preparedStatement4 = con.prepareStatement(query4);
+
+				// Execute the query
+				ResultSet resultSet4 = preparedStatement4.executeQuery();
+
+				// Iterate through the result set and populate the ArrayList
+				while (resultSet4.next()) {
+					int movieSlotID = resultSet4.getInt("MovieSlotID");
+					int movieID = resultSet4.getInt("MovieID");
+					int mall = resultSet4.getInt("Mall");
+					int hall = resultSet4.getInt("Hall");
+					String slot = resultSet4.getString("Slot");
+					String date = resultSet4.getString("Date");
+
+					MovieSlots movieslot = new MovieSlots (movieSlotID, movieID, hall, mall, slot, date);
+					movieslots.add(movieslot);
+				}
 
 				// Close resources
 				con.close();
@@ -136,6 +165,9 @@ public class AddMovieSlot extends HttpServlet {
 
 				resultSet3.close();
 				preparedStatement3.close();
+				
+				resultSet4.close();
+				preparedStatement4.close();
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -149,7 +181,7 @@ public class AddMovieSlot extends HttpServlet {
 
 			// Creating a RequestDispatcher object to dispatch
 			// the request the request to another resource
-			RequestDispatcher rd = request.getRequestDispatcher("add-movie.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("add-movie-slot.jsp");
 
 			// The request will be forwarded to the resource
 			// specified, here the resource is a JSP named,
@@ -209,8 +241,8 @@ public class AddMovieSlot extends HttpServlet {
 							MovieSlots movieslot = new MovieSlots();
 
 							movieslot.setMovieID(movieID);
-							movieslot.setMall(mall);
-							movieslot.setHall(hall);
+							movieslot.setMall(Integer.parseInt(mall));
+							movieslot.setHall(Integer.parseInt(hall));
 							movieslot.setSlot(time);
 							movieslot.setDate(date);
 
@@ -236,6 +268,10 @@ public class AddMovieSlot extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			
+			response.sendRedirect("/bsc/AddMovieSlot");
+			out.println("</body>");
+			out.println("</html>");
 
 		}
 
