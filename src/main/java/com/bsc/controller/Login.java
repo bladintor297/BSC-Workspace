@@ -33,7 +33,7 @@ public class Login extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		response.sendRedirect("welcome.jsp");
+		response.sendRedirect("login.jsp");
 		response.getWriter().append("This is a get function in Login.java \nHantar user balik pegi login page. \nRedirect sini when no session created");
 	}
 
@@ -60,14 +60,14 @@ public class Login extends HttpServlet {
 				// Create Session
 				session.setAttribute("email", rs.getString("email"));
 				session.setAttribute("name", rs.getString("name"));
-				session.setAttribute("phone", rs.getString("phonenumber"));
+				// session.setAttribute("phone", rs.getString("phonenumber"));
 				System.out.println("After session");
 				
 				/*
 				 * session.getAttribute("email"); session.getAttribute("nama");
 				 * System.out.println("After session");
 				 * 
-				 */				response.sendRedirect("welcome.jsp");
+				 */ response.sendRedirect("/bsc/Welcome");
 			}else {
 				session.setAttribute("status", "failed");
 				System.out.println("Wrong email or password");
