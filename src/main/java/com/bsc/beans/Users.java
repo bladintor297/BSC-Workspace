@@ -5,8 +5,16 @@ public class Users {
 	private String name;
 	private String email;
 	private String password;
+	private String phone;
 	private int role;
 	
+	public Users() {}
+	
+	public Users(String name, String email, String phone) {
+		this.name = name;
+		this.email = email;
+		this.phone = phone;
+	}
 	public String getName() {
 		return name;
 	}
@@ -25,6 +33,12 @@ public class Users {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+		public String getPhone() {
+			return phone;
+		}
+		public void setPhone(String phone) {
+			this.phone = phone;
+		}
 	public int getRole() {
 		return role;
 	}
