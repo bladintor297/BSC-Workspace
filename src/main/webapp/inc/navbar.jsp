@@ -17,11 +17,17 @@
 				</ul>
 			</div>
 			<div class="offcanvas-header border-top">
+
 				<a href="../profile" class="btn btn-warning w-100" target="_blank" rel="noopener"> 
 					<i class="bx bx-cart fs-4 lh-1 me-1"></i> &nbsp;My Profile
 				</a>
 			</div>
 		</div>
+		<a href="/bsc/AddMovieSlot"
+			class="btn btn-warning btn-sm fs-sm rounded d-none d-lg-inline-flex me-1 "
+			target="_blank" rel="noopener"> <i class="bx bx-cart"></i>
+			&nbsp;Add Movie
+		</a> 
 		<a href="/bsc/profile.jsp" class="btn btn-warning btn-sm fs-sm rounded d-none d-lg-inline-flex" target="_self" rel="noopener"> 
 			<i class='bx bxs-user-circle fs-5 lh-1 me-1'></i> &nbsp;My Profile
 		</a>
@@ -30,13 +36,14 @@
 		</a>
 		<% } else {%>
 			<div class="d-flex justify-content-end">
-				<a
+<a
 				href="/bsc/Login"
-				class="btn btn-warning btn-sm fs-sm rounded d-none d-lg-inline-flex"
+				class="btn btn-warning btn-sm fs-sm rounded d-none d-lg-inline-flex ms-2"
 				target="_self" rel="noopener"> <i
 				class='bx bxs-user-circle fs-5 lh-1 me-1'></i> &nbsp;Login
-			</a>
-			</div>
+			</a> 
+		</div>
+			
 		<% } %>
 	</div>
 </header>
