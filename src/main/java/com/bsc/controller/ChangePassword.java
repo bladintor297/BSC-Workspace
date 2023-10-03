@@ -17,10 +17,10 @@ import javax.servlet.http.HttpSession;
 
 import com.bsc.beans.Users; // Assuming you have a User class
 
-public class Profile extends HttpServlet {
+public class ChangePassword extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public Profile() {
+	public ChangePassword() {
 		super();
 	}
 
@@ -63,9 +63,8 @@ public class Profile extends HttpServlet {
 
 				if (resultSet.next()) {
 				    // Retrieve the data from the result set and set it in the Users object
-				    user.setName(resultSet.getString("name"));
-				    user.setEmail(resultSet.getString("email"));
-				    user.setPhone(resultSet.getString("phone"));
+				    user.setPassword(resultSet.getString("setPassword"));
+;
 				}
 
 
@@ -108,14 +107,11 @@ public class Profile extends HttpServlet {
 			// Step 3: Get variables (if neccessary)
 
 			/* Example: */
-			String email = request.getParameter("email");
-			String name = request.getParameter("name");
-			String phone = request.getParameter("phone");
+			String Password = request.getParameter("cnp");
 			HttpSession session = request.getSession();
 			Users user_passed  = new Users();
-			user_passed.setEmail(email);
-			user_passed.setName(name);
-			user_passed.setPhone(phone);
+			user_passed.setPassword(Password);
+			
 			
 			
 			// String password = request.getParameter("password");
@@ -132,17 +128,15 @@ public class Profile extends HttpServlet {
 				PreparedStatement preparedStatement = null;
 
 				// Step 6: Run query
-				query = "UPDATE users SET name = ?, email = ?, phone = ? WHERE id = ?";
+				query = "UPDATE users SET password = ? WHERE id = ?";
 				preparedStatement = con.prepareStatement(query);
 
 				// Step 7: Create single variable from arraylist
 				
 
 				// Step 8: Set data to variable
-				preparedStatement.setString(1, name);
-				preparedStatement.setString(2, email);
-				preparedStatement.setString(3, phone);
-				preparedStatement.setInt(4, Integer.parseInt((String) session.getAttribute("id"))); // Assuming 'id' is
+				preparedStatement.setString(1, Password);
+				preparedStatement.setInt(2, Integer.parseInt((String) session.getAttribute("id"))); // Assuming 'id' is
 																									// an integer
 				/* -- Add more here -- */
 
@@ -150,9 +144,7 @@ public class Profile extends HttpServlet {
 				preparedStatement.executeUpdate();
 				ResultSet resultSet = preparedStatement.executeQuery();
 				
-				u.setName(resultSet.getString("name"));
-			    u.setEmail(resultSet.getString("email"));
-			    u.setPhone(resultSet.getString("phone"));
+				u.setName(resultSet.getString("setPassword"));
 
 
 				
@@ -162,7 +154,7 @@ public class Profile extends HttpServlet {
 			}
 			
 			request.setAttribute("user", u);
-			response.sendRedirect("/bsc/Profile");
+			response.sendRedirect("/bsc/change-password.jsp");
 			out.println("</body>");
 			out.println("</html>");
 

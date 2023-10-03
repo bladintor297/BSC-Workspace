@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.bsc.model.*;
 import com.bsc.beans.*;
 import com.bsc.model.DBConnection;
 
