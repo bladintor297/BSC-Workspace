@@ -1,4 +1,8 @@
+<%@page import="java.util.Comparator"%>
+<%@page import="java.util.Collections"%>
 <%@page import="java.util.ArrayList"%>
+<%@ page import="java.util.ArrayList, java.text.SimpleDateFormat, java.util.Calendar, java.util.Date" %>
+
 
 <%@page import="com.bsc.beans.Malls"%>
 <%@page import="com.bsc.beans.Movies"%>
@@ -281,24 +285,32 @@
 			
 			
 				<% ArrayList<MovieSlots> movieslots = (ArrayList<MovieSlots>) request.getAttribute("movieslots");
+												  
+
+				if (movieslots != null){ %>
+				<%
+				for (int i = 0; i < movieslots.size(); i++) {
+					
+					
+
+					SimpleDateFormat formattedDate = new SimpleDateFormat("dd-MMM");
 				
-				if (movieslots != null){%>
-				
-	
-				<%for (int i = 0; i < movieslots.size(); i++) {%>
-	
+					
+				%>
 				<tr>
 					<th scope="row"><%=i + 1%>.</th>
 					<td><%=movieslots.get(i).getMovieTitle() %></td>
 					<td><%=movieslots.get(i).getMallName()%></td>
-					<td><%=movieslots.get(i).getDate()%></td>
+					<td><%= movieslots.get(i).getDate() %></td>
 					<td><%=movieslots.get(i).getSlot()%></td>
-					<td><%=movieslots.get(i).getHallName()%></td> 
+					<td><%=(movieslots.get(i).getHallName())%> (<%=movieslots.get(i).getHallCategory()%>)</td>
 					<td>
 						<span class="badge bg-success rounded-pill px-3"> Successful</span>
 					</td>
 					<td>
-						<button type="button" class="btn btn-danger btn-lg btn-block btn-sm">Delete</button>
+							<a href="/bsc/ManageMovieSlot" class="btn btn-danger btn-lg btn-block btn-sm">Delete</a>
+						
+						
 					</td>
 				</tr>
 	

@@ -131,15 +131,10 @@ public class AddMovieSlot extends HttpServlet {
 				/*------  Retrieve Movies ------ */
 
 				// SQL query to retrieve mall data from the database
-				String query4 = "SELECT "
-				        + "movieslot.*, "
-						+ "mall.MallName AS MallName, "
-				        + "movie.Title AS MovieTitle, "
-				        + "hall.HallName AS HallName, "
-				        + "hall.Category AS HallCategory "
-				        + "FROM movieslot "
-				        + "JOIN hall ON movieslot.Hall = hall.HallID "
-				        + "JOIN mall ON movieslot.Mall = mall.MallID "
+				String query4 = "SELECT " + "movieslot.*, " + "mall.MallName AS MallName, "
+						+ "movie.Title AS MovieTitle, " + "hall.HallName AS HallName, "
+						+ "hall.Category AS HallCategory " + "FROM movieslot "
+						+ "JOIN hall ON movieslot.Hall = hall.HallID " + "JOIN mall ON movieslot.Mall = mall.MallID "
 						+ "JOIN movie ON movieslot.MovieID = movie.MovieID ";
 				PreparedStatement preparedStatement4 = con.prepareStatement(query4);
 
