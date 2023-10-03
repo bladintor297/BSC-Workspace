@@ -1,4 +1,8 @@
+<%@page import="java.util.Comparator"%>
+<%@page import="java.util.Collections"%>
 <%@page import="java.util.ArrayList"%>
+<%@ page import="java.util.ArrayList, java.text.SimpleDateFormat, java.util.Calendar, java.util.Date" %>
+
 
 <%@page import="com.bsc.beans.Malls"%>
 <%@page import="com.bsc.beans.Movies"%>
@@ -41,10 +45,13 @@
 <%@include file="inc/navbar.jsp"%>
 	<section class="container text-center pt-2 mt-2 mt-md-4">			
 		<h2 class="h5 pt-2 pt-lg-0"> Manage Movies </h2>
+	
 
 		<!-- Button trigger modal -->
+		<div class="d-flex justify-content-end">
 		<button type="button" class="btn btn-warning" data-bs-toggle="modal"
 			data-bs-target="#exampleModal"><i class="bx bx-movie"></i>Add New Movie</button>
+		</div>
 
 		<!-- Modal -->
 		<div class="modal fade" id="exampleModal" tabindex="-1"
@@ -111,11 +118,12 @@
 				</div>
 			</div>
 		</div>
-	</section>
+	
 
 	<table class="table table-bordered table-hover mt-2">
 		<thead>
 			<tr>
+				<th scope="row">No.</th>
 				<th >Movie Title</th>
 				<th >Mall</th>
 				<th >Date</th>
@@ -128,6 +136,7 @@
 		<tbody>
 			<tr>
 				<form action="/bsc/AddMovieSlot" method="POST">
+					<td></td>
 					<td>
 						<select name="movieID" class="form-select">
 							<option value="0" selected disabled><em>- Select movie -</em></option>
@@ -274,58 +283,44 @@
 				</form>
 			</tr>
 			
+			
+				<% ArrayList<MovieSlots> movieslots = (ArrayList<MovieSlots>) request.getAttribute("movieslots");
+												  
 
-			<tr>
-				<form action="/bsc/AddMovieSlot" method="GET">
-					<%
-					if (request.getAttribute("movieslot") != null) {
+				if (movieslots != null){ %>
+				<%
+				for (int i = 0; i < movieslots.size(); i++) {
+					
+					
 
-						ArrayList<MovieSlots> movieslots = (ArrayList<MovieSlots>) request.getAttribute("movieslots");
-						for (MovieSlots m : movieslots) {
-					%>
+					SimpleDateFormat formattedDate = new SimpleDateFormat("dd-MMM");
+				
 					
-					<td>
-						<p>m.getMovieID</p>
-					</td>
-					
-					
-					
-					<td>
-						
-					</td>
-					
-					
-					
-					<td>
-					    
-					</td>
-					
-					
-					
-					<td>
-						
-					</td>
-					
-					
-					
-					<td>
-						
-					</td>
-
-
+				%>
+				<tr>
+					<th scope="row"><%=i + 1%>.</th>
+					<td><%=movieslots.get(i).getMovieTitle() %></td>
+					<td><%=movieslots.get(i).getMallName()%></td>
+					<td><%= movieslots.get(i).getDate() %></td>
+					<td><%=movieslots.get(i).getSlot()%></td>
+					<td><%=(movieslots.get(i).getHallName())%> (<%=movieslots.get(i).getHallCategory()%>)</td>
 					<td>
 						<span class="badge bg-success rounded-pill px-3"> Successful</span>
 					</td>
+					<td>
+							<a href="/bsc/ManageMovieSlot" class="btn btn-danger btn-lg btn-block btn-sm">Delete</a>
+						
+						
+					</td>
+				</tr>
+	
+				<%}}%>
 
-
-				</form>
-			</tr><%}}%>
-			
 			
 			
 		</tbody>
 	</table>
-	
+	</section>
 	
 	
 	
