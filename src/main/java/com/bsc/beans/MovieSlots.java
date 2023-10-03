@@ -8,6 +8,7 @@ public class MovieSlots {
 	private int mall;
 	private String slot;
 	private String date;
+	private int status;
 	
 	
 	//Foreign Keys Data
@@ -27,11 +28,12 @@ public class MovieSlots {
 		this.mall = mall;
 		this.slot = slot;
 		this.date = date;
+		
 	}
 	
 
 	public MovieSlots(int movieSlotID, int movieID, int hall, int mall, String slot, String date, String hallCategory,
-			String movieTitle, String hallName, String mallName) {
+			String movieTitle, String hallName, String mallName,  int status) {
 		this.movieSlotID = movieSlotID;
 		this.movieID = movieID;
 		this.hall = hall;
@@ -42,6 +44,7 @@ public class MovieSlots {
 		this.hallName = hallName;
 		this.movieTitle = movieTitle;
 		this.mallName = mallName;
+		this.status = status;
 	}
 
 	public int getMovieID() {
@@ -125,6 +128,14 @@ public class MovieSlots {
 
 	public void setMallName(String mallName) {
 		this.mallName = mallName;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
 	}
 
 

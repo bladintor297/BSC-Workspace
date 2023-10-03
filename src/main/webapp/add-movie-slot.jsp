@@ -286,7 +286,8 @@
 			
 				<% ArrayList<MovieSlots> movieslots = (ArrayList<MovieSlots>) request.getAttribute("movieslots");
 												  
-
+				Collections.sort(movieslots, Collections.reverseOrder());
+												  
 				if (movieslots != null){ %>
 				<%
 				for (int i = 0; i < movieslots.size(); i++) {
@@ -305,16 +306,23 @@
 					<td><%=movieslots.get(i).getSlot()%></td>
 					<td><%=(movieslots.get(i).getHallName())%> (<%=movieslots.get(i).getHallCategory()%>)</td>
 					<td>
-						<span class="badge bg-success rounded-pill px-3"> Successful</span>
+						
+						<% if (movieslots.get(i).getStatus() == 1){ %>
+							<span class="badge bg-danger rounded-pill px-3"> Cancelled</span>
+						<%} else { %>
+							<span class="badge bg-success rounded-pill px-3"> Successful</span>
+						<%} %>
 					</td>
 					<td>
-							<a href="/bsc/ManageMovieSlot" class="btn btn-danger btn-lg btn-block btn-sm">Delete</a>
+							<a href="/bsc/ManageMovieSlot?movieslotID=<%=movieslots.get(i).getMovieSlotID()%>" class="btn btn-danger btn-lg btn-block btn-sm">Delete</a>
 						
 						
 					</td>
 				</tr>
 	
-				<%}}%>
+				<%}%>
+				<%}%>
+				
 
 			
 			
