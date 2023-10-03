@@ -131,7 +131,16 @@ public class AddMovieSlot extends HttpServlet {
 				/*------  Retrieve Movies ------ */
 
 				// SQL query to retrieve mall data from the database
-				String query4 = "SELECT * FROM movieslot";
+				String query4 = "SELECT "
+				        + "movieslot.*, "
+						+ "mall.MallName AS MallName, "
+				        + "movie.Title AS MovieTitle, "
+				        + "hall.HallName AS HallName, "
+				        + "hall.Category AS HallCategory "
+				        + "FROM movieslot "
+				        + "JOIN hall ON movieslot.Hall = hall.HallID "
+				        + "JOIN mall ON movieslot.Mall = mall.MallID "
+						+ "JOIN movie ON movieslot.MovieID = movie.MovieID ";
 				PreparedStatement preparedStatement4 = con.prepareStatement(query4);
 
 				// Execute the query
@@ -139,14 +148,20 @@ public class AddMovieSlot extends HttpServlet {
 
 				// Iterate through the result set and populate the ArrayList
 				while (resultSet4.next()) {
+
 					int movieSlotID = resultSet4.getInt("MovieSlotID");
 					int movieID = resultSet4.getInt("MovieID");
-					int mall = resultSet4.getInt("Mall");
-					int hall = resultSet4.getInt("Hall");
+					int mallID = resultSet4.getInt("Mall");
+					int hallID = resultSet4.getInt("Hall");
 					String slot = resultSet4.getString("Slot");
 					String date = resultSet4.getString("Date");
+					String category = resultSet4.getString("HallCategory");
+					String movieTitle = resultSet4.getString("MovieTitle");
+					String hallName = resultSet4.getString("HallName");
+					String mallName = resultSet4.getString("MallName");
 
-					MovieSlots movieslot = new MovieSlots(movieSlotID, movieID, hall, mall, slot, date);
+					MovieSlots movieslot = new MovieSlots(movieSlotID, movieID, hallID, mallID, slot, date, category,
+							movieTitle, hallName, mallName);
 					movieslots.add(movieslot);
 				}
 

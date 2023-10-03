@@ -41,10 +41,13 @@
 <%@include file="inc/navbar.jsp"%>
 	<section class="container text-center pt-2 mt-2 mt-md-4">			
 		<h2 class="h5 pt-2 pt-lg-0"> Manage Movies </h2>
+	
 
 		<!-- Button trigger modal -->
+		<div class="d-flex justify-content-end">
 		<button type="button" class="btn btn-warning" data-bs-toggle="modal"
 			data-bs-target="#exampleModal"><i class="bx bx-movie"></i>Add New Movie</button>
+		</div>
 
 		<!-- Modal -->
 		<div class="modal fade" id="exampleModal" tabindex="-1"
@@ -111,7 +114,7 @@
 				</div>
 			</div>
 		</div>
-	</section>
+	
 
 	<table class="table table-bordered table-hover mt-2">
 		<thead>
@@ -276,34 +279,36 @@
 				</form>
 			</tr>
 			
-			<% ArrayList<MovieSlots> movieslots = (ArrayList<MovieSlots>) request.getAttribute("movieslots");
 			
-			if (movieslots != null){%>
-			
+				<% ArrayList<MovieSlots> movieslots = (ArrayList<MovieSlots>) request.getAttribute("movieslots");
+				
+				if (movieslots != null){%>
+				
+	
+				<%for (int i = 0; i < movieslots.size(); i++) {%>
+	
+				<tr>
+					<th scope="row"><%=i + 1%>.</th>
+					<td><%=movieslots.get(i).getMovieTitle() %></td>
+					<td><%=movieslots.get(i).getMallName()%></td>
+					<td><%=movieslots.get(i).getDate()%></td>
+					<td><%=movieslots.get(i).getSlot()%></td>
+					<td><%=movieslots.get(i).getHallName()%></td> 
+					<td>
+						<span class="badge bg-success rounded-pill px-3"> Successful</span>
+					</td>
+					<td>
+						<button type="button" class="btn btn-danger btn-lg btn-block btn-sm">Delete</button>
+					</td>
+				</tr>
+	
+				<%}}%>
 
-			<%for (int i = 0; i < movieslots.size(); i++) {%>
-
-			<tr>
-				<th scope="row"><%=i + 1%>.</th>
-				<td><%=movieslots.get(i).getMovieID()%></td>
-				<td><%=movieslots.get(i).getMall()%></td>
-				<td><%=movieslots.get(i).getDate()%></td>
-				<td><%=movieslots.get(i).getSlot()%></td>
-				<td><%=movieslots.get(i).getHall()%></td> 
-				<td>
-					<span class="badge bg-success rounded-pill px-3"> Successful</span>
-				</td>
-				<td>
-					<button type="button" class="btn btn-danger btn-lg btn-block btn-sm">Delete</button>
-				</td>
-			</tr>
-
-			<%}}%>
 			
 			
 		</tbody>
 	</table>
-	
+	</section>
 	
 	
 	
