@@ -96,12 +96,13 @@ public class MovieSlot extends HttpServlet {
 					int hallID = resultSet.getInt("Hall");
 					String slot = resultSet.getString("Slot");
 					String date = resultSet.getString("Date");
+					int status = resultSet.getInt("status");
 					String category = resultSet.getString("HallCategory");
 					String movieTitle = resultSet.getString("MovieTitle");
 					String hallName = resultSet.getString("HallName");
 					String mallName = resultSet.getString("MallName");
 
-					MovieSlots movieslot = new MovieSlots (movieSlotID, movieID, hallID, mallID, slot, date, category, movieTitle, hallName, mallName);
+					MovieSlots movieslot = new MovieSlots (movieSlotID, movieID, hallID, mallID, slot, date, category, movieTitle, hallName, mallName, status);
 					movieslots.add(movieslot);
 				}
 				

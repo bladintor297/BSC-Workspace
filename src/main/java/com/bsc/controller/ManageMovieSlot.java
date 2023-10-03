@@ -46,9 +46,7 @@ public class ManageMovieSlot extends HttpServlet {
 			out.println("<body>");
 
 			// Variables from Form
-
-			ArrayList<MovieSlots> deletemov = new ArrayList<>();
-
+			int movieslotID = Integer.parseInt(request.getParameter("movieslotID"));
 			try {
 				// Load the MySQL JDBC driver
 				Class.forName("com.mysql.jdbc.Driver");
@@ -56,11 +54,13 @@ public class ManageMovieSlot extends HttpServlet {
 						"jdbc:mysql://localhost:3306/bsc?allowPublicKeyRetrieval=true&useSSL=false", "root",
 						"@dmin123");
 
-				/*------  Delete Malls ------ */
+				/*------  Delete entry------ */
 
-				String query = "DELETE FROM movieslot WHERE ";
+				String query = "UPDATE movieslot SET status = ? WHERE movieslotID = ?";
 				PreparedStatement preparedStatement = con.prepareStatement(query);
-				int resultSet = preparedStatement.executeUpdate();
+				preparedStatement.setInt(1,  1);
+				preparedStatement.setInt(2,  movieslotID);
+				preparedStatement.executeUpdate();
 
 				// Execute the query
 

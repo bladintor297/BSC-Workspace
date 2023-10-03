@@ -135,7 +135,7 @@ public class AddMovieSlot extends HttpServlet {
 						+ "movie.Title AS MovieTitle, " + "hall.HallName AS HallName, "
 						+ "hall.Category AS HallCategory " + "FROM movieslot "
 						+ "JOIN hall ON movieslot.Hall = hall.HallID " + "JOIN mall ON movieslot.Mall = mall.MallID "
-						+ "JOIN movie ON movieslot.MovieID = movie.MovieID ";
+						+ "JOIN movie ON movieslot.MovieID = movie.MovieID ORDER BY movieslot.date DESC";
 				PreparedStatement preparedStatement4 = con.prepareStatement(query4);
 
 				// Execute the query
@@ -150,13 +150,14 @@ public class AddMovieSlot extends HttpServlet {
 					int hallID = resultSet4.getInt("Hall");
 					String slot = resultSet4.getString("Slot");
 					String date = resultSet4.getString("Date");
+					int status = resultSet4.getInt("status");
 					String category = resultSet4.getString("HallCategory");
 					String movieTitle = resultSet4.getString("MovieTitle");
 					String hallName = resultSet4.getString("HallName");
 					String mallName = resultSet4.getString("MallName");
 
 					MovieSlots movieslot = new MovieSlots(movieSlotID, movieID, hallID, mallID, slot, date, category,
-							movieTitle, hallName, mallName);
+							movieTitle, hallName, mallName, status);
 					movieslots.add(movieslot);
 				}
 
