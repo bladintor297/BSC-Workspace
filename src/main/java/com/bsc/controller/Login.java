@@ -33,7 +33,7 @@ public class Login extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		response.sendRedirect("login.jsp");
+
 		response.getWriter().append("This is a get function in Login.java \nHantar user balik pegi login page. \nRedirect sini when no session created");
 	}
 
