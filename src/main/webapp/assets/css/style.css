@@ -122,11 +122,3 @@ form-check-input:checked {
 	background-color: #e1a200 !important;
 	
 }
-
-.accordion-button:not(.collapsed)::after{
-	background-color: #e1a200 !important;
-}
-
-.accordion-button::after {
-	background-color: #e1a20038 !important;
-}

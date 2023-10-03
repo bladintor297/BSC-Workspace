@@ -55,8 +55,10 @@ public class MovieSlot extends HttpServlet {
 			out.println("<body>");
 			
 			int movieID = 1; //Tukar id to dynamic 
-
+			
+			ArrayList<Malls> malls = new ArrayList<>();
 			ArrayList<MovieSlots> movieslots = new ArrayList<>();
+			ArrayList<Halls> halls = new ArrayList<>();
 
 			try {
 				// Load the MySQL JDBC driver
@@ -67,40 +69,79 @@ public class MovieSlot extends HttpServlet {
 
 				
 				/*------  Retrieve Movies ------ */
-				
-				String query = "SELECT "
-				        + "movieslot.*, "
-				        + "mall.MallName as MallName, "
-				        + "movie.Title AS MovieTitle, "
-				        + "hall.HallName AS HallName, "
-				        + "hall.Category AS HallCategory "
-				        + "FROM movieslot "
-				        + "JOIN hall ON movieslot.Hall = hall.HallID "
-				        + "JOIN mall ON movieslot.Mall = mall.MallID "
-				        + "JOIN movie ON movieslot.MovieID = movie.MovieID "
-				        + "WHERE movieslot.MovieID = ?";
 
-			    PreparedStatement preparedStatement = con.prepareStatement(query);
-			    preparedStatement.setInt(1, movieID); // Set the movieID parameter
+				// SQL query to retrieve movie data from the database
+			    String query2 = "SELECT * FROM movieslot WHERE movieID = ?";
+			    PreparedStatement preparedStatement2 = con.prepareStatement(query2);
+			    preparedStatement2.setInt(1, movieID); // Set the movieID parameter
 
 			    // Execute the query
-			    ResultSet resultSet = preparedStatement.executeQuery();
+			    ResultSet resultSet2 = preparedStatement2.executeQuery();
+
+				// Iterate through the result set and populate the ArrayList
+				while (resultSet2.next()) {
+					int movieSlotID = resultSet2.getInt("MovieSlotID");
+					int mall = resultSet2.getInt("Mall");
+					int hall = resultSet2.getInt("Hall");
+					String slot = resultSet2.getString("Slot");
+					String date = resultSet2.getString("Date");
+
+					MovieSlots movieslot = new MovieSlots (movieSlotID, movieID, hall, mall, slot, date);
+					movieslots.add(movieslot);
+				}
+				
+				
+				/*------  Retrieve Malls ------ */
+
+				// SQL query to retrieve mall data from the database
+				String query = "SELECT mall.* FROM mall JOIN movieslot ON mall.MallID = movieslot.Mall WHERE movieslot.MovieID ='" + movieID + "'";
+				
+				PreparedStatement preparedStatement = con.prepareStatement(query);
+
+				// Execute the query
+				ResultSet resultSet = preparedStatement.executeQuery();
 
 				// Iterate through the result set and populate the ArrayList
 				while (resultSet.next()) {
-					
-					int movieSlotID = resultSet.getInt("MovieSlotID");
-					int mallID = resultSet.getInt("Mall");
-					int hallID = resultSet.getInt("Hall");
-					String slot = resultSet.getString("Slot");
-					String date = resultSet.getString("Date");
-					String category = resultSet.getString("HallCategory");
-					String movieTitle = resultSet.getString("MovieTitle");
-					String hallName = resultSet.getString("HallName");
+					int mallID = resultSet.getInt("MallID");
 					String mallName = resultSet.getString("MallName");
+					String address = resultSet.getString("Address");
 
-					MovieSlots movieslot = new MovieSlots (movieSlotID, movieID, hallID, mallID, slot, date, category, movieTitle, hallName, mallName);
-					movieslots.add(movieslot);
+					
+					Malls mall = new Malls(mallID, mallName, address);
+					malls.add(mall);
+					
+					// Create a Set to remove duplicates
+					Set<Malls> uniqueMalls = new HashSet<>(malls);
+
+					// Clear the original list and add unique malls back to it
+					malls.clear();
+					malls.addAll(uniqueMalls);
+				}
+
+
+				
+
+				/*------  Retrieve Movies ------ */
+
+				// SQL query to retrieve mall data from the database
+				String query3 = "SELECT * FROM hall";
+				PreparedStatement preparedStatement3 = con.prepareStatement(query3);
+
+				// Execute the query
+				ResultSet resultSet3 = preparedStatement3.executeQuery();
+				
+
+				// Iterate through the result set and populate the ArrayList
+				while (resultSet3.next()) {
+					int id = resultSet3.getInt("HallID");
+					String hallName = resultSet3.getString("HallName"); // Replace with the actual column name
+					String category = resultSet3.getString("Category"); // Replace with the actual column name
+					int capacity = resultSet3.getInt("Capacity"); // Replace with the actual column name
+					int status = resultSet3.getInt("Status"); // Replace with the actual column name
+
+					Halls hall = new Halls(id, hallName, category, capacity, status);
+					halls.add(hall);
 				}
 
 				// Close resources
@@ -108,17 +149,31 @@ public class MovieSlot extends HttpServlet {
 				resultSet.close();
 				preparedStatement.close();
 
+				resultSet2.close();
+				preparedStatement2.close();
+
+				resultSet3.close();
+				preparedStatement3.close();
 
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 
+			// Setting the attribute of the request object
+			// which will be later fetched by a JSP page
+			request.setAttribute("malls", malls);
+			//request.setAttribute("movie", movieslots.get(0));
+			request.setAttribute("halls", halls);
 			request.setAttribute("movieslots", movieslots);
 
+			// Creating a RequestDispatcher object to dispatch
+			// the request the request to another resource
 			RequestDispatcher rd = request.getRequestDispatcher("slots.jsp");
 
+			// The request will be forwarded to the resource
+			// specified, here the resource is a JSP named,
+			// "stdlist.jsp"
 			rd.forward(request, response);
-			
 			out.println("</body>");
 			out.println("</html>");
 		}
