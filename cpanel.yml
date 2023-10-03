@@ -1,0 +1,6 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home6/idhamanu/public_html/BlackScreenCinema
+    - /bin/mkdir -p $DEPLOYPATH
+    - /usr/bin/rsync -r --exclude=.git --exclude=.cpanel.yml $TRAVIS_BUILD_DIR/ $DEPLOYPATH/
