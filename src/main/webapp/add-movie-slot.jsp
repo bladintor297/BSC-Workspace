@@ -286,7 +286,7 @@
 			
 				<% ArrayList<MovieSlots> movieslots = (ArrayList<MovieSlots>) request.getAttribute("movieslots");
 												  
-				Collections.sort(movieslots, Collections.reverseOrder());
+				//Collections.sort(movieslots, Collections.reverseOrder());
 												  
 				if (movieslots != null){ %>
 				<%
