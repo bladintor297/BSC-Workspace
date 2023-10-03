@@ -37,12 +37,7 @@
 
 <!-- Body -->
 <body>
-
-
-
-
-
-	<main class="page-wrapper">
+<main class="page-wrapper">
 	
 	<%@include file="inc/navbar.jsp"%>
 	
@@ -50,9 +45,7 @@
 	<!-- Page content -->
       <section class="container pt-5">
         <div class="row">
-
-  
-          <!-- Sidebar (User info + Account menu) -->
+        <!-- Sidebar (User info + Account menu) -->
           <aside class="col-lg-3 col-md-4 border-end pb-5 mt-n5">
             <div class="position-sticky top-0">
               <div class="text-center pt-5">
@@ -69,16 +62,16 @@
                   Account menu
                   <i class="bx bx-chevron-down fs-lg ms-1"></i>
                 </button>
-                <div id="account-menu" class="list-group list-group-flush collapse d-md-block">
-                  <a href="account-details.html" class="list-group-item list-group-item-action d-flex align-items-center active">
+                <div id="profile.jsp" class="list-group list-group-flush collapse d-md-block">
+                  <a href="account-details.html" class="list-group-item list-group-item-action d-flex align-items-center">
                     <i class="bx bx-cog fs-xl opacity-60 me-2"></i>
                     Account Details
                   </a>
-                  <a href="/bsc/change-password.jsp" class="list-group-item list-group-item-action d-flex align-items-center">
+                  <a href="profile.jsp" class="list-group-item list-group-item-action d-flex align-items-center  active">
                     <i class="bx bx-lock-alt fs-xl opacity-60 me-2"></i>
                     Password
                   </a>
-                  <a href="account-notifications.html" class="list-group-item list-group-item-action d-flex align-items-center">
+                  <a href="profile.jsp" class="list-group-item list-group-item-action d-flex align-items-center">
                     <i class="bx bx-bell fs-xl opacity-60 me-2"></i>
                     Notifications
                   </a>
@@ -92,60 +85,75 @@
               </div>
             </div>
           </aside>
-
-
-          <!-- Account details -->
+          
+          
+          <!-- Password -->
           <div class="col-md-8 offset-lg-1 pb-5 mb-2 mb-lg-4  mt-md-0">
             <div class="ps-md-3 ps-lg-0 mt-md-2 pb-md-4">
-              <h1 class="h2 pb-3">Account Details</h1>
+              <h1 class="h2 pb-3">Password</h1>
 
               <!-- Basic info -->
-              <h2 class="h5 text-warning mb-4">Basic info</h2>
+              <h2 class="h5 text-warning mb-4">Change Password</h2>
               
               <% 
               Users user = (Users) request.getAttribute("user");  %>
               
-              <form class="needs-validation border-bottom pb-3 pb-lg-4"  action="/bsc/Profile" method="POST"  novalidate>
+
+              <!-- Password -->
+              <form class="needs-validation border-bottom pb-3 pb-lg-4" action="/bsc/ChangePassword" method="POST"  novalidate> 
+                <div class="row">
+                  <div class="col-sm-6 mb-4">
+                    <label for="cp" class="form-label fs-base">Current password</label>
+                    <div class="password-toggle">
+                      <input type="password" id="cp" name="cp" class="form-control form-control-lg" required>
+                      <label class="password-toggle-btn" aria-label="Show/hide password">
+                        <input class="password-toggle-check" type="checkbox">
+                        <span class="password-toggle-indicator"></span>
+                      </label>
+                      <div class="invalid-tooltip position-absolute top-100 start-0">Incorrect password!</div>
+                    </div>
+                  </div>
+                </div>
                 <div class="row pb-2">
                   <div class="col-sm-6 mb-4">
-                    <label for="fn" class="form-label fs-base">Full name</label>
-                    <input type="text" id="fn" name="name" class="form-control form-control-lg" value="<%= user.getName() %>" required>
-                    <div class="invalid-feedback">Please enter your first name!</div>
+                    <label for="np" class="form-label fs-base">New password</label>
+                    <div class="password-toggle">
+                      <input type="password" name="np" id="np" class="form-control form-control-lg" required>
+                      <label class="password-toggle-btn" aria-label="Show/hide password">
+                        <input class="password-toggle-check" type="checkbox">
+                        <span class="password-toggle-indicator"></span>
+                      </label>
+                      <div class="invalid-tooltip position-absolute top-100 start-0">Incorrect password!</div>
+                    </div>
                   </div>
-               
                   <div class="col-sm-6 mb-4">
-                    <label for="email" class="form-label fs-base">Email address</label>
-                    <input type="email" id="email" name="email" class="form-control form-control-lg" value=<%= user.getEmail() %> required>
-                    <div class="invalid-feedback">Please provide a valid email address!</div>
+                    <label for="cnp" class="form-label fs-base">Confirm new password</label>
+                    <div class="password-toggle">
+                      <input type="password" name="cnp" id="cnp" class="form-control form-control-lg" required>
+                      <label class="password-toggle-btn" aria-label="Show/hide password">
+                        <input class="password-toggle-check" type="checkbox">
+                        <span class="password-toggle-indicator"></span>
+                      </label>
+                      <div class="invalid-tooltip position-absolute top-100 start-0">Incorrect password!</div>
+                    </div>
                   </div>
-                  <div class="col-sm-6 mb-4">
-                    <label for="phone" class="form-label fs-base">Phone <small class="text-muted">(optional)</small></label>
-                    <input type="text" id="phone" name="phone" class="form-control form-control-lg" data-format='{"numericOnly": true, "delimiters": ["+60 ", " ", " "], "blocks": [0, 3, 3, 2]}' value="<%= user.getPhone()%>">
-                  </div>
-                  
                 </div>
                 <div class="d-flex mb-3">
                   <button type="reset" class="btn btn-secondary me-3">Cancel</button>
-                  <button type="submit" class="btn btn-warning">Save changes</button>
+                  <button type="submit" class="btn btn-primary">Save changes</button>
                 </div>
               </form>
-
-
-              <!-- Delete account -->
-              <h2 class="h5 text-primary pt-1 pt-lg-3 mt-4">Delete account</h2>
-              <p>When you delete your account, your public profile will be deactivated immediately. If you change your mind before the 14 days are up, sign in with your email and password, and we will send you a link to reactivate your account.</p>
-              <div class="form-check mb-4">
-                <input type="checkbox" id="delete-account" class="form-check-input">
-                <label for="delete-account" class="form-check-label fs-base">Yes, I want to delete my account</label>
               </div>
-              <button type="button" class="btn btn-danger">Delete</button>
-            </div>
-          </div>
+              </div>
         </div>
       </section>
-	</main>
 
-	<%@include file="inc/top-btn.jsp"%>
+</main>
+  
+          
+
+
+    <%@include file="inc/top-btn.jsp"%>
 
 
 
