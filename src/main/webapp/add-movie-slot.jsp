@@ -76,9 +76,12 @@
 						</div>
 						<div class="mb-3">
 							<label for="exampleFormControlTextarea1" class="form-label">Classification</label>
-							<input name="Classification" type="text" class="form-control" placeholder="13"
-								id="exampleFormControlInput1" >
-						</div>
+							 <select name="Classification" class="form-select" id="autoSizingSelect">
+									<option selected>Choose...</option>
+									<option value="1">13</option>
+									<option value="2">18</option>
+								</select>
+							</div>
 						<div class="mb-3">
 							<label for="exampleFormControlInput1" class="form-label">Genre</label>
 							<input name="Genre" type="text" class="form-control" placeholder="Musical, Comedy"
@@ -271,10 +274,59 @@
 				</form>
 			</tr>
 			
+
+			<tr>
+				<form action="/bsc/AddMovieSlot" method="GET">
+					<%
+					if (request.getAttribute("movieslot") != null) {
+
+						ArrayList<MovieSlots> movieslots = (ArrayList<MovieSlots>) request.getAttribute("movieslots");
+						for (MovieSlots m : movieslots) {
+					%>
+					
+					<td>
+						<p>m.getMovieID</p>
+					</td>
+					
+					
+					
+					<td>
+						
+					</td>
+					
+					
+					
+					<td>
+					    
+					</td>
+					
+					
+					
+					<td>
+						
+					</td>
+					
+					
+					
+					<td>
+						
+					</td>
+
+
+					<td>
+						<span class="badge bg-success rounded-pill px-3"> Successful</span>
+					</td>
+
+
+				</form>
+			</tr><%}}%>
+			
 			
 			
 		</tbody>
 	</table>
+	
+	
 	
 	
 		<script src="assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
