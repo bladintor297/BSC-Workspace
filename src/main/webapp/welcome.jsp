@@ -84,7 +84,13 @@
 						</div>
 						<div class="card-body text-center">
 							<h2 class="h4 mb-2">
-								<a href="movie-selection.html" class="stretched-link"><%= m.getTitle() %></a>
+								<a href="
+								<% if (session != null && session.getAttribute("email") != null) { %>
+									/bsc/MovieSlot?movieID=<%=m.getMovieID() %>
+								<% }else { %>
+									/bsc/Login
+								<% } %>
+								" class="stretched-link"><%= m.getTitle() %></a>
 							</h2>
 							<div class="card-portfolio-meta">
 								<span class="text-muted"><%= m.getGenre().replace(", ", "/") %></span>
@@ -107,7 +113,7 @@
 								<a href="
 								
 								<% if (session != null && session.getAttribute("email") != null) { %>
-									/Seats
+									/bsc/MovieSlot?movieID=<%=m.getMovieID() %>
 								<% }else { %>
 									/bsc/Login
 								<% } %>

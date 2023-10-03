@@ -48,11 +48,6 @@
 	      <!-- Page content -->
 	      <section class="position-relative h-100 pt-5 pb-4">
 	      
-	     <div class="m-3">
-	      Email: <%= session.getAttribute("email") %> <br>
-	      Name: <%= session.getAttribute("name") %> <br>
-	      Phone: <%= session.getAttribute("phone") %>
-	     </div>
 	        <!-- Sign in form -->
 	        <div class="container d-flex flex-wrap justify-content-center justify-content-xl-start h-100 pt-5">
 	          <div class="position-absolute top-0 end-0 w-50 h-100 bg-position-center bg-repeat-0 bg-size-cover d-none d-xl-block" style="background-image: url(assets/img/account/signin.png);"></div>

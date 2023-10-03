@@ -49,7 +49,7 @@
                 <h2 class="h1 pt-2 pt-lg-0"> Movie Showtime </h2>
 
                 <div class="row pb-lg-3 d-flex justify-content-center">
-                    <% Movies m= (Movies) request.getAttribute("movie");; if (m !=null ) { %>
+                    <% Movies m = (Movies) request.getAttribute("movie");  %>
 
                         <!-- Item -->
                         <div class="col-md-3 ">
@@ -73,7 +73,7 @@
                             </div>
                         </div>
 
-                        <%} %>
+                       
 
                 </div>
             </section>

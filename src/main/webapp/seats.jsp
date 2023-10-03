@@ -27,7 +27,7 @@
 
 	<%
 		//later tukar ni
-		if (session != null && session.getAttribute("email") == null) { %>
+		if (session != null && session.getAttribute("email") != null) { %>
 		
 		
 		<%@include file="inc/navbar.jsp"%>	

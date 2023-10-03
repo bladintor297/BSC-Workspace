@@ -54,10 +54,11 @@ public class MovieSlot extends HttpServlet {
 			out.println("</head>");
 			out.println("<body>");
 			
-			int movieID = 1; //Tukar id to dynamic 
+			int movieID = Integer.parseInt(request.getParameter("movieID")); //Tukar id to dynamic 
 
 			ArrayList<MovieSlots> movieslots = new ArrayList<>();
-
+			Movies movie = null;
+			
 			try {
 				// Load the MySQL JDBC driver
 				Class.forName("com.mysql.jdbc.Driver");
@@ -66,7 +67,8 @@ public class MovieSlot extends HttpServlet {
 						"@dmin123");
 
 				
-				/*------  Retrieve Movies ------ */
+				
+				/*------  Retrieve Movie Slots ------ */
 				
 				String query = "SELECT "
 				        + "movieslot.*, "
@@ -102,6 +104,30 @@ public class MovieSlot extends HttpServlet {
 					MovieSlots movieslot = new MovieSlots (movieSlotID, movieID, hallID, mallID, slot, date, category, movieTitle, hallName, mallName);
 					movieslots.add(movieslot);
 				}
+				
+				
+				
+				/*------  Retrieve Movie Details ------ */
+				
+				query = "SELECT * FROM movie WHERE MovieID = ?";
+				preparedStatement = con.prepareStatement(query);
+			    preparedStatement.setInt(1, movieID);
+			    
+			    // Execute the query
+			    resultSet = preparedStatement.executeQuery();
+			    
+			    while (resultSet.next()) {
+			        int MovieID = resultSet.getInt("MovieID");
+					String title = resultSet.getString("Title");
+					String description = resultSet.getString("Description");
+					String releaseDate = resultSet.getString("ReleaseDate");
+					int classification = resultSet.getInt("Classification");
+					String genre = resultSet.getString("Genre");
+					String imageLandscape = resultSet.getString("ImageLandscape");
+					String imagePortrait = resultSet.getString("ImagePortrait");
+					
+					movie = new Movies (MovieID, title, description, releaseDate, classification, genre, imageLandscape, imagePortrait);
+			    }
 
 				// Close resources
 				con.close();
@@ -114,6 +140,7 @@ public class MovieSlot extends HttpServlet {
 			}
 
 			request.setAttribute("movieslots", movieslots);
+			request.setAttribute("movie", movie);
 
 			RequestDispatcher rd = request.getRequestDispatcher("slots.jsp");
 
