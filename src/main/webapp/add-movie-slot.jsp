@@ -116,6 +116,7 @@
 	<table class="table table-bordered table-hover mt-2">
 		<thead>
 			<tr>
+				<th scope="row">No.</th>
 				<th >Movie Title</th>
 				<th >Mall</th>
 				<th >Date</th>
@@ -128,6 +129,7 @@
 		<tbody>
 			<tr>
 				<form action="/bsc/AddMovieSlot" method="POST">
+					<td></td>
 					<td>
 						<select name="movieID" class="form-select">
 							<option value="0" selected disabled><em>- Select movie -</em></option>
@@ -274,53 +276,29 @@
 				</form>
 			</tr>
 			
+			<% ArrayList<MovieSlots> movieslots = (ArrayList<MovieSlots>) request.getAttribute("movieslots");
+			
+			if (movieslots != null){%>
+			
+
+			<%for (int i = 0; i < movieslots.size(); i++) {%>
 
 			<tr>
-				<form action="/bsc/AddMovieSlot" method="GET">
-					<%
-					if (request.getAttribute("movieslot") != null) {
+				<th scope="row"><%=i + 1%>.</th>
+				<td><%=movieslots.get(i).getMovieID()%></td>
+				<td><%=movieslots.get(i).getMall()%></td>
+				<td><%=movieslots.get(i).getDate()%></td>
+				<td><%=movieslots.get(i).getSlot()%></td>
+				<td><%=movieslots.get(i).getHall()%></td> 
+				<td>
+					<span class="badge bg-success rounded-pill px-3"> Successful</span>
+				</td>
+				<td>
+					<button type="button" class="btn btn-danger btn-lg btn-block btn-sm">Delete</button>
+				</td>
+			</tr>
 
-						ArrayList<MovieSlots> movieslots = (ArrayList<MovieSlots>) request.getAttribute("movieslots");
-						for (MovieSlots m : movieslots) {
-					%>
-					
-					<td>
-						<p>m.getMovieID</p>
-					</td>
-					
-					
-					
-					<td>
-						
-					</td>
-					
-					
-					
-					<td>
-					    
-					</td>
-					
-					
-					
-					<td>
-						
-					</td>
-					
-					
-					
-					<td>
-						
-					</td>
-
-
-					<td>
-						<span class="badge bg-success rounded-pill px-3"> Successful</span>
-					</td>
-
-
-				</form>
-			</tr><%}}%>
-			
+			<%}}%>
 			
 			
 		</tbody>

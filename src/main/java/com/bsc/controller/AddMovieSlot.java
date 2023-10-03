@@ -173,6 +173,7 @@ public class AddMovieSlot extends HttpServlet {
 			request.setAttribute("malls", malls);
 			request.setAttribute("movies", movies);
 			request.setAttribute("halls", halls);
+			request.setAttribute("movieslots", movieslots);
 
 			// Creating a RequestDispatcher object to dispatch
 			// the request the request to another resource
