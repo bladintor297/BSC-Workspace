@@ -17,6 +17,12 @@
 
     <!-- Viewport -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    	<!-- Favicon and Touch Icons -->
+	<link rel="icon" href="assets/favicon/logobsc.ico">
+	<meta name="msapplication-TileColor" content="#080032">
+	<meta name="msapplication-config" content="assets/favicon/browserconfig.xml">
+	<meta name="theme-color" content="#ffffff">
 
     <%@include file="inc/header-links.jsp" %>
 
