@@ -15,17 +15,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=0.9">
 <title>Add Movie</title>
 
-<link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
-<link rel="manifest" href="assets/favicon/site.webmanifest">
-<link rel="mask-icon" href="assets/favicon/safari-pinned-tab.svg" color="#6366f1">
-<link rel="shortcut icon" href="assets/favicon/favicon.ico">
-<meta name="msapplication-TileColor" content="#080032">
-<meta name="msapplication-config" content="assets/favicon/browserconfig.xml">
-<meta name="theme-color" content="#ffffff">
+	<!-- Favicon and Touch Icons -->
+	<link rel="icon" href="assets/favicon/logobsc.ico">
+	<meta name="msapplication-TileColor" content="#080032">
+	<meta name="msapplication-config" content="assets/favicon/browserconfig.xml">
+	<meta name="theme-color" content="#ffffff">
 
 <!-- Vendor Styles -->
 <link rel="stylesheet" media="screen" href="assets/vendor/boxicons/css/boxicons.min.css" />
@@ -43,81 +40,9 @@
 
 <%@include file="inc/spinner.jsp"%>
 <%@include file="inc/navbar.jsp"%>
+
 	<section class="container text-center pt-2 mt-2 mt-md-4">			
-		<h2 class="h5 pt-2 pt-lg-0"> Manage Movies </h2>
-	
-
-		<!-- Button trigger modal -->
-		<div class="d-flex justify-content-end">
-		<button type="button" class="btn btn-warning" data-bs-toggle="modal"
-			data-bs-target="#exampleModal"><i class="bx bx-movie"></i>Add New Movie</button>
-		</div>
-
-		<!-- Modal -->
-		<div class="modal fade" id="exampleModal" tabindex="-1"
-			aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h1 class="modal-title fs-5" id="exampleModalLabel">Movie Details</h1>
-						<button type="button" class="btn-close" data-bs-dismiss="modal"
-							aria-label="Close"></button>
-					</div>
-					<!-- Form -->
-					<form class="text-start" action="/bsc/AddNewMovie" method="post">
-					<div class="modal-body">
-						<div class="mb-3" >
-							<label for="exampleFormControlInput1" class="form-label">Title
-							</label> <input name="Title" type="text" class="form-control" placeholder="Barbie"
-								id="exampleFormControlInput1" >
-						</div>
-						<div class="mb-3">
-							<label for="exampleFormControlTextarea1" class="form-label">Description</label>
-							<input name="Description" class="form-control" id="exampleFormControlTextarea1" placeholder="A live-action musical film based on the popular Mattel toy line."
-								rows="3"></input>
-						</div>
-						<div class="mb-3">
-							<label for="exampleFormControlTextarea1" class="form-label">Release Date</label>
-							<input name="ReleaseDate" type="date" class="form-control"
-								id="exampleFormControlInput1" >
-						</div>
-						<div class="mb-3">
-							<label for="exampleFormControlTextarea1" class="form-label">Classification</label>
-							 <select name="Classification" class="form-select" id="autoSizingSelect">
-									<option selected>Choose...</option>
-									<option value="1">13</option>
-									<option value="2">18</option>
-								</select>
-							</div>
-						<div class="mb-3">
-							<label for="exampleFormControlInput1" class="form-label">Genre</label>
-							<input name="Genre" type="text" class="form-control" placeholder="Musical, Comedy"
-								id="exampleFormControlInput1">
-								
-						</div>
-							<div class="mb-3">
-								<label for="exampleFormControlInput1" class="form-label">Landscape
-									image </label> <input name="ImageLandscape" type="text" class="form-control"
-									placeholder="https://www.kenosha.com/wp-content/uploads/2023/08/et00072466-jjadjvahwx-landscape-copy.png"
-									id="exampleFormControlInput1">
-							</div>
-							<div class="mb-3">
-							<label for="exampleFormControlTextarea1" class="form-label">Portrait image</label>
-							<input name="ImagePortrait" type="text" class="form-control" placeholder="https://media-cache.cinematerial.com/p/500x/q63ztpjf/barbie-movie-poster.jpg?v=1687352716"
-								id="exampleFormControlInput1" >
-						</div>
-					</div>
-					<!--  -->
-					
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary"
-							data-bs-dismiss="modal">Close</button>
-						<button type="submit" class="btn btn-warning">Submit</button>
-					</div>
-					</form>
-				</div>
-			</div>
-		</div>
+		<h2 class="h5 pt-2 pt-lg-0"> Manage Movies Slot</h2>
 	
 
 	<table class="table table-bordered table-hover mt-2">
@@ -126,7 +51,7 @@
 				<th scope="row">No.</th>
 				<th >Movie Title</th>
 				<th >Mall</th>
-				<th >Date</th>
+				<th style="width:content-width">Date</th>
 				<th class="col-3">Movie Slot</th>
 				<th class="col-2">Place</th>
 				<th>Status</th>
@@ -139,12 +64,18 @@
 					<td></td>
 					<td>
 						<select name="movieID" class="form-select">
-							<option value="0" selected disabled><em>- Select movie -</em></option>
+							<option value="0" disabled><em>- Select movie -</em></option>
 							
 							<%ArrayList<Movies> movie=  (ArrayList<Movies>)request.getAttribute("movies");
+							int mID = (Integer)request.getAttribute("mID");
 								
 							for(Movies m:movie){%>
-								<option value="<%= m.getMovieID() %>"><%= m.getTitle() %></option>
+								<option value="<%= m.getMovieID() %>"
+								
+								<% if (mID == m.getMovieID()) {%>
+								selected
+								<%} %>
+								><%= m.getTitle() %></option>
 							<%}%>
 						</select>
 					</td>
@@ -160,7 +91,7 @@
 						</select>
 					</td>
 					<td>
-					    <div class="form-check px-0 my-0">
+					    <div class="form-check px-0 my-0 ">
 					        <%
 					        // Get the current date
 					        java.util.Date currentDate = new java.util.Date();
@@ -311,7 +242,7 @@
 							<span class="badge bg-danger rounded-pill px-3"> Cancelled</span>
 						<%} else { %>
 							<span class="badge bg-success rounded-pill px-3"> Successful</span>
-						<%} %>
+						<%}%>
 					</td>
 					<td>
 							<a href="/bsc/ManageMovieSlot?movieslotID=<%=movieslots.get(i).getMovieSlotID()%>" class="btn btn-danger btn-lg btn-block btn-sm">Delete</a>

@@ -1,21 +1,22 @@
 package com.bsc.beans;
 
 public class Notifications {
-    private int notificationID;
+	
+	private int notificationID;
 	private String content;
-    private String tittle;
-    private String type;
-    
-    public Notifications(int notificationID, String content, String tittle, String type) {
-		super();
+	private String title;
+	private String dateTime;
+	
+	public Notifications() {}
+	
+	public Notifications(int notificationID, String content, String title, String dateTime) {
 		this.notificationID = notificationID;
 		this.content = content;
-		this.tittle = tittle;
-		this.type = type;
+		this.title = title;
+		this.dateTime = dateTime;
 	}
-    
-    // Getter and Setter methods
-    public int getNotificationID() {
+
+	public int getNotificationID() {
 		return notificationID;
 	}
 
@@ -31,19 +32,23 @@ public class Notifications {
 		this.content = content;
 	}
 
-	public String getTittle() {
-		return tittle;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setTittle(String tittle) {
-		this.tittle = tittle;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
-	public String getType() {
-		return type;
+	public String getDateTime() {
+		return dateTime;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public void setDateTime(String dateTime) {
+		this.dateTime = dateTime;
 	}
+
+
+	
+	
 }

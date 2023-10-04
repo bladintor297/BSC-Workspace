@@ -23,7 +23,7 @@
 				</a>
 			</div>
 		</div>
-		<a href="/bsc/AddMovieSlot"
+		<a href="/bsc/AddNewMovie"
 			class="btn btn-warning btn-sm fs-sm rounded d-none d-lg-inline-flex me-1 "
 			target="_blank" rel="noopener"> <i class="bx bx-cog"></i>
 			&nbsp;Manage Movies

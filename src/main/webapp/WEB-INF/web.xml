@@ -83,16 +83,16 @@
 		<servlet-class>com.bsc.controller.ChangePassword</servlet-class>
 	</servlet>
 	<servlet>
-		<servlet-name>notifications</servlet-name>
-		<display-name>notifications</display-name>
+		<servlet-name>ManageMovie</servlet-name>
+		<display-name>ManageMovie</display-name>
 		<description></description>
-		<servlet-class>com.bsc.controller.notifications</servlet-class>
+		<servlet-class>com.bsc.controller.ManageMovie</servlet-class>
 	</servlet>
 	<servlet>
-		<servlet-name>Notifications</servlet-name>
-		<display-name>Notifications</display-name>
+		<servlet-name>Notification</servlet-name>
+		<display-name>Notification</display-name>
 		<description></description>
-		<servlet-class>com.bsc.beans.Notifications</servlet-class>
+		<servlet-class>com.bsc.controller.Notification</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>Register</servlet-name>
@@ -143,11 +143,11 @@
 		<url-pattern>/ChangePassword</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>notifications</servlet-name>
-		<url-pattern>/notifications</url-pattern>
+		<servlet-name>ManageMovie</servlet-name>
+		<url-pattern>/ManageMovie</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>Notifications</servlet-name>
-		<url-pattern>/Notifications</url-pattern>
+		<servlet-name>Notification</servlet-name>
+		<url-pattern>/Notification</url-pattern>
 	</servlet-mapping>
 </web-app>
