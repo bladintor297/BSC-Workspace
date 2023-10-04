@@ -85,8 +85,6 @@ public class ManageMovieSlot extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append(
-				"This is a get function in Login.java \nHantar user balik pegi login page. \nRedirect sini when no session created");
 		response.setContentType("text/html;charset=UTF-8");
 		try (PrintWriter out = response.getWriter()) {
 			out.println("<!DOCTYPE html>");
@@ -115,20 +113,6 @@ public class ManageMovieSlot extends HttpServlet {
 				PreparedStatement preparedStatement = con.prepareStatement(query);
 				ResultSet resultSet = preparedStatement.executeQuery();
 
-				/*
-				 * MovieSlots movieslot = new MovieSlots();
-				 * 
-				 * movieslot.setMovieID(movieID); movieslot.setMall(Integer.parseInt(mall));
-				 * movieslot.setHall(Integer.parseInt(hall)); movieslot.setSlot(time);
-				 * movieslot.setDate(date);
-				 * 
-				 * 
-				 * movieslots.add(movieslot);
-				 * 
-				 * preparedStatement.setInt(1, movieID); preparedStatement.setString(2, mall);
-				 * preparedStatement.setString(3, hall); preparedStatement.setString(4, time);
-				 * preparedStatement.setString(5, date);
-				 */
 
 				// Execute the query
 

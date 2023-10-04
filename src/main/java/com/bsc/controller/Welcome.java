@@ -56,7 +56,7 @@ public class Welcome extends HttpServlet {
             /*------  Retrieve Movies ------ */
             
             // SQL query to retrieve mall data from the database
-            String query2 = "SELECT MovieID, Title, Description, ReleaseDate, Classification, Genre, ImageLandscape, ImagePortrait FROM movie";
+            String query2 = "SELECT * FROM movie WHERE status=0";
             PreparedStatement preparedStatement2 = con.prepareStatement(query2);
 
             // Execute the query
