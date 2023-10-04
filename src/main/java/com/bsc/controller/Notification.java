@@ -72,10 +72,10 @@ public class Notification extends HttpServlet {
 					int notificationID = resultSet.getInt("NotificationID");
 					String title = resultSet.getString("Title");
 					String content = resultSet.getString("Content");
-					String dateTime = resultSet.getString("DateTime");
+					String dateandtime = resultSet.getString("dateandtime");
 									
-					Notifications notification = new Notifications(notificationID, content, title, dateTime);
-					
+					Notifications notification = new Notifications(notificationID, content, title, dateandtime);
+					System.out.println(title);
 					notificationlist.add(notification);
 
 				}
@@ -86,7 +86,7 @@ public class Notification extends HttpServlet {
 			}
 			request.setAttribute("notificationlist", notificationlist);
 			
-			RequestDispatcher rd = request.getRequestDispatcher("/notifications.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("notifications.jsp");
 			rd.forward(request, response);
 
 			out.println("</body>");
