@@ -88,6 +88,12 @@
 		<description></description>
 		<servlet-class>com.bsc.controller.ManageMovie</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>Notification</servlet-name>
+		<display-name>Notification</display-name>
+		<description></description>
+		<servlet-class>com.bsc.controller.Notification</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>Register</servlet-name>
 		<url-pattern>/Register</url-pattern>
@@ -139,5 +145,9 @@
 	<servlet-mapping>
 		<servlet-name>ManageMovie</servlet-name>
 		<url-pattern>/ManageMovie</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Notification</servlet-name>
+		<url-pattern>/Notification</url-pattern>
 	</servlet-mapping>
 </web-app>
