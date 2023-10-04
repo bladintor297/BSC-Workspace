@@ -82,6 +82,18 @@
 		<description></description>
 		<servlet-class>com.bsc.controller.ChangePassword</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>notifications</servlet-name>
+		<display-name>notifications</display-name>
+		<description></description>
+		<servlet-class>com.bsc.controller.notifications</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>Notifications</servlet-name>
+		<display-name>Notifications</display-name>
+		<description></description>
+		<servlet-class>com.bsc.beans.Notifications</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>Register</servlet-name>
 		<url-pattern>/Register</url-pattern>
@@ -129,5 +141,13 @@
 	<servlet-mapping>
 		<servlet-name>ChangePassword</servlet-name>
 		<url-pattern>/ChangePassword</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>notifications</servlet-name>
+		<url-pattern>/notifications</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Notifications</servlet-name>
+		<url-pattern>/Notifications</url-pattern>
 	</servlet-mapping>
 </web-app>

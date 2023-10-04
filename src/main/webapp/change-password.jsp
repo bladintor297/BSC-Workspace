@@ -74,10 +74,8 @@
                   <a href="profile.jsp" class="list-group-item list-group-item-action d-flex align-items-center">
                     <i class="bx bx-bell fs-xl opacity-60 me-2"></i>
                     Notifications
-                  </a>
-                  
-                
-                  <a href="account-signin.html" class="list-group-item list-group-item-action d-flex align-items-center">
+                  </a>             
+                  <a href="Logout.java" class="list-group-item list-group-item-action d-flex align-items-center">
                     <i class="bx bx-log-out fs-xl opacity-60 me-2"></i>
                     Sign Out
                   </a>
