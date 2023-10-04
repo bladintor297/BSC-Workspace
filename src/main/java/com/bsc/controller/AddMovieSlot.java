@@ -55,6 +55,13 @@ public class AddMovieSlot extends HttpServlet {
 			ArrayList<Halls> halls = new ArrayList<>();
 
 			ArrayList<MovieSlots> movieslots = new ArrayList<>();
+			
+			int mID = 0;
+			
+			if (request.getParameter("movieID") != null) 
+				mID = Integer.parseInt( request.getParameter("movieID"));
+			
+			
 
 			try {
 				// Load the MySQL JDBC driver
@@ -85,7 +92,7 @@ public class AddMovieSlot extends HttpServlet {
 				/*------  Retrieve Movies ------ */
 
 				// SQL query to retrieve mall data from the database
-				String query2 = "SELECT MovieID, Title, Description, ReleaseDate, Classification, Genre, ImageLandscape, ImagePortrait FROM movie";
+				String query2 = "SELECT * FROM movie WHERE status = 0";
 				PreparedStatement preparedStatement2 = con.prepareStatement(query2);
 
 				// Execute the query
@@ -185,7 +192,9 @@ public class AddMovieSlot extends HttpServlet {
 			request.setAttribute("movies", movies);
 			request.setAttribute("halls", halls);
 			request.setAttribute("movieslots", movieslots);
-
+			
+			request.setAttribute("mID", mID);
+			
 			// Creating a RequestDispatcher object to dispatch
 			// the request the request to another resource
 			RequestDispatcher rd = request.getRequestDispatcher("add-movie-slot.jsp");
