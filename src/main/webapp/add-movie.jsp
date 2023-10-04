@@ -55,10 +55,10 @@
 		<!-- Modal -->
 		<div class="modal fade" id="exampleModal" tabindex="-1"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
+			<div class="modal-dialog ">
+				<div class="modal-content ">
 					<div class="modal-header">
-						<h1 class="modal-title fs-5" id="exampleModalLabel">Movie Details</h1>
+						<h1 class="modal-title fs-5 " id="exampleModalLabel">Movie Details</h1>
 						<button type="button" class="btn-close" data-bs-dismiss="modal"
 							aria-label="Close"></button>
 					</div>
@@ -118,8 +118,8 @@
 			</div>
 		</div>
 	
-	<table class="table table-bordered table-hover mt-2">
-		<thead>
+	<table class="table table-bordered table-hover mt-2 align-middle">
+		<thead class="bg-success ">
 			<tr>
 				<th >Movie ID</th>
 				<th >Title</th>
@@ -131,7 +131,7 @@
 				<th>Actions</th>
 			</tr>
 		</thead>
-		<tbody>
+		<tbody class="bg-black">
 			
 				<% ArrayList<Movies> movies = (ArrayList<Movies>) request.getAttribute("movies"); %>
 				<%
@@ -150,7 +150,7 @@
 						<td><%= movies.get(i).getReleaseDate()%></td>
 						<td><%=movies.get(i).getClassification()%></td>
 						<td><%=movies.get(i).getGenre()%></td>
-						<td><img src="<%=movies.get(i).getImagePortrait()%>" style="height:250px; width: 150px; object-fit:cover;"></td>
+						<td><img src="<%=movies.get(i).getImagePortrait()%>" style="height:250px; width: 200px; object-fit:cover;"></td>
 						<td>
 							<div class="d-grid my-auto gap-3">
 								<a href="AddMovieSlot?movieID=<%=movies.get(i).getMovieID()%>" class="btn btn-warning btn-sm">Add slot</a>
