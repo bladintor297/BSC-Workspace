@@ -30,13 +30,8 @@
 </head>
 
 
-<!-- Body -->
-<body>
-
-
-
-
-
+	<!-- Body -->
+	<body>
 	<main class="page-wrapper">
 	
 	<%@include file="inc/navbar.jsp"%>
@@ -76,9 +71,7 @@
                   <a href="account-notifications.html" class="list-group-item list-group-item-action d-flex align-items-center">
                     <i class="bx bx-bell fs-xl opacity-60 me-2"></i>
                     Notifications
-                  </a>
-                  
-                
+                  </a>               
                   <a href="account-signin.html" class="list-group-item list-group-item-action d-flex align-items-center">
                     <i class="bx bx-log-out fs-xl opacity-60 me-2"></i>
                     Sign Out
