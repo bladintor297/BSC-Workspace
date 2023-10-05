@@ -2,45 +2,20 @@
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
+<head>
+
     <title>Sign Up</title>
 
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Silicon - Multipurpose Technology Bootstrap Template">
-    <meta name="keywords" content="bootstrap, business, creative agency, mobile app showcase, saas, fintech, finance, online courses, software, medical, conference landing, services, e-commerce, shopping cart, multipurpose, shop, ui kit, marketing, seo, landing, blog, portfolio, html5, css3, javascript, gallery, slider, touch, creative">
-    <meta name="author" content="Createx Studio">
+    <%@include file="inc/header-links.jsp" %>
 
-    <!-- Viewport -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
 
-	<!-- Favicon and Touch Icons -->
-	<link rel="icon" href="assets/favicon/logobsc.ico">
-	<meta name="msapplication-TileColor" content="#080032">
-	<meta name="msapplication-config" content="assets/favicon/browserconfig.xml">
-	<meta name="theme-color" content="#ffffff">
-
-    <!-- Vendor Styles -->
-    <link rel="stylesheet" media="screen" href="assets/vendor/boxicons/css/boxicons.min.css"/>
-
-    <!-- Main Theme Styles + Bootstrap -->
-    <link rel="stylesheet" media="screen" href="assets/css/theme.min.css">
-    <link rel="stylesheet" media="screen" href="assets/css/style.css">
-
-	<script ></script>
-	<script src="assets/js/function.js"></script>
-	
-  </head>
-
-
-  <!-- Body -->
-  <body>
-	
-	<%@include file="inc/spinner.jsp" %>
-
-
+<!-- Body -->
+<body>
 
     <main class="page-wrapper">
+		
+	<%@include file="inc/spinner.jsp" %>
 
       <!-- Page content -->
       <section class="position-relative h-100 pt-5 pb-4">

@@ -8,9 +8,9 @@ public class Seats {
 	
 	
 	public Seats(int seatID, double price, String seatNumber) {
-		SeatID = seatID;
+		this.SeatID = seatID;
 		this.price = price;
-		SeatNumber = seatNumber;
+		this.SeatNumber = seatNumber;
 	}
 	public int getSeatID() {
 		return SeatID;

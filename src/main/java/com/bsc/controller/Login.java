@@ -71,7 +71,7 @@ public class Login extends HttpServlet {
 				System.out.println("Before session");
 
 				// Create Session
-				session.setAttribute("id", rs.getString("id"));
+				session.setAttribute("id", rs.getInt("id"));
 				session.setAttribute("email", rs.getString("email"));
 				session.setAttribute("name", rs.getString("name"));
 				session.setAttribute("phone", rs.getString("phone"));

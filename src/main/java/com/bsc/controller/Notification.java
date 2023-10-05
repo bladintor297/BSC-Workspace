@@ -72,7 +72,7 @@ public class Notification extends HttpServlet {
 					int notificationID = resultSet.getInt("NotificationID");
 					String title = resultSet.getString("Title");
 					String content = resultSet.getString("Content");
-					String dateandtime = resultSet.getString("dateandtime");
+					String dateandtime = resultSet.getString("DateTime");
 									
 					Notifications notification = new Notifications(notificationID, content, title, dateandtime);
 					System.out.println(title);
