@@ -22,6 +22,7 @@ import com.bsc.beans.Halls;
 import com.bsc.beans.Malls;
 import com.bsc.beans.MovieSlots;
 import com.bsc.beans.Movies;
+import com.bsc.beans.Users;
 
 /**
  * Servlet implementation class MovieSlot
@@ -57,6 +58,7 @@ public class MovieSlot extends HttpServlet {
 			int movieID = Integer.parseInt(request.getParameter("movieID")); //Tukar id to dynamic 
 
 			ArrayList<MovieSlots> movieslots = new ArrayList<>();
+			ArrayList<Users> userlist = new ArrayList<>();
 			Movies movie = null;
 			
 			try {
@@ -129,6 +131,27 @@ public class MovieSlot extends HttpServlet {
 					
 					movie = new Movies (MovieID, title, description, releaseDate, classification, genre, imageLandscape, imagePortrait);
 			    }
+			    
+			    
+			    /*------  Retrieve Customers ------ */
+				
+				query = "SELECT * FROM users WHERE role = 0";
+				preparedStatement = con.prepareStatement(query);
+			    
+			    // Execute the query
+			    resultSet = preparedStatement.executeQuery();
+			    
+			    while (resultSet.next()) {
+			        int userID = resultSet.getInt("id");
+					String name= resultSet.getString("name");
+					String email = resultSet.getString("email");
+					String phone = resultSet.getString("phone");
+	
+					
+					Users user = new Users (userID, name, email, phone);
+					userlist.add(user);
+			    }
+
 
 				// Close resources
 				con.close();
@@ -142,6 +165,7 @@ public class MovieSlot extends HttpServlet {
 
 			request.setAttribute("movieslots", movieslots);
 			request.setAttribute("movie", movie);
+			request.setAttribute("userlist", userlist);
 
 			RequestDispatcher rd = request.getRequestDispatcher("slots.jsp");
 

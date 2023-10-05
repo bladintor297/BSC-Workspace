@@ -6,43 +6,31 @@
 	<head>
 	<meta charset="utf-8">
 	<title>Black Screen Cinema</title>
-	
-	<!-- Viewport -->
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	
-		<!-- Favicon and Touch Icons -->
-	<link rel="icon" href="assets/favicon/logobsc.ico">
-	<meta name="msapplication-TileColor" content="#080032">
-	<meta name="msapplication-config" content="assets/favicon/browserconfig.xml">
-	<meta name="theme-color" content="#ffffff">
-	
-	<%@include file="inc/header-links.jsp"%>
-
+    
+    <%@include file="inc/header-links.jsp" %>
 
 </head>
-
 
 <!-- Body -->
 <body>
 
-
-
-
-
-	<main class="page-wrapper">
+    <main class="page-wrapper">
+		
+		<%@include file="inc/spinner.jsp" %>
+        <%@include file="inc/navbar.jsp" %>
 
 	<%
 		//later tukar ni
 		if (session != null && session.getAttribute("email") != null) { %>
 		
 		
-		<%@include file="inc/navbar.jsp"%>	
+	
 			
 		<!-- Page title + Filters -->
 		<section class="container text-center pt-2 mt-2 mt-md-4 ">
 			<h2 class="h1 pt-2 pt-lg-0">- Select Seats -</h2>
 			
-			<form action="/bsc/MovieSlot" method="POST">
+			<form action="/bsc/Seat" method="POST">
 				<div class="row mx-1 my-5" role="group" >
 				  <button type="button" class="btn btn-warning" >Screen</button>
 				  
@@ -51,7 +39,7 @@
 					<div class="btn-group d-flex mt-2" role="group" id="btncheck<%= i %>" aria-label="Basic checkbox toggle button group">
 						<% for (int j = 1; j <= 12; ++j){ %>
 							
-								<input type="checkbox" class="btn-check" id="btncheck<%= i + String.valueOf(j)%>" autocomplete="off">
+								<input type="checkbox" class="btn-check" value="<%= i + String.valueOf(j)%>" name="seats" id="btncheck<%= i + String.valueOf(j)%>" autocomplete="off">
 						  		<label class="btn btn-outline-warning" for="btncheck<%= i + String.valueOf(j)%>"><%= i + String.valueOf(j)%></label>
 					  		
 						

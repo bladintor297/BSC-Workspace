@@ -2,6 +2,7 @@ package com.bsc.beans;
 
 public class Users {
 	
+	private int userID;
 	private String name;
 	private String email;
 	private String password;
@@ -15,6 +16,22 @@ public class Users {
 		this.email = email;
 		this.phone = phone;
 	}
+	
+	public Users(int userID, String name, String email, String phone) {
+		this.userID = userID;
+		this.name = name;
+		this.email = email;
+		this.phone = phone;
+	}
+	
+	public int getUserID() {
+		return userID;
+	}
+
+	public void setUserID(int userID) {
+		this.userID = userID;
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -45,6 +62,8 @@ public class Users {
 	public void setRole(int role) {
 		this.role = role;
 	}
+
+
 	
 	
 

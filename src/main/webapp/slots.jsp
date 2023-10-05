@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@page import="java.util.ArrayList"%>
-<%@ page import="java.util.ArrayList, java.text.SimpleDateFormat, java.util.Calendar" %>
+<%@ page import="java.text.SimpleDateFormat, java.util.Calendar" %>
+<%@ page import="java.util.Date" %>
 
+<%@page import="com.bsc.beans.Users"%>
 <%@page import="com.bsc.beans.Halls"%>
 <%@page import="com.bsc.beans.Malls"%>
 <%@page import="com.bsc.beans.Movies"%>
@@ -12,42 +14,26 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
+
     <title>Black Screen Cinema</title>
-
-    <!-- Viewport -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     
-    	<!-- Favicon and Touch Icons -->
-	<link rel="icon" href="assets/favicon/logobsc.ico">
-	<meta name="msapplication-TileColor" content="#080032">
-	<meta name="msapplication-config" content="assets/favicon/browserconfig.xml">
-	<meta name="theme-color" content="#ffffff">
-
     <%@include file="inc/header-links.jsp" %>
-
 
 </head>
 
-
 <!-- Body -->
-
 <body>
 
-
-
-
-
     <main class="page-wrapper">
-
-
-
+		
+		<%@include file="inc/spinner.jsp" %>
         <%@include file="inc/navbar.jsp" %>
         	
         	<%
         	ArrayList<MovieSlots> movieslots = (ArrayList<MovieSlots>) request.getAttribute("movieslots");
         	java.util.Set<Integer> visitedMallIDs = new java.util.HashSet<Integer>();
         	java.util.Set<Integer> visitedMovieSlots = new java.util.HashSet<Integer>();
+        	SimpleDateFormat displaySlot = new SimpleDateFormat("EEE, dd MMMM yyyy");
         	%>
 
             <!-- Page title + Filters -->
@@ -101,7 +87,9 @@
                     	SimpleDateFormat dayFormat = new SimpleDateFormat("dd");
                     	SimpleDateFormat monthFormat = new SimpleDateFormat("MMM");
                     	SimpleDateFormat dayWeekFormat = new SimpleDateFormat("EEE");
-                    
+                    	SimpleDateFormat daySlotFormat = new SimpleDateFormat("EEEE");
+                    	SimpleDateFormat slotFormat = new SimpleDateFormat("dd MMMM yyyy");
+                    	
 			            Calendar calendar = Calendar.getInstance();
 			
 			            for (int i = 0; i < 3; i++) {
@@ -109,6 +97,8 @@
 			            String day = dayFormat.format(calendar.getTime());
 			            String dayWeek = dayWeekFormat.format(calendar.getTime());
 			            String month = monthFormat.format(calendar.getTime());
+			           
+			            
 			         %>
 			         	<li class="nav-item d-grid" role="presentation">
                             <span><%= month %></span>
@@ -148,6 +138,9 @@
 			            String day = dayFormat.format(calendar.getTime());
 			            String dayWeek = dayWeekFormat.format(calendar.getTime());
 			            String month = monthFormat.format(calendar.getTime());
+			            String dateSlot = slotFormat.format(calendar.getTime());	
+			            String daySlot = daySlotFormat.format(calendar.getTime());
+			            
 			         %>
 			         
 			         <div class="tab-pane tab<%=i%>" id="day<%=i%>" role="tabpanel" aria-labelledby="day<%=i%>-tab" tabindex="0">
@@ -182,7 +175,7 @@
 										%>
                                         <div class="col-2 ">
                                             <div class="position-relative text-center my-3 border-end mx-n1">
-                                                <a href="/bsc/seats.jsp" class="btn-link text-decoration-none">
+                                                <a type="button" class="btn-link text-decoration-none"  data-bs-toggle="modal" data-bs-target="#select-seat<%=movieslots.get(j).getMovieSlotID() %>">
                                                     <div class="pt-2">
                                                         <h5 class="mb-1"> <%= movieslots.get(j).getSlot() %></h5>
                                                         <hr
@@ -191,7 +184,84 @@
                                                              <%= movieslots.get(j).getHallCategory() %> (<%= movieslots.get(j).getHallName() %>)
                                                         </p>
                                                     </div>
-                                                </a>
+                                                    </a>
+                                                    <!-- Modal -->
+													<div class="modal fade" id="select-seat<%=movieslots.get(j).getMovieSlotID()%>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" >
+													  <div class="modal-dialog">
+													    <div class="modal-content px-0" style="position: fixed !important; top: auto; right: auto; left: 0; bottom: 0;">
+													      <div class="modal-header border-0">
+													        <h1 class="modal-title fs-5" id="exampleModalLabel"></h1>
+													        <button type="button" class="btn-close me-3" data-bs-dismiss="modal" aria-label="Close"></button>
+													      </div>
+													      <form action="/bsc/Seat">
+													      <div class="modal-body text-center ">
+													      
+													      	
+													        <h4 class="fw-bold"> <%= movieslots.get(j).getMovieTitle() %></h4>
+													        <div class="text-center d-grid">
+													        	<span class="text-muted">
+													        		<%= movieslots.get(j).getHallCategory() %> - 
+													        	
+														        	<% if (movieslots.get(j).getMall() == 3 || movieslots.get(j).getMall() == 4){ %>
+														        		Premier Class
+														        	<%} else if (movieslots.get(j).getMall() == 5 || movieslots.get(j).getMall() == 6){ %>
+														        		4D Experience Cinema
+														        	<%} else {%>
+														        		Digital 2D
+														        	<%} %>
+													        	</span>
+													        	
+													        	
+													        	<span>
+													        		<%= movieslots.get(j).getSlot() %>, <%= daySlot %>
+													        	</span>
+													        	<span>
+													        		<%= dateSlot %>
+													        	</span>
+													       
+													        	<br>
+													        	<span>
+														        	<%= movieslots.get(j).getMallName() %> 
+														        	(<%= movieslots.get(j).getHallName() %>)
+													        	</span>
+
+													        </div>
+													        <% if((int)session.getAttribute("role") != 0) {%>
+														        <div class="form-group row mt-3 g-3">
+														        	
+														        	<div class="col-4 offset-4">
+															        	<select name="user" class="form-select" >
+																			<option value="-1, invalid" selected disabled><em>- Select Customer -</em></option>
+																			
+																		<%ArrayList<Users> userlist=  (ArrayList<Users>)request.getAttribute("userlist");
+																			
+																		for(Users user:userlist){%>
+																			<option value="<%= user.getUserID() %>, <%= user.getName() %>">ID: <%= String.format("%04d", user.getUserID()) %> - <%= user.getName() %>  </option>
+																		<%}%>
+																		<option value="0, Guest"> <em>(Guest)</em></option>
+																		</select>
+														        	</div>
+														        	<div class="col-4 offset-4">
+														        		  <input class="form-control" type="text" value="" name="custEmail" placeholder="Customer's email">
+														        	</div>	
+														        	
+														        			        	
+														        </div>
+													        <%} %>
+													        
+													        
+													        <input type="hidden" name="movieSlotID" value="<%=movieslots.get(j).getMovieSlotID()%>">
+													        <input type="hidden" name="movieID" value="<%=movieslots.get(j).getMovieID()%>">
+													      
+													      </div>
+													      
+													        <button type="submit" class="btn btn-secondary btn-lg bg-warning text-uppercase fw-bold btn-block mb-3	" >Select Seat</button>
+													     </form>
+													        
+													    </div>
+													  </div>
+													</div>
+                                                
 
                                             </div>
                                         </div>
@@ -223,6 +293,8 @@
             </div>
             <!-- Tab panes -->
 
+			
+			
             <div class="row pb-lg-3"></div>
 
 
