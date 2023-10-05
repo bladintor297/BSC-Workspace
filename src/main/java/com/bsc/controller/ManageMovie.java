@@ -38,6 +38,7 @@ public class ManageMovie extends HttpServlet {
 			out.println("</head>");
 			out.println("<body>");
 
+			 
 			// Variables from Form
 			int movieID = 0;
 			if (request.getParameter("movieID") != null) 
