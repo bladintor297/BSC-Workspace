@@ -73,7 +73,9 @@
 				<%} %>
 				
 			</div>
-			<div class="row ">
+			<div class="row  ">
+				
+				
 
 				<%
 					if (movie != null && !movie.isEmpty()) {
@@ -82,6 +84,7 @@
 					%>
 
 					        <div class="col-3 card-hover shadow-none bg-none position-relative mb-4 mb-lg-5">
+					        	
 								<a href="
 								
 								<% if (session != null && session.getAttribute("email") != null) { %>
@@ -90,11 +93,15 @@
 									/bsc/Login
 								<% } %>
 								"
-									class="text-decoration-none text-center" id="movie-item"> <img
-									src="<%= m.getImagePortrait() %>"
-									class="b-block border rounded-3 shadow-sm"
-									alt="<%= m.getTitle() %>"
-									style="height: 450px; width: 300px; object-fit: cover;">
+									
+									class="text-decoration-none text-center" id="movie-item"> 
+									
+									<img
+										
+										src="<%= m.getImagePortrait() %>"
+										class="b-block border rounded-3 shadow-sm"
+										alt="<%= m.getTitle() %>"
+										style="height: 450px; width: 300px; object-fit: cover;">
 									<h3 class="h5 mt-4 mb-3 mb-lg-0 text-white"><%= m.getTitle() %></h3>
 								</a>
 							</div>
