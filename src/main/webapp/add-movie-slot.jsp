@@ -45,8 +45,8 @@
 		<h2 class="h5 pt-2 pt-lg-0"> Manage Movies Slot</h2>
 	
 
-	<table class="table table-bordered table-hover mt-2">
-		<thead>
+	<table class="table table-bordered table-hover mt-2 border-white">
+		<thead class="bg-success ">
 			<tr>
 				<th scope="row">No.</th>
 				<th >Movie Title</th>
@@ -58,7 +58,7 @@
 				<th>Actions</th>
 			</tr>
 		</thead>
-		<tbody>
+		<tbody class="bg-black">
 			<tr>
 				<form action="/bsc/AddMovieSlot" method="POST">
 					<td></td>
@@ -203,7 +203,7 @@
 						
 					</td>
 					<td>
-						<span class="badge bg-warning rounded-pill px-3"> 50 seats left</span>
+						<span class="badge bg-primary rounded-pill px-3"> Status</span>
 					</td>
 					<td>
 						<div class="d-grid gap-2">

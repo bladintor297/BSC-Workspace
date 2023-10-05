@@ -169,7 +169,7 @@ public class AddNewMovie extends HttpServlet {
 				e.printStackTrace();
 			}
 
-			response.sendRedirect("/AddNewMovie");
+			response.sendRedirect("/bsc/AddNewMovie");
 			out.println("</body>");
 			out.println("</html>");
 		}

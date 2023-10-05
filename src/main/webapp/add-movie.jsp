@@ -118,7 +118,7 @@
 			</div>
 		</div>
 	
-	<table class="table table-bordered table-hover mt-2 align-middle">
+	<table class="table table-bordered table-hover mt-2 align-middle border-white">
 		<thead class="bg-success ">
 			<tr>
 				<th >Movie ID</th>
