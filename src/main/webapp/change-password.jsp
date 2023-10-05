@@ -57,20 +57,20 @@
                   Account menu
                   <i class="bx bx-chevron-down fs-lg ms-1"></i>
                 </button>
-                <div id="profile.jsp" class="list-group list-group-flush collapse d-md-block">
-                  <a href="account-details.html" class="list-group-item list-group-item-action d-flex align-items-center">
+                <div id="/bsc/Profile" class="list-group list-group-flush collapse d-md-block">
+                  <a href="/bsc/Profile" class="list-group-item list-group-item-action d-flex align-items-center">
                     <i class="bx bx-cog fs-xl opacity-60 me-2"></i>
                     Account Details
                   </a>
-                  <a href="profile.jsp" class="list-group-item list-group-item-action d-flex align-items-center  active">
+                  <a href="/bsc/change-password.jsp" class="list-group-item list-group-item-action d-flex align-items-center  active">
                     <i class="bx bx-lock-alt fs-xl opacity-60 me-2"></i>
                     Password
                   </a>
-                  <a href="profile.jsp" class="list-group-item list-group-item-action d-flex align-items-center">
+                  <a href="/bsc/Notification" class="list-group-item list-group-item-action d-flex align-items-center">
                     <i class="bx bx-bell fs-xl opacity-60 me-2"></i>
                     Notifications
                   </a>             
-                  <a href="Logout.java" class="list-group-item list-group-item-action d-flex align-items-center">
+                  <a href="/bsc/login.jsp" class="list-group-item list-group-item-action d-flex align-items-center">
                     <i class="bx bx-log-out fs-xl opacity-60 me-2"></i>
                     Sign Out
                   </a>

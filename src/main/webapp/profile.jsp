@@ -59,8 +59,8 @@
                   Account menu
                   <i class="bx bx-chevron-down fs-lg ms-1"></i>
                 </button>
-                <div id="account-menu" class="list-group list-group-flush collapse d-md-block">
-                  <a href="account-details.html" class="list-group-item list-group-item-action d-flex align-items-center active">
+                <div id="/bsc/Profile" class="list-group list-group-flush collapse d-md-block">
+                  <a href="/bsc/Profile" class="list-group-item list-group-item-action d-flex align-items-center active">
                     <i class="bx bx-cog fs-xl opacity-60 me-2"></i>
                     Account Details
                   </a>
@@ -68,11 +68,11 @@
                     <i class="bx bx-lock-alt fs-xl opacity-60 me-2"></i>
                     Password
                   </a>
-                  <a href="account-notifications.html" class="list-group-item list-group-item-action d-flex align-items-center">
+                  <a href="/bsc/Notification" class="list-group-item list-group-item-action d-flex align-items-center">
                     <i class="bx bx-bell fs-xl opacity-60 me-2"></i>
                     Notifications
                   </a>               
-                  <a href="account-signin.html" class="list-group-item list-group-item-action d-flex align-items-center">
+                  <a href="/bsc/login.jsp" class="list-group-item list-group-item-action d-flex align-items-center">
                     <i class="bx bx-log-out fs-xl opacity-60 me-2"></i>
                     Sign Out
                   </a>

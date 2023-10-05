@@ -14,18 +14,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.bsc.beans.Movies;
+import com.bsc.beans.Malls;
 
 /**
- * Servlet implementation class AddNewMovie
+ * Servlet implementation class AddMall
  */
-public class AddNewMovie extends HttpServlet {
+public class AddMall extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public AddNewMovie() {
+	public AddMall() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -46,7 +46,7 @@ public class AddNewMovie extends HttpServlet {
 			out.println("</head>");
 			out.println("<body>");
 
-			ArrayList<Movies> movies = new ArrayList<>();
+			ArrayList<Malls> malls = new ArrayList<>();
 
 			try {
 
@@ -58,39 +58,33 @@ public class AddNewMovie extends HttpServlet {
 
 				// SQL query to retrieve mall data from
 				
-				//Retrieve data from db
-				String query2 = "SELECT * FROM movie WHERE status=0";
-				PreparedStatement preparedStatement2 = con.prepareStatement(query2);
+				String query = "SELECT * FROM mall WHERE Status=0";
+//				String query = "SELECT * FROM mall";
+				PreparedStatement preparedStatement = con.prepareStatement(query);
+				
+				ResultSet resultSet = preparedStatement.executeQuery();
+				
+				while (resultSet.next()) {
+					int mallId = resultSet.getInt("MallID");
+					String mallName = resultSet.getString("MallName");
+					String address = resultSet.getString("Address");
 
-				// Execute the query
-				ResultSet resultSet2 = preparedStatement2.executeQuery();
-
-				// Iterate through the result set and populate the ArrayList
-				while (resultSet2.next()) {
-					int id2 = resultSet2.getInt("MovieID");
-					String title2 = resultSet2.getString("Title");
-					String description2 = resultSet2.getString("Description");
-					String releaseDate2 = resultSet2.getString("ReleaseDate");
-					int classification2 = resultSet2.getInt("Classification");
-					String genre2 = resultSet2.getString("Genre");
-					String imageLandscape2 = resultSet2.getString("ImageLandscape");
-					String imagePortrait2 = resultSet2.getString("ImagePortrait");
-
-					Movies movie = new Movies (id2, title2, description2, releaseDate2, classification2, genre2, imageLandscape2, imagePortrait2);
-					movies.add(movie);
+					Malls mall = new Malls (mallId, mallName, address);
+					malls.add(mall);
 				}
-
+				
 				// Close resources
 				con.close();
-				resultSet2.close();
-				preparedStatement2.close();
+				resultSet.close();
+				preparedStatement.close();
+
 
 			} catch (Exception e) { 
 				e.printStackTrace();
 			}
 			
-			request.setAttribute("movies", movies);
-			RequestDispatcher rd = request.getRequestDispatcher("add-movie.jsp");
+			request.setAttribute("malls", malls);
+			RequestDispatcher rd = request.getRequestDispatcher("add-mall.jsp");
 
 			rd.forward(request, response);
 
@@ -115,15 +109,10 @@ public class AddNewMovie extends HttpServlet {
 			out.println("</head>");
 			out.println("<body>");
 
-			ArrayList<Movies> movies = new ArrayList<>();
+			ArrayList<Malls> malls = new ArrayList<>();
 			// Variable dari form
-			String title = request.getParameter("Title");
-			String description = request.getParameter("Description");
-			String releaseDate = request.getParameter("ReleaseDate");
-			int classification = Integer.parseInt(request.getParameter("Classification"));
-			String genre = request.getParameter("Genre");
-			String imageLandscape = request.getParameter("ImageLandscape");
-			String imagePortrait = request.getParameter("ImagePortrait");
+			String mallName = request.getParameter("MallName");
+			String address = request.getParameter("Address");
 
 			try {
 
@@ -133,31 +122,37 @@ public class AddNewMovie extends HttpServlet {
 						"jdbc:mysql://localhost:3306/bsc?allowPublicKeyRetrieval=true&useSSL=false", "root",
 						"@dmin123");
 
-				// SQL query to retrieve mall data from
-
-				String query = "INSERT INTO movie (Title, Description, ReleaseDate, Classification, Genre, ImageLandscape, ImagePortrait) VALUES (?, ?, ?, ?, ?, ?, ?)";
+	
+				String query = "INSERT INTO mall (MallName, Address, Status) VALUES (?, ?, 0)";
 				PreparedStatement preparedStatement = con.prepareStatement(query);
+				
 
 				// Call constructor
-				Movies movie = new Movies();
-				movie.setTitle(title);
-				movie.setDescription(description);
-				movie.setGenre(genre);
-				movie.setReleaseDate(releaseDate);
-				movie.setImageLandscape(imageLandscape);
-				movie.setImagePortrait(imagePortrait);
+				Malls mall = new Malls();
+				mall.setMallName(mallName);
+				mall.setAddress(address);
+				
+				malls.add(mall);
 
-				movies.add(movie);
-
-				preparedStatement.setString(1, title);
-				preparedStatement.setString(2, description);
-				preparedStatement.setString(3, releaseDate);
-				preparedStatement.setInt(4, classification);
-				preparedStatement.setString(5, genre);
-				preparedStatement.setString(6, imageLandscape);
-				preparedStatement.setString(7, imagePortrait);
+				preparedStatement.setString(1, mallName);
+				preparedStatement.setString(2, address);
 
 				preparedStatement.executeUpdate();
+				
+				String query1 = "SELECT * FROM mall WHERE Status=0";
+//				String query1 = "SELECT * FROM mall";
+				preparedStatement = con.prepareStatement(query1);
+				
+				ResultSet resultSet = preparedStatement.executeQuery();
+				
+				while (resultSet.next()) {
+					int mallId = resultSet.getInt("MallID");
+					String mallName1 = resultSet.getString("MallName");
+					String address1 = resultSet.getString("Address");
+
+					Malls mall1 = new Malls (mallId, mallName1, address1);
+					malls.add(mall1);
+				}
 				
 
 				// Close resources
@@ -168,10 +163,13 @@ public class AddNewMovie extends HttpServlet {
 				e.printStackTrace();
 			}
 
-			response.sendRedirect("/AddNewMovie");
+			request.setAttribute("malls", malls);
+			RequestDispatcher rd = request.getRequestDispatcher("add-mall.jsp");
+
+			rd.forward(request, response);
+//			response.sendRedirect("/add-mall.jsp");
 			out.println("</body>");
 			out.println("</html>");
-		}
+		}	
 	}
-
 }

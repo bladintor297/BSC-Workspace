@@ -168,7 +168,7 @@ public class Notification extends HttpServlet {
 			}
 			
 			request.setAttribute("user", u);
-			response.sendRedirect("/bsc/change-password.jsp");
+			response.sendRedirect("/bsc/notifications.jsp");
 			out.println("</body>");
 			out.println("</html>");
 

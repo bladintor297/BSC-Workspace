@@ -12,10 +12,8 @@
 <title>Black Screen Cinema</title>
 
 <!-- SEO Meta Tags -->
-<meta name="description"
-	content="Silicon - Multipurpose Technology Bootstrap Template">
-<meta name="keywords"
-	content="bootstrap, business, creative agency, mobile app showcase, saas, fintech, finance, online courses, software, medical, conference landing, services, e-commerce, shopping cart, multipurpose, shop, ui kit, marketing, seo, landing, blog, portfolio, html5, css3, javascript, gallery, slider, touch, creative">
+<meta name="description" content="Silicon - Multipurpose Technology Bootstrap Template">
+<meta name="keywords" content="bootstrap, business, creative agency, mobile app showcase, saas, fintech, finance, online courses, software, medical, conference landing, services, e-commerce, shopping cart, multipurpose, shop, ui kit, marketing, seo, landing, blog, portfolio, html5, css3, javascript, gallery, slider, touch, creative">
 <meta name="author" content="Createx Studio">
 
 <!-- Viewport -->
@@ -24,8 +22,7 @@
 <!-- Favicon and Touch Icons -->
 <link rel="icon" href="assets/favicon/logobsc.ico">
 <meta name="msapplication-TileColor" content="#080032">
-<meta name="msapplication-config"
-	content="assets/favicon/browserconfig.xml">
+<meta name="msapplication-config" content="assets/favicon/browserconfig.xml">
 <meta name="theme-color" content="#ffffff">
 
 <!-- Vendor Styles -->
@@ -76,23 +73,26 @@
 							<button type="button"
 								class="btn btn-secondary w-100 d-md-none mt-n2 mb-3"
 								data-bs-toggle="collapse" data-bs-target="#account-menu">
-								<i class="bx bxs-user-detail fs-xl me-2"></i> Account menu <i
-									class="bx bx-chevron-down fs-lg ms-1"></i>
-							</button>
-							<div id="profile.jsp"
-								class="list-group list-group-flush collapse d-md-block">
-								<a href="account-details.html"
-									class="list-group-item list-group-item-action d-flex align-items-center">
-									<i class="bx bx-cog fs-xl opacity-60 me-2"></i> Account Details
-								</a> <a href="profile.jsp"
-									class="list-group-item list-group-item-action d-flex align-items-center">
-									<i class="bx bx-lock-alt fs-xl opacity-60 me-2"></i> Password
-								</a> <a href="profile.jsp"
-									class="list-group-item list-group-item-action d-flex align-items-center active">
-									<i class="bx bx-bell fs-xl opacity-60 me-2"></i> Notifications
-								</a> <a href="Logout.java"
-									class="list-group-item list-group-item-action d-flex align-items-center">
-									<i class="bx bx-log-out fs-xl opacity-60 me-2"></i> Sign Out
+								  <i class="bx bxs-user-detail fs-xl me-2"></i>
+			                  	Account menu
+			                  <i class="bx bx-chevron-down fs-lg ms-1"></i>
+			                	</button>
+			                	<div id="/bsc/Profile" class="list-group list-group-flush collapse d-md-block">
+			                  	<a href="/bsc/Profile" class="list-group-item list-group-item-action d-flex align-items-center">
+			                    <i class="bx bx-cog fs-xl opacity-60 me-2"></i>
+			                    Account Details
+			                  </a>
+			                  <a href="/bsc/change-password.jsp" class="list-group-item list-group-item-action d-flex align-items-center">
+			                    <i class="bx bx-lock-alt fs-xl opacity-60 me-2"></i>
+			                    Password
+			                  </a>
+			                  <a href="/bsc/Notification" class="list-group-item list-group-item-action d-flex align-items-center active">
+			                    <i class="bx bx-bell fs-xl opacity-60 me-2"></i>
+			                    Notifications
+			                  </a>             
+			                  <a href="/bsc/login.jsp" class="list-group-item list-group-item-action d-flex align-items-center">
+			                    <i class="bx bx-log-out fs-xl opacity-60 me-2"></i>
+			                    Sign Out
 								</a>
 							</div>
 						</div>
