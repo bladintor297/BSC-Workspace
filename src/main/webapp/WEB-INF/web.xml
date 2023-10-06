@@ -106,12 +106,7 @@
 		<description></description>
 		<servlet-class>com.bsc.controller.Booking</servlet-class>
 	</servlet>
-	<servlet>
-		<servlet-name>AddMall</servlet-name>
-		<display-name>AddMall</display-name>
-		<description></description>
-		<servlet-class>com.bsc.controller.AddMall</servlet-class>
-	</servlet>
+
 	<servlet-mapping>
 		<servlet-name>Register</servlet-name>
 		<url-pattern>/Register</url-pattern>
@@ -176,8 +171,5 @@
 		<servlet-name>Booking</servlet-name>
 		<url-pattern>/Booking</url-pattern>
 	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>AddMall</servlet-name>
-		<url-pattern>/AddMall</url-pattern>
-	</servlet-mapping>
+
 </web-app>
