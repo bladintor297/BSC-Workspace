@@ -85,6 +85,7 @@
 							 <select name="Classification" class="form-select" id="autoSizingSelect">
 									<option selected>Choose...</option>
 									<option value="13">13</option>
+									<option value="16">16</option>
 									<option value="18">18</option>
 								</select>
 							</div>

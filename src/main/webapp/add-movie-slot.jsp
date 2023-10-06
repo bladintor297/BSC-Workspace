@@ -225,7 +225,7 @@
 						<% if (movieslots.get(i).getStatus() == 1){ %>
 							<span class="badge bg-danger rounded-pill px-3"> Cancelled</span>
 						<%} else { %>
-							<span class="badge bg-success rounded-pill px-3"> Successful</span>
+							<span class="badge bg-success rounded-pill px-3"> Schedule</span>
 						<%}%>
 					</td>
 					<td>
