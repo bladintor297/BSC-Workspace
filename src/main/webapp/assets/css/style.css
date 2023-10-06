@@ -97,6 +97,7 @@
 	transition: ease-out 0.3s;
 }
 
+.nav-tabs .nav-item:hover>.nav-link:not(.disabled),
 .navbar .nav-item:hover>.nav-link:not(.disabled),
 .navbar-nav .show>.nav-link,
 .navbar-nav .nav-link.active {
@@ -129,4 +130,9 @@ form-check-input:checked {
 
 .accordion-button::after {
 	background-color: #e1a20038 !important;
+}
+
+.bg-ticket{
+	background: rgb(78,51,0) !important;
+	background: linear-gradient(90deg, rgba(78,51,0,1) 0%, rgba(255,184,52,1) 100%) !important;
 }
