@@ -22,11 +22,14 @@ public class Bookings {
 	private String slot;
 	private String mall;
 	private String hall; 
+	private String custName;
+	private String custEmail;
     
 	
 	public Bookings(int bookingID, int userID, int movieSlotID, String paymentID, String seat, double amount,
 			String bookingDate, int status, int movieID, String title, String description, String releaseDate, 
-			int classification, String genre, String imageLandscape, String imagePortrait, String Slot, String Mall, String Hall) {
+			int classification, String genre, String imageLandscape, String imagePortrait, String Slot, String Mall, 
+			String Hall, String CustName, String CustEmail) {
 		super();
 		BookingID = bookingID;
 		UserID = userID;
@@ -47,6 +50,8 @@ public class Bookings {
 		slot = Slot;
 		mall = Mall;
 		hall = Hall;
+		custName = CustName;
+		custEmail = CustEmail;
 	}
 
 
@@ -212,6 +217,30 @@ public class Bookings {
 
 	public void setHall(String hall) {
 		this.hall = hall;
+	}
+
+
+
+	public String getCustName() {
+		return custName;
+	}
+
+
+
+	public void setCustName(String custName) {
+		this.custName = custName;
+	}
+
+
+
+	public String getCustEmail() {
+		return custEmail;
+	}
+
+
+
+	public void setCustEmail(String custEmail) {
+		this.custEmail = custEmail;
 	}
 	
 	

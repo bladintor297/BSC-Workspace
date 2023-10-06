@@ -6,7 +6,12 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -47,8 +52,11 @@ public class Booking extends HttpServlet {
 			out.println("<title>Servlet StudentServlet</title>");
 			out.println("</head>");
 
-			ArrayList<Bookings> bookinglist = new ArrayList<>();
+			ArrayList<Bookings> ongoinglist = new ArrayList<>();
+			ArrayList<Bookings> historylist = new ArrayList<>();
 			HttpSession session = request.getSession();
+			String query = null;
+			PreparedStatement preparedStatement = null;
 			
 			try {
 
@@ -58,14 +66,23 @@ public class Booking extends HttpServlet {
 						"jdbc:mysql://localhost:3306/bsc?allowPublicKeyRetrieval=true&useSSL=false", "root",
 						"@dmin123");
 				
-				String query = "SELECT DISTINCT booking.*, movie.* "
-						+ "FROM booking "
-						+ "INNER JOIN movie ON booking.MovieID = movie.MovieID "
-						+ "WHERE booking.UserID = ? "
-						+ "AND booking.BookingDate >= NOW()";
 				
-				PreparedStatement preparedStatement = con.prepareStatement(query);
-				preparedStatement.setInt(1, (int)session.getAttribute("id")); 
+				if ((int)session.getAttribute("role") != 0) {
+					query = "SELECT booking.*, movie.* "
+							+ "FROM booking "
+							+ "INNER JOIN movie ON booking.MovieID = movie.MovieID ";
+					preparedStatement = con.prepareStatement(query);
+					
+				}
+				else {
+					query = "SELECT booking.*, movie.* "
+							+ "FROM booking "
+							+ "INNER JOIN movie ON booking.MovieID = movie.MovieID "
+							+ "WHERE booking.UserID = ? ";
+					preparedStatement = con.prepareStatement(query);
+					preparedStatement.setInt(1, (int)session.getAttribute("id"));
+				}		
+				 
 				ResultSet resultSet = preparedStatement.executeQuery();
 				ResultSet resultSet2 = null;
 				String _slot = null;
@@ -75,7 +92,7 @@ public class Booking extends HttpServlet {
 				while (resultSet.next()) {
 					int movieID = resultSet.getInt("MovieID");
 					
-					query = "SELECT movieslot.*, "
+					query = "SELECT DISTINCT movieslot.*, "
 							 + "mall.MallName AS MallName, "
 							 + "hall.HallName AS HallName "
 				             + "FROM movieslot "
@@ -113,15 +130,32 @@ public class Booking extends HttpServlet {
 				    String imageLandscape = resultSet.getString("ImageLandscape");
 				    String imagePortrait = resultSet.getString("ImagePortrait");
 				    
+				    String custName = resultSet.getString("CustName");
+				    String custEmail= resultSet.getString("UserEmail");
+				    
 				    // Create a Bookings object that combines data from both Bookings and Movies
 				    Bookings booking = new Bookings(bookingID, userID, movieSlotID, paymentID,
-				            seat, amount, bookingDate, status,
-				            movieID, title, description, releaseDate,
-				            classification, genre, imageLandscape, imagePortrait, slot, mall, hall);
+				            seat, amount, bookingDate, status, movieID, title, description, 
+				            releaseDate, classification, genre, imageLandscape, imagePortrait, slot, 
+				            mall, hall, custName, custEmail);
 
-				    // Add the Booking object to the ArrayList
-				    bookinglist.add(booking);
+				    SimpleDateFormat inputDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+				    //inputDateFormat.parse(bookingDate);
+				    // Check the booking date condition and add to the appropriate list
+				    if (inputDateFormat.parse(bookingDate).after(new Date()) || inputDateFormat.parse(bookingDate).equals(new Date()) ) {
+				        ongoinglist.add(booking);
+				        System.out.println("1 booking added to ongoinglist");
+				    } else {
+				        historylist.add(booking);
+				        System.out.println("1 booking added to historylist");
+				    }
 				}
+				
+				
+				
+				
+				/* HISTORY LIST */
+				
 				
 				
 				// Close resources
@@ -133,7 +167,8 @@ public class Booking extends HttpServlet {
 				e.printStackTrace();
 			}
 			
-			request.setAttribute("bookinglist", bookinglist);
+			request.setAttribute("historylist", historylist);
+			request.setAttribute("ongoinglist", ongoinglist);
 			
 			RequestDispatcher rd = request.getRequestDispatcher("booking-history.jsp");
 			rd.forward(request, response);

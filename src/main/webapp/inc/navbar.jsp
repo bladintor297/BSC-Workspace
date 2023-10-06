@@ -13,7 +13,9 @@
 				<div class="offcanvas-body">
 					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 						<li class="nav-item"><a href="/bsc/Welcome" class="nav-link active">Home</a></li>
-						<li class="nav-item me-1"><a href="/bsc/Booking" class="nav-link">History</a></li>
+						<li class="nav-item me-1">
+							<a href="/bsc/Booking" class="nav-link">Bookings</a>
+						</li>
 						
 						
 						<% if ((int)session.getAttribute("role") != 0 ){ %>

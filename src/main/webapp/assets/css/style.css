@@ -136,3 +136,8 @@ form-check-input:checked {
 	background: rgb(78,51,0) !important;
 	background: linear-gradient(90deg, rgba(78,51,0,1) 0%, rgba(255,184,52,1) 100%) !important;
 }
+
+.bg-ticket-history{
+	background: rgb(78,51,0) !important;
+	background: linear-gradient(90deg, rgba(78,51,0,1) 0%, rgb(128, 128, 128) 100%) !important;
+}
