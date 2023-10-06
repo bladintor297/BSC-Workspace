@@ -17,29 +17,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=0.9">
 <title>Add Movie</title>
-
-	<!-- Favicon and Touch Icons -->
-	<link rel="icon" href="assets/favicon/logobsc.ico">
-	<meta name="msapplication-TileColor" content="#080032">
-	<meta name="msapplication-config" content="assets/favicon/browserconfig.xml">
-	<meta name="theme-color" content="#ffffff">
-
-<!-- Vendor Styles -->
-<link rel="stylesheet" media="screen" href="assets/vendor/boxicons/css/boxicons.min.css" />
-
-<!-- Main Theme Styles + Bootstrap -->
-<link rel="stylesheet" media="screen" href="assets/css/theme.min.css">
-<link rel="stylesheet" media="screen" href="assets/css/style.css">
-
-<script></script>
-<script src="assets/js/function.js"></script>
-
+<%@include file="inc/header-links.jsp"%>
 
 </head>
 <body>
 
 <%@include file="inc/spinner.jsp"%>
 <%@include file="inc/navbar.jsp"%>
+
 	<section class="container text-center pt-2 mt-2 mt-md-4">			
 		<h2 class="h5 pt-2 pt-lg-0"> Manage Movies </h2>
 		
@@ -122,13 +107,13 @@
 	<table class="table table-bordered table-hover mt-2 align-middle border-white">
 		<thead class="bg-success ">
 			<tr>
-				<th >Movie ID</th>
+				<th style="width:9%">Movie ID</th>
 				<th >Title</th>
 				<th >Description</th>
-				<th >Date</th>
+				<th style="width:10%">Date</th>
 				<th >Classification</th>
-				<th >Genre</th>
-				<th>Poster</th>
+				<th style="width:10%">Genre</th>
+				<th style="width:20%">Poster</th>
 				<th>Actions</th>
 			</tr>
 		</thead>
@@ -146,9 +131,25 @@
 				%>
 				<tr>
 						<th ><%=movies.get(i).getMovieID() %></th>
-						<td><%=movies.get(i).getTitle() %></td>
-						<td><%=movies.get(i).getDescription()%></td>
-						<td><%= movies.get(i).getReleaseDate()%></td>
+						<td>
+							<p><%=movies.get(i).getTitle() %></p>
+						</td>
+						<td>
+							<p align="justify"><%=movies.get(i).getDescription()%></p>
+						</td>
+						<td>
+							<% 
+
+							 // Assuming movies.get(i).getReleaseDate() returns a String in the format "yyyy-MM-dd HH:mm:ss.S"
+							  String dateStr = movies.get(i).getReleaseDate();
+							  SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
+							  Date releaseDate = inputFormat.parse(dateStr);
+
+							  SimpleDateFormat outputFormat = new SimpleDateFormat("dd MMM, yyyy");
+							  String displayDate = outputFormat.format(releaseDate);
+							%>
+							<p><%= displayDate %></p>
+						</td>
 						<td><%=movies.get(i).getClassification()%></td>
 						<td><%=movies.get(i).getGenre()%></td>
 						<td><img src="<%=movies.get(i).getImagePortrait()%>" style="height:250px; width: 200px; object-fit:cover;"></td>

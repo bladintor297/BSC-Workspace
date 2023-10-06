@@ -112,6 +112,12 @@
 		<description></description>
 		<servlet-class>com.bsc.controller.AddMall</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>AddNewUser</servlet-name>
+		<display-name>AddNewUser</display-name>
+		<description></description>
+		<servlet-class>com.bsc.controller.AddNewUser</servlet-class>
+	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>Register</servlet-name>
@@ -180,6 +186,10 @@
 	<servlet-mapping>
 		<servlet-name>AddMall</servlet-name>
 		<url-pattern>/AddMall</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>AddNewUser</servlet-name>
+		<url-pattern>/AddNewUser</url-pattern>
 	</servlet-mapping>
 
 </web-app>

@@ -15,6 +15,7 @@
 
 <!-- Vendor Styles -->
 <link rel="stylesheet" media="screen" href="assets/vendor/boxicons/css/boxicons.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
 <!-- Main Theme Styles + Bootstrap -->
 <link rel="stylesheet" media="screen" href="assets/css/theme.min.css">
