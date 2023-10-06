@@ -17,23 +17,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=0.9">
 <title>Add Movie</title>
-
-	<!-- Favicon and Touch Icons -->
-	<link rel="icon" href="assets/favicon/logobsc.ico">
-	<meta name="msapplication-TileColor" content="#080032">
-	<meta name="msapplication-config" content="assets/favicon/browserconfig.xml">
-	<meta name="theme-color" content="#ffffff">
-
-<!-- Vendor Styles -->
-<link rel="stylesheet" media="screen" href="assets/vendor/boxicons/css/boxicons.min.css" />
-
-<!-- Main Theme Styles + Bootstrap -->
-<link rel="stylesheet" media="screen" href="assets/css/theme.min.css">
-<link rel="stylesheet" media="screen" href="assets/css/style.css">
-
-<script></script>
-<script src="assets/js/function.js"></script>
-
+<%@include file="inc/header-links.jsp"%>
 
 </head>
 <body>

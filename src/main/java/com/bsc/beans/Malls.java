@@ -7,6 +7,9 @@ public class Malls {
 	private int MallID;
 	private String MallName;
 	private String Address;
+	private String Status;
+	
+	public Malls () {}
 	
 	public Malls (int MallID, String MallName, String Address) {
 		this.MallID = MallID;
@@ -33,7 +36,14 @@ public class Malls {
 	public void setMallID(int mallID) {
 		MallID = mallID;
 	}
-	
+	public String getStatus() {
+		return Status;
+	}
+
+	public void setStatus(String status) {
+		Status = status;
+	}
+
 	@Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -50,7 +60,7 @@ public class Malls {
 
     @Override
     public int hashCode() {
-        return Objects.hash(MallID, MallName, Address);
+        return Objects.hash(MallID, MallName, Address, Status);
     }
 
 }

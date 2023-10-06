@@ -80,7 +80,6 @@ public class Register extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		System.out.println("Test");
 		// TODO Auto-generated method stub
 		String name = request.getParameter("name");
 		String email = request.getParameter("email");

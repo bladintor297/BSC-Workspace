@@ -2,102 +2,176 @@
 	pageEncoding="ISO-8859-1"%>
 
 <%@page import="java.util.ArrayList"%>
+<%@page import="java.util.Date, java.text.SimpleDateFormat"%>
 
 <%@page import="com.bsc.beans.Malls"%>
 <%@page import="com.bsc.beans.Movies"%>
-<!DOCTYPE html>
-<html lang="en">
+<%@page import="com.bsc.beans.Bookings"%>
+
+<!DOCTYPE html><html lang="en">
 	<head>
 	<meta charset="utf-8">
 	<title>Black Screen Cinema</title>
+	<%@include file="inc/header-links.jsp"%>
 	
-	<!-- Viewport -->
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	
-	<!-- Favicon and Touch Icons -->
-<link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
-<link rel="manifest" href="assets/favicon/site.webmanifest">
-<link rel="mask-icon" href="assets/favicon/safari-pinned-tab.svg" color="#6366f1">
-<link rel="shortcut icon" href="assets/favicon/favicon.ico">
-<meta name="msapplication-TileColor" content="#080032">
-<meta name="msapplication-config" content="assets/favicon/browserconfig.xml">
-<meta name="theme-color" content="#ffffff">
-
-<!-- Vendor Styles -->
-<link rel="stylesheet" media="screen" href="assets/vendor/boxicons/css/boxicons.min.css" />
-
-<!-- Main Theme Styles + Bootstrap -->
-<link rel="stylesheet" media="screen" href="assets/css/theme.min.css">
-<link rel="stylesheet" media="screen" href="assets/css/style.css">
-
-<script></script>
-<script src="assets/js/function.js"></script>
-
-
 </head>
 
 
 <!-- Body -->
 <body>
-
-
-
-
-
-	<main class="page-wrapper">
-
-
-	<%@include file="inc/navbar.jsp"%>
+<main class="page-wrapper">
 	
+	<%@include file="inc/navbar.jsp"%>
+
 
 	<!-- Page content -->
       <section class="container pt-5">
         <div class="row d-flex justify-content-center">
 
   
-          
-
 
           <!-- Account collections -->
-          <div class="col-md-11  pb-5 mb-lg-2 pt-md-5 mt-n3 mt-md-0">
+          <div class="col-md-11  pb-5 mb-lg-2 mt-n3 mt-md-0">
             <div class="ps-md-3 ps-lg-0  ">
-              <div class="d-sm-flex align-items-center justify-content-between mb-3 pb-3">
+              <div class="d-sm-flex align-items-center justify-content-center mb-3 pb-3">
                 <h1 class="h2 mb-sm-0">My Movies</h1>
-                
               </div>
+              <div class="d-flex justify-content-between">
+					<ul class="nav nav-tabs" id="myTab" role="tablist">
+					  <li class="nav-item" role="presentation">
+					    <a class="nav-link rounded-pill px-5 active" id="ongoing-tab" data-bs-toggle="tab" data-bs-target="#ongoing" type="button" role="tab" aria-controls="ongoing" aria-selected="true">Ongoing</a>
+					  </li>
+					  <li class="nav-item" role="presentation">
+					    <a class="nav-link rounded-pill px-5 " id="history-tab" data-bs-toggle="tab" data-bs-target="#history" type="button" role="tab" aria-controls="history" aria-selected="false">History</a>
+					  </li>
+	
+					</ul>
+					<div>
+						<button class="btn btn-danger"><i class='bx bxs-file-pdf'></i> &nbsp;&nbsp;  Generate Report</button>
+					</div>
+				</div>
 
-              
-              <!-- Item -->
-              <div class="card border-0 shadow-sm overflow-hidden mb-4">
-                <div class="row g-0">
-                  <a href="#" class="col-sm-3 bg-repeat-0 bg-position-center bg-size-cover" style="background-image: url(https://kakimuvee.net/wp-content/uploads/2023/05/350459467_6210333149047026_4053920908481757867_n-edited.jpg); min-height: 13rem;"></a>
-                  <div class="col-sm-8">
-                    <div class="card-body">
-                      <div class="fs-sm text-muted mb-1">Nov 30, 2021 (Release Date)</div>
-                      <h2 class="h4 pb-1 mb-2">
-                        <a href="#">Malbatt Misi Bakara (Movie Title)</a>
-                      </h2>
-                      <p class="mb-4 mb-lg-5">Wed 06 Sep | 8.25 pm | Hall 6</p>
-                      <div class="d-flex">
-                        <button type="button" class="btn btn-outline-primary px-3 px-lg-4 me-3">
-                          <i class="bx bx-edit fs-xl me-xl-2"></i>
-                          <span class="d-none d-xl-inline">View</span>
-                        </button>
-                        <button type="button" class="btn btn-outline-danger px-3 px-lg-4">
-                          <i class="bx bx-trash-alt fs-xl me-xl-2"></i>
-                          <span class="d-none d-xl-inline">Appeal Refund</span>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
 
-           
+				
+				
+				<%
+				ArrayList<Bookings> ongoinglist = (ArrayList<Bookings>)request.getAttribute("ongoinglist");
+				ArrayList<Bookings> historylist = (ArrayList<Bookings>)request.getAttribute("historylist");
+			   	SimpleDateFormat inputDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			   	SimpleDateFormat outputDateFormat = new SimpleDateFormat("d MMMM, yyyy");
+				%>
+				<div class="tab-content">
+				  <div class="tab-pane active" id="ongoing" role="tabpanel" aria-labelledby="ongoing-tab">
+				  
+				   	
+				   	<% for (Bookings booking:ongoinglist){%>
+				    <!-- Item -->
+		              <div class="card border-0 shadow-sm overflow-hidden mb-4">
+		                <div class="row g-0">
+		                <a href="#" class="col-sm-3 bg-repeat-0 bg-position-center bg-size-cover" style="background-image: url(<%= booking.getImagePortrait() %>); min-height: 13rem;">
+					      <span class="badge badge-success position-absolute top-0 end-0 zindex-5">New</span>
+					    </a>
+		                 
+		                  <div class="col-sm-9">
+		                      <!-- Ticket card -->
+					            <div class="ms-2 position-relative">
+					              <div class="position-relative overflow-hidden rounded-3 zindex-5  p-sm-5 bg-ticket">
+					                <span class="position-absolute top-50 start-0 translate-middle bg-light rounded-circle p-4"></span>
+					                <span class="position-absolute top-0 start-0 w-100 h-100 bg-repeat-0 bg-position-center-end bg-size-cover" style="background-image: url(assets/img/landing/conference/price-card-pattern.png);"></span>
+					                <div class="px-md-4 position-relative zindex-5">
+					                  <div class="d-sm-flex align-items-start justify-content-between">
+					                    <div class="text-center text-sm-start me-sm-4">
+					                      <div class="h5 fst-italic fw-semibold text-light text-uppercase mb-1"><%= outputDateFormat.format(inputDateFormat.parse(booking.getBookingDate())) %></div>
+					                      <h3 class="h2 text-light"><%= booking.getTitle() %></h3>
+					                      <p class="text-muted pb-0 mb-0"><%= booking.getSlot() %> &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; 
+					                      <%=booking.getSeat() %>  &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; 
+					                      <%=booking.getHall()%>  
+					                      </p>
+					                      <p class="text-muted pt-0 mt-0"><%= booking.getMall() %></p>
+					                      <p class="text-light pt-0 mt-0"><%= booking.getCustName() %> &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; <%= booking.getCustEmail() %></p>
+					                      
+					                      
+					                    </div>
+					                    <div class="d-table bg-white rounded-3 p-4 flex-shrink-0 mx-auto mx-sm-0">
+					                      <img src="assets/img/landing/conference/qr.png" width="102" alt="QR Code">
+					                      
+					                    </div>
+					                  </div>
+					                  <div class="d-flex flex-column flex-sm-row align-items-center ">
+					                    <a class="btn btn-secondary rounded-pill btn-lg mb-3 mb-sm-0 me-sm-3 px-5">
+					                    	RM<%= String.format("%.2f", booking.getAmount() )%>
+					                    </a>
+					                    <div class="d-flex align-items-center">
+					                      <span class="fs-lg text-light me-2"></span>
+					                    </div>
+					                  </div>
+					                </div>
+					                <span class="position-absolute top-50 end-0 translate-middle-y bg-light rounded-circle p-4 me-n4"></span>
+					              </div>
+					              
+					            </div>
+		                    
+		                  </div>
+		                </div>
+		              </div>
+		              <%} %>
+				  </div>
+				  <div class="tab-pane" id="history" role="tabpanel" aria-labelledby="history-tab">
+				   	<% for (Bookings booking:historylist){%>
+				    <!-- Item -->
+		              <div class="card border-0 shadow-sm overflow-hidden mb-4">
+		                <div class="row g-0">
+		                <a href="#" class="col-sm-3 bg-repeat-0 bg-position-center bg-size-cover" style="background-image: url(<%= booking.getImagePortrait() %>); min-height: 13rem;">
+					      <span class="badge badge-success position-absolute top-0 end-0 zindex-5">New</span>
+					    </a>
+		                 
+		                  <div class="col-sm-9">
+		                      <!-- Ticket card -->
+					            <div class="ms-2 position-relative">
+					              <div class="position-relative overflow-hidden rounded-3 zindex-5  p-sm-5 bg-ticket-history">
+					                <span class="position-absolute top-50 start-0 translate-middle bg-light rounded-circle p-4"></span>
+					                <span class="position-absolute top-0 start-0 w-100 h-100 bg-repeat-0 bg-position-center-end bg-size-cover" style="background-image: url(assets/img/landing/conference/price-card-pattern.png);"></span>
+					                <div class="px-md-4 position-relative zindex-5">
+					                  <div class="d-sm-flex align-items-start justify-content-between">
+					                    <div class="text-center text-sm-start me-sm-4">
+					                      <div class="h5 fst-italic fw-semibold text-light text-uppercase mb-1"><%= outputDateFormat.format(inputDateFormat.parse(booking.getBookingDate())) %></div>
+					                      <h3 class="h2 text-light"><%= booking.getTitle() %></h3>
+					                      <p class="text-muted pb-0 mb-0"><%= booking.getSlot() %> &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; 
+					                      <%=booking.getSeat() %>  &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; 
+					                      <%=booking.getHall()%>  
+					                      </p>
+					                      <p class="text-muted pt-0 mt-0"><%= booking.getMall() %></p>
+					                      <p class="text-light pt-0 mt-0"><%= booking.getCustName() %> &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; <%= booking.getCustEmail() %></p>
+					                      
+					                    </div>
+					                    <div class="d-table bg-white rounded-3 p-4 flex-shrink-0 mx-auto mx-sm-0">
+					                      <img src="assets/img/landing/conference/qr.png" width="102" alt="QR Code" style="opacity: 0.8; filter: grayscale(100%);">
+					                    </div>
+					                  </div>
+					                  <div class="d-flex flex-column flex-sm-row align-items-center ">
+					                    <a class="btn btn-secondary rounded-pill btn-lg mb-3 mb-sm-0 me-sm-3 px-5">
+					                    	RM<%= String.format("%.2f", booking.getAmount() )%>
+					                    </a>
+					                    <div class="d-flex align-items-center">
+					                      <span class="fs-lg text-light me-2">
+					                      	<span class="fs-lg text-light me-2"></span>
+					                      </span>
 
-           
+					                    </div>
+					                  </div>
+					                </div>
+					                <span class="position-absolute top-50 end-0 translate-middle-y bg-light rounded-circle p-4 me-n4"></span>
+					              </div>
+					              
+					            </div>
+		                    
+		                  </div>
+		                </div>
+		              </div>
+		              <%} %>
+				  </div>
+				</div>
+              	
             </div>
           </div>
         </div>
