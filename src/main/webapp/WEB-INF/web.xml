@@ -95,11 +95,25 @@
 		<servlet-class>com.bsc.controller.Notification</servlet-class>
 	</servlet>
 	<servlet>
+		<servlet-name>Payment</servlet-name>
+		<display-name>Payment</display-name>
+		<description></description>
+		<servlet-class>com.bsc.controller.Payment</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>Booking</servlet-name>
+		<display-name>Booking</display-name>
+		<description></description>
+		<servlet-class>com.bsc.controller.Booking</servlet-class>
+	</servlet>
+	<servlet>
 		<servlet-name>AddMall</servlet-name>
 		<display-name>AddMall</display-name>
 		<description></description>
 		<servlet-class>com.bsc.controller.AddMall</servlet-class>
 	</servlet>
+
+
 	<servlet-mapping>
 		<servlet-name>Register</servlet-name>
 		<url-pattern>/Register</url-pattern>
@@ -157,7 +171,16 @@
 		<url-pattern>/Notification</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
+		<servlet-name>Payment</servlet-name>
+		<url-pattern>/Payment</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Booking</servlet-name>
+		<url-pattern>/Booking</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
 		<servlet-name>AddMall</servlet-name>
 		<url-pattern>/AddMall</url-pattern>
 	</servlet-mapping>
+
 </web-app>
