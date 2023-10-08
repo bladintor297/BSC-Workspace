@@ -7,7 +7,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head>	
 
 	<title>Black Screen Cinema</title>
 
@@ -29,76 +29,65 @@
         <%@include file="profile-aside.jsp"%>
         
         <!-- Account messages -->
-        <div class="col-md-8 col-lg-9 pb-5 mb-lg-2 mb-lg-4 pt-md-5 mt-n3 mt-md-0">
-          <div class="ps-md-3 mt-md-2 pt-md-4 pb-md-2">
-            <div class="row g-0 border rounded-3 shadow-sm position-relative overflow-hidden">
-
-              <div id="contactsList" class="col-lg-12">
-                <div
-                  class="offcanvas-lg offcanvas-start position-absolute position-lg-relative h-100 bg-secondary shadow-none border-end"
-                  data-bs-scroll="true" data-bs-backdrop="false" style="max-height: 712px;">
-                  <div class="card-header w-100 border-0 p-4">
-                    <div class="d-flex align-items-center justify-content-between mb-4">
-                      <h1 class="h3 mb-0">Notifications</h1>
-                      <button type="button"
-                        class="btn btn-link nav-link bg-faded-primary-hover d-lg-none py-2 ps-2 pe-3 me-n3"
-                        data-bs-dismiss="offcanvas" data-bs-target="#contactsList">
-                        <i class="bx bx-x fs-xl me-1"></i>
-                        Close
-                      </button>
-                    </div>
-
-                  </div>
-
-
+        <div class="col-md-8 col-lg-9 pb-5 mb-lg-2 mb-lg-4 mt-n3 mt-md-0">
+          <div class="ps-md-3 mt-md-2  pb-md-2">
+          
+          		  <h2 class="h1 pt-2 pt-lg-0 text-center">My Notifications</h2>
                   <!-- Notifications Here -->
-
                   <div class="list-group">
+                  		
                   <!-- Loop here -->
                       <% ArrayList<Notifications> notificationlist = (ArrayList<Notifications>)request.getAttribute("notificationlist");
 
                           for (Notifications notification:notificationlist){
-
+						
                           %>
+                          <a class="list-group-item d-flex justify-content-between align-items-start notification-list
+                          <% if (notification.getIsRead()==1){%>
+							 read
+						  <% } %>
+                          ">
+						    <div class="ms-2 me-auto">
+						      <div class="fw-bold"><%= notification.getTitle() %></div>
+						      <%= notification.getContent() %>
+						    </div>
+						    <div class="d-grid justify-content-start">
+		                        <div class="row">
+		                        	<small><%= notification.getDateTime() %></small>
+		                        </div>
+		                        <form  class="row" action="/bsc/Notification" method="POST">
+		                        <div class="form-check">
+		                          <input type="hidden" name="notificationId" value="<%= notification.getNotificationID() %>">
+								  <button type="submit" class="btn py-1 btn-sm 
+								  <%
+								  if (notification.getIsRead()==1){%>
+								  btn-warning disabled
+								  <% } else {%>
+								  btn-outline-warning
+								  <%} %>
+								  " id="btn-check"><i class="fa-solid fa-circle-check" ></i></button>
+								  <label class="form-check-label" for="btn-check">
+								    Mark as Read
+								  </label>
+								</div>
+								</form>
+							</div>
+		
+						  </a>
 
-		                    <a href="#" class="list-group-item list-group-item-action " aria-current="true">
-		                      <div class="d-flex w-100 justify-content-between">
-		                        <h5 class="mb-1"> <%= notification.getTitle() %></h5>
-		                        <small><%= notification.getDateTime() %></small>
-		                      </div>
-		                      <p class="mb-1"> <%= notification.getContent() %></p>
 		                    
-		                    </a>
 		                  <%} %>
 
                   </div>
-
-       
-
-                </div>
-              </div>
-
-
-            </div>
           </div>
         </div>
       </div>
     </section>
 </main>
-
 	
-					
-					<!-- Vendor Scripts -->
-					<script
-						src="assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-					<script
-						src="assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
-					<script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-
-					<!-- Main Theme Script -->
-					<script src="assets/js/theme.min.js"></script>
-				
-					
+	<%@include file="inc/top-btn.jsp"%>
+	<%@include file="inc/footer.jsp"%>
+	<%@ include file="inc/footer-links.jsp" %>
 </body>
 
 </html>

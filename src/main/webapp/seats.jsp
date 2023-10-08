@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	
+<%@page import="java.util.ArrayList"%>
+
+<%@page import="com.bsc.beans.Seats"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -33,13 +37,23 @@
 			<form action="/bsc/Seat" method="POST">
 				<div class="row mx-1 my-5" role="group" >
 				  <button type="button" class="btn btn-warning" >Screen</button>
-				  
+				<%  ArrayList<Seats> seatslist = (ArrayList<Seats>) request.getAttribute("seatslist"); %>
 				</div>
 				<% for (char i = 'A'; i <= 'E'; ++i){ %>
 					<div class="btn-group d-flex mt-2" role="group" id="btncheck<%= i %>" aria-label="Basic checkbox toggle button group">
 						<% for (int j = 1; j <= 12; ++j){ %>
 							
-								<input type="checkbox" class="btn-check" value="<%= i + String.valueOf(j)%>" name="seats" id="btncheck<%= i + String.valueOf(j)%>" autocomplete="off">
+								<input 
+								
+								type="checkbox" class="btn-check" value="<%= i + String.valueOf(j)%>" name="seats" id="btncheck<%= i + String.valueOf(j)%>" 
+								<% for (Seats seat : seatslist) {
+							        if (seat.getSeatNumber().equals(i + String.valueOf(j))) { %>
+							            disabled="disabled"
+							        <% }
+							    } %>
+							    autocomplete="off">
+							
+						  		
 						  		<label class="btn btn-outline-warning" for="btncheck<%= i + String.valueOf(j)%>"><%= i + String.valueOf(j)%></label>
 					  		
 						
@@ -67,7 +81,7 @@
 	
 			
 		  
-		<% } else { %>
+		<%}  else { %>
 			<p class="text-white fst-italic">No user logged in </p>
 		<%
 		}
@@ -77,15 +91,7 @@
 	</main>
 
 	<%@include file="inc/top-btn.jsp"%>
-
-
-
-	<!-- Vendor Scripts -->
-	<script src="assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-	<script
-		src="assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
-
-	<!-- Main Theme Script -->
-	<script src="assets/js/theme.min.js"></script>
+	<%@include file="inc/footer.jsp"%>
+	<%@ include file="inc/footer-links.jsp" %>
 </body>
 </html>

@@ -12,6 +12,11 @@ public class Seats {
 		this.price = price;
 		this.SeatNumber = seatNumber;
 	}
+	
+	public Seats(String seatNumber) {
+		this.SeatNumber = seatNumber;
+	}
+	
 	public int getSeatID() {
 		return SeatID;
 	}

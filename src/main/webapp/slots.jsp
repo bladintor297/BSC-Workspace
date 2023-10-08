@@ -249,7 +249,7 @@
 														        </div>
 													        <%} %>
 													        
-													        
+													        <input type="hidden" name="movieDate" value="<%=movieslots.get(j).getDate() %>">
 													        <input type="hidden" name="movieSlotID" value="<%=movieslots.get(j).getMovieSlotID()%>">
 													        <input type="hidden" name="movieID" value="<%=movieslots.get(j).getMovieID()%>">
 													      
@@ -315,14 +315,8 @@
 			// Set the active class to the day0TabPane element
 			day0TabPane.classList.add('active');
 		</script>
-
-
-        <!-- Vendor Scripts -->
-        <script src="assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
-
-        <!-- Main Theme Script -->
-        <script src="assets/js/theme.min.js"></script>
+		<%@include file="inc/footer.jsp"%>
+		<%@ include file="inc/footer-links.jsp" %>
 </body>
 
 </html>

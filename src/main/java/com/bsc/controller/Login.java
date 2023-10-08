@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.bsc.beans.Notifications;
+
 /**
  * Servlet implementation class Login
  */
@@ -57,6 +59,7 @@ public class Login extends HttpServlet {
 		String password = request.getParameter("password");
 		HttpSession session = request.getSession();
 		RequestDispatcher dispatcher = null;
+		
 
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -68,7 +71,7 @@ public class Login extends HttpServlet {
 			ResultSet rs = pst.executeQuery();
 
 			if (rs.next()) {
-				System.out.println("Before session");
+				
 
 				// Create Session
 				session.setAttribute("id", rs.getInt("id"));
@@ -76,13 +79,23 @@ public class Login extends HttpServlet {
 				session.setAttribute("name", rs.getString("name"));
 				session.setAttribute("phone", rs.getString("phone"));
 				session.setAttribute("role", rs.getInt("role"));
-				System.out.println("After session");
-
 				
-				  session.getAttribute("email"); session.getAttribute("nama"); session.getAttribute("role");
-				  System.out.println("After session");
+				int row = 0;
+				String query = "SELECT * FROM notifications "
+						+ "WHERE IsRead = 0 "
+						+ "AND UserID = ?";
+				pst = con.prepareStatement(query);
+				pst.setInt(1, rs.getInt("id"));
+				rs= pst.executeQuery();
+				
+				while (rs.next()) {row++;}
+				
+				
+				System.out.println ("Row count: " + row);
+				
+				session.setAttribute("notificationCount", row);
 				  
-				 response.sendRedirect("/bsc/Welcome");
+				dispatcher = request.getRequestDispatcher("/Welcome");
 			} else {
 				session.setAttribute("status", "failed");
 				System.out.println("Wrong email or password");

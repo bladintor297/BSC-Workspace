@@ -57,20 +57,11 @@
                   
                 </div>
                 <div class="d-flex mb-3">
-                  <button type="reset" class="btn btn-secondary me-3">Cancel</button>
+                  <a href="/bsc/Profile" class="btn btn-secondary me-3">Cancel</a>
                   <button type="submit" class="btn btn-warning">Save changes</button>
                 </div>
               </form>
 
-
-              <!-- Delete account -->
-              <h2 class="h5 text-primary pt-1 pt-lg-3 mt-4">Delete account</h2>
-              <p>When you delete your account, your public profile will be deactivated immediately. If you change your mind before the 14 days are up, sign in with your email and password, and we will send you a link to reactivate your account.</p>
-              <div class="form-check mb-4">
-                <input type="checkbox" id="delete-account" class="form-check-input">
-                <label for="delete-account" class="form-check-label fs-base">Yes, I want to delete my account</label>
-              </div>
-              <button type="button" class="btn btn-danger">Delete</button>
             </div>
           </div>
         </div>
@@ -78,15 +69,7 @@
 	</main>
 
 	<%@include file="inc/top-btn.jsp"%>
-
-
-
-	<!-- Vendor Scripts -->
-	<script src="assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-	<script
-		src="assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
-
-	<!-- Main Theme Script -->
-	<script src="assets/js/theme.min.js"></script>
+	<%@include file="inc/footer.jsp"%>
+	<%@ include file="inc/footer-links.jsp" %>
 </body>
 </html>

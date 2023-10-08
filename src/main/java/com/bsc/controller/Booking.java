@@ -139,16 +139,25 @@ public class Booking extends HttpServlet {
 				            releaseDate, classification, genre, imageLandscape, imagePortrait, slot, 
 				            mall, hall, custName, custEmail);
 
-				    SimpleDateFormat inputDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-				    //inputDateFormat.parse(bookingDate);
-				    // Check the booking date condition and add to the appropriate list
-				    if (inputDateFormat.parse(bookingDate).after(new Date()) || inputDateFormat.parse(bookingDate).equals(new Date()) ) {
+				    // Define the date format for your input
+				    SimpleDateFormat inputDateFormat = new SimpleDateFormat("yyyy-MM-dd"); // Change to your desired format
+
+				    // Parse the bookingDate into a LocalDate
+				    LocalDate bookingLocalDate = LocalDateTime.parse(bookingDate, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S")).toLocalDate(); // Adjust the format as needed
+
+				    // Get the current date as a LocalDate
+				    LocalDate currentDate = LocalDate.now();
+
+				    // Compare the LocalDate objects
+				    if (bookingLocalDate.isAfter(currentDate) || bookingLocalDate.equals(currentDate)) {
 				        ongoinglist.add(booking);
 				        System.out.println("1 booking added to ongoinglist");
 				    } else {
 				        historylist.add(booking);
 				        System.out.println("1 booking added to historylist");
 				    }
+				  
+
 				}
 				
 				

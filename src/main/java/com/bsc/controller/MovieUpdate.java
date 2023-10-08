@@ -45,12 +45,24 @@ public class MovieUpdate extends HttpServlet {
 			out.println("<title>Servlet StudentServlet</title>");
 			out.println("</head>");
 			out.println("<body>");
-
-			ArrayList<Movies> movies = new ArrayList<>();
+			
 			int movieID = 0;
 			if (request.getParameter("movieID") != null) 
-			movieID = Integer.parseInt(request.getParameter("movieID"));
+				movieID = Integer.parseInt(request.getParameter("movieID"));
 
+			
+			String newTitle = request.getParameter("Title"); 
+			String newDescription = request.getParameter("Description"); 
+			String newReleaseDate = request.getParameter("ReleaseDate");
+			int newClassification = Integer.parseInt(request.getParameter("Classification")); 
+			String newGenre = request.getParameter("Genre"); 
+			String newImageLandscape = request.getParameter("ImageLandscape"); 
+			String newImagePortrait = request.getParameter("ImagePortrait");
+			
+			
+
+			ArrayList<Movies> movies = new ArrayList<>();
+			
 			try {
 
 				// Connect DB
@@ -59,10 +71,27 @@ public class MovieUpdate extends HttpServlet {
 						"jdbc:mysql://localhost:3306/bsc?allowPublicKeyRetrieval=true&useSSL=false", "root",
 						"@dmin123");
 
-				// SQL query to retrieve mall data from
+				// SQL query to update movie data
+				String updateQuery = "UPDATE movie SET Title = ?, Description = ?, ReleaseDate = ?, Classification = ?, Genre = ?, ImageLandscape = ?, ImagePortrait = ? WHERE MovieID = ?";
+
+				// Create a PreparedStatement for the update query
+				PreparedStatement updateStatement = con.prepareStatement(updateQuery);
+
+				// Set the new values for the update
+				updateStatement.setString(1, newTitle); // Replace newTitle with the new title value
+				updateStatement.setString(2, newDescription); // Replace newDescription with the new description value
+				updateStatement.setString(3, newReleaseDate); // Replace newReleaseDate with the new release date value
+				updateStatement.setInt(4, newClassification); // Replace newClassification with the new classification value
+				updateStatement.setString(5, newGenre); // Replace newGenre with the new genre value
+				updateStatement.setString(6, newImageLandscape); // Replace newImageLandscape with the new landscape image URL
+				updateStatement.setString(7, newImagePortrait); // Replace newImagePortrait with the new portrait image URL
+				updateStatement.setInt(8, movieID); // Replace movieIDToUpdate with the MovieID of the record to update
+
+				// Execute the update query
+				updateStatement.executeUpdate();
 				
 				//Retrieve data from db
-				String query2 = "SELECT * FROM movie WHERE status=0";
+				String query2 = "SELECT * FROM movie WHERE status = 0";
 				PreparedStatement preparedStatement2 = con.prepareStatement(query2);
 
 				// Execute the query
@@ -85,6 +114,7 @@ public class MovieUpdate extends HttpServlet {
 
 				// Close resources
 				con.close();
+				updateStatement.close();
 				resultSet2.close();
 				preparedStatement2.close();
 

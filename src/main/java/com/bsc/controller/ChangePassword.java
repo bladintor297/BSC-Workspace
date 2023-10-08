@@ -54,7 +54,7 @@ public class ChangePassword extends HttpServlet {
 				String query = "SELECT * FROM users WHERE id = ?";
 				PreparedStatement preparedStatement = con.prepareStatement(query);
 
-				preparedStatement.setInt(1, Integer.parseInt((String) session.getAttribute("id"))); 
+				preparedStatement.setInt(1, (int)session.getAttribute("id")); 
 				
 
 				// Execute the query
@@ -72,7 +72,7 @@ public class ChangePassword extends HttpServlet {
 				e.printStackTrace();
 			}
 			request.setAttribute("user", user);
-			RequestDispatcher rd = request.getRequestDispatcher("profile.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("change-password.jsp");
 			rd.forward(request, response);
 
 			out.println("</body>");

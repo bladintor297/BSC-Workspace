@@ -54,7 +54,7 @@ public class Profile extends HttpServlet {
 				String query = "SELECT * FROM users WHERE id = ?";
 				PreparedStatement preparedStatement = con.prepareStatement(query);
 
-				preparedStatement.setInt(1, Integer.parseInt((String) session.getAttribute("id"))); 
+				preparedStatement.setInt(1, (int)session.getAttribute("id")); 
 				
 
 				// Execute the query
@@ -66,6 +66,13 @@ public class Profile extends HttpServlet {
 				    user.setName(resultSet.getString("name"));
 				    user.setEmail(resultSet.getString("email"));
 				    user.setPhone(resultSet.getString("phone"));
+				    
+				    session.removeAttribute("name");
+				    session.removeAttribute("email");
+				    session.setAttribute("name", resultSet.getString("name"));
+				    session.setAttribute("email", resultSet.getString("email"));
+				    
+				    System.out.println(user);
 				}
 
 
@@ -142,7 +149,7 @@ public class Profile extends HttpServlet {
 				preparedStatement.setString(1, name);
 				preparedStatement.setString(2, email);
 				preparedStatement.setString(3, phone);
-				preparedStatement.setInt(4, Integer.parseInt((String) session.getAttribute("id"))); // Assuming 'id' is
+				preparedStatement.setInt(4, (int)session.getAttribute("id")); // Assuming 'id' is
 																									// an integer
 				/* -- Add more here -- */
 

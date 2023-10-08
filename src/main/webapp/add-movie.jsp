@@ -25,8 +25,8 @@
 <%@include file="inc/spinner.jsp"%>
 <%@include file="inc/navbar.jsp"%>
 
-	<section class="container text-center pt-2 mt-2 mt-md-4">			
-		<h2 class="h5 pt-2 pt-lg-0"> Manage Movies </h2>
+	<section class="container pt-2 mt-2 mt-md-4">			
+		<h2 class="h5 pt-2 pt-lg-0 text-center"> Manage Movies </h2>
 		
 		<!-- Button trigger modal -->
 		<div class="d-flex justify-content-end">
@@ -176,8 +176,9 @@
 							aria-label="Close"></button>
 					</div>
 					<!-- Form -->
-					<form class="text-start" action="/bsc/MovieUpdate" method="get">
+					<form class="text-start" action="/bsc/MovieUpdate" method="POST">
 					<div class="modal-body">
+						<input type = "hidden" name="movieID" value="<%=movies.get(i).getMovieID() %>">
 						<div class="mb-3" >
 							<label for="updateTitle" class="form-label">Title
 							</label> <input name="Title" type="text" class="form-control"
@@ -185,13 +186,25 @@
 						</div>
 						<div class="mb-3">
 							<label for="updateDesc" class="form-label">Description</label>
-							<input name="Description" type="text" class="form-control" id="updateDesc" value="<%=movies.get(i).getDescription()%>"
-							>
+							<textarea name="Description" class="form-control" id="updateDesc" rows="3"><%=movies.get(i).getDescription()%></textarea>
 						</div>
 						<div class="mb-3">
 							<label for="updateDate" class="form-label">Release Date</label>
-							<input name="ReleaseDate" type="date" class="form-control"
-								id="updateDate" value="<%=movies.get(i).getReleaseDate()%>">
+							<%
+							// Assuming movies.get(i).getReleaseDate() returns a string like "2022-05-27 00:00:00"
+							String dbDateStr = movies.get(i).getReleaseDate();
+							String formattedDateStr = ""; // Initialize a formatted date string
+							
+							// Parse the database date string
+							java.text.SimpleDateFormat dbDateFormat = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+							java.util.Date dbDate = dbDateFormat.parse(dbDateStr);
+							
+							// Format the date as a string in "yyyy-MM-dd" format for the HTML date input
+							java.text.SimpleDateFormat htmlDateFormat = new java.text.SimpleDateFormat("yyyy-MM-dd");
+							formattedDateStr = htmlDateFormat.format(dbDate);
+							%>
+							
+							<input name="ReleaseDate" type="date" class="form-control" id="updateDate" value="<%= formattedDateStr %>">
 						</div>
 						<div class="mb-3">
 							<label for="exampleFormControlTextarea1" class="form-label">Classification</label>
@@ -240,22 +253,10 @@
 		</tbody>
 	</table>
 
-	<%-- 	<%
-		Movies movie = (Movies) request.getAttribute("movies");
-		%> --%>
-
-		<!-- Modal -->
-		
 		
 	</section>
-	
-	
-	
-		<script src="assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-	<script
-		src="assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
-
-	<!-- Main Theme Script -->
-	<script src="assets/js/theme.min.js"></script>
+	<%@include file="inc/top-btn.jsp"%>
+	<%@include file="inc/footer.jsp"%>
+	<%@ include file="inc/footer-links.jsp" %>
 </body>
 </html>

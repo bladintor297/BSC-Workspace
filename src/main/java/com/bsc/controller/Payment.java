@@ -19,6 +19,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
@@ -36,11 +37,15 @@ public class Payment extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		String paymentID = (String) session.getAttribute("paymentID");
+		
+		String movieDate = (String) session.getAttribute("movieDate");
+	
 		int movieID = (int) session.getAttribute("movieID");
 		int movieSlotID = (int) session.getAttribute("movieSlotID");
 		int userID = 0;
 		String userName = null;
 		String userEmail = null;
+		int row = 0;
 		
 		if ((int)session.getAttribute("role") != 0) {
 			userID = (int) session.getAttribute("custID");
@@ -94,7 +99,7 @@ public class Payment extends HttpServlet {
     			String query = "INSERT INTO booking "
     					+ "(MovieSlotID, MovieID, PaymentID, UserID, UserEmail, CustName, Seat, BookingDate, Amount, Status) "
     					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    			PreparedStatement preparedStatement = con.prepareStatement(query);
+    			PreparedStatement preparedStatement = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
     			
     			//Add Booking to DB
     			preparedStatement.setInt(1, movieSlotID); // MovieSlotID
@@ -104,7 +109,7 @@ public class Payment extends HttpServlet {
     			preparedStatement.setString(5, userEmail); // UserEmail
     			preparedStatement.setString(6, userName); // CustName
     			preparedStatement.setString(7, seats); // Seat
-    			preparedStatement.setString(8, LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))); // BookingDate
+    			preparedStatement.setString(8, movieDate); // BookingDate
     			preparedStatement.setDouble(9, amount); // Amount
     			preparedStatement.setInt(10, 1); // Status
     			
@@ -138,9 +143,33 @@ public class Payment extends HttpServlet {
 				preparedStatement.executeUpdate();
 				
 				
+				/* INSERT INTO TABLE NOTIFICATION */
+    			
+    			query = "INSERT INTO notifications "
+    					+ "(Title, Content, DateTime, UserID) "
+    					+ "VALUES (?, ?, ?, ?) ";
+
+    			preparedStatement = con.prepareStatement(query);
+
+                preparedStatement.setString(1, "Successfull Booking (B" + String.format("%04d", bookingID) + ")");
+                preparedStatement.setString(2, "Your booking at " + movieDate +" is successfull");
+                preparedStatement.setString(3, LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+                preparedStatement.setInt(4, userID);
+                row = 1;
+
+				preparedStatement.executeUpdate();
 				
+				preparedStatement.setString(1, "Successfull Payment for Booking (B" + String.format("%04d", bookingID) + ")");
+                preparedStatement.setString(2, String.format("You have been charged with RM %f for your movie booking", amount));
+                preparedStatement.setString(3, LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+                preparedStatement.setInt(4, userID);
+				
+				preparedStatement.executeUpdate();
+				
+			
 				// Close resources
 				con.close();
+				generatedKeys.close();
 				preparedStatement.close();
 				
 				
@@ -149,7 +178,8 @@ public class Payment extends HttpServlet {
 				e.printStackTrace();
 			}
             
-            
+            session.removeAttribute("notificationCount");
+			session.setAttribute("notificationCount", row);
             response.sendRedirect("/bsc/Booking");
         } catch (StripeException e) {
             // Payment failed, handle the error appropriately

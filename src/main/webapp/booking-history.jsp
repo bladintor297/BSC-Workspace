@@ -46,9 +46,7 @@
 					  </li>
 	
 					</ul>
-					<div>
-						<button class="btn btn-danger"><i class='bx bxs-file-pdf'></i> &nbsp;&nbsp;  Generate Report</button>
-					</div>
+					
 				</div>
 
 
@@ -81,6 +79,7 @@
 					                <div class="px-md-4 position-relative zindex-5">
 					                  <div class="d-sm-flex align-items-start justify-content-between">
 					                    <div class="text-center text-sm-start me-sm-4">
+					                      <span class="text-muted fst-italic">Booking ID: #B<%= String.format("%04d", booking.getBookingID()) %></span>
 					                      <div class="h5 fst-italic fw-semibold text-light text-uppercase mb-1"><%= outputDateFormat.format(inputDateFormat.parse(booking.getBookingDate())) %></div>
 					                      <h3 class="h2 text-light"><%= booking.getTitle() %></h3>
 					                      <p class="text-muted pb-0 mb-0"><%= booking.getSlot() %> &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; 
@@ -179,15 +178,7 @@
 	</main>
 
 	<%@include file="inc/top-btn.jsp"%>
-
-
-
-	<!-- Vendor Scripts -->
-	<script src="assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-	<script
-		src="assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
-
-	<!-- Main Theme Script -->
-	<script src="assets/js/theme.min.js"></script>
+	<%@include file="inc/footer.jsp"%>
+	<%@ include file="inc/footer-links.jsp" %>
 </body>
 </html>

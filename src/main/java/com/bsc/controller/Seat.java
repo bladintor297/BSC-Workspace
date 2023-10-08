@@ -53,10 +53,14 @@ public class Seat extends HttpServlet {
 			HttpSession session = request.getSession();
 			int movieID = Integer.parseInt(request.getParameter("movieID"));
 			int movieSlotID = Integer.parseInt(request.getParameter("movieSlotID"));
+			String movieDate = request.getParameter("movieDate");
+			
 			String selectedValue = null;
 			String[] selectedValues = null;
 			String custID = null;
 			String custName = null;
+			
+			ArrayList<Seats> seatlist = new ArrayList<>();
 			
 			if ((int)session.getAttribute("role") != 0) {
 				selectedValue = request.getParameter("user");
@@ -78,11 +82,44 @@ public class Seat extends HttpServlet {
 				session.setAttribute("custName", custName);
 			}
 			
+			session.setAttribute("movieDate", movieDate);
 			
 			
+			try {
+				Class.forName("com.mysql.jdbc.Driver");
+				Connection con = DriverManager.getConnection(
+								"jdbc:mysql://localhost:3306/bsc?allowPublicKeyRetrieval=true&useSSL=false", 
+								"root",
+								"@dmin123");
+				
+				String query = "SELECT Seat FROM booking WHERE MovieSlotID = ?";
+				PreparedStatement preparedStatement = con.prepareStatement(query);
+				preparedStatement.setInt(1, movieSlotID);
+				
+				ResultSet resultSet = preparedStatement.executeQuery();
+				
+				while (resultSet.next()) {
+					String seatNumbers = resultSet.getString("Seat");
+					String[] seats = seatNumbers.split(", ");
+					for (String seat : seats) {
+					    
+						// Assuming you have a Seats constructor that takes a seat number
+					    Seats seatsObject = new Seats(seat);
+					    seatlist.add(seatsObject);
+					}
+				}
+				
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+			
 
-			response.sendRedirect("/bsc/seats.jsp");
+			request.setAttribute("seatslist", seatlist);
 
+			RequestDispatcher rd = request.getRequestDispatcher("seats.jsp");
+
+			rd.forward(request, response);
+			
 			out.println("</body>");
 			out.println("</html>");
 		}
@@ -162,6 +199,7 @@ public class Seat extends HttpServlet {
 				
 				
 				session.setAttribute("amount", amount);
+				System.out.print("Movie Date Session: " + session.getAttribute("movieDate"));
 				session.setAttribute("seats", seats.toString());
 			}catch (Exception e) {
 				e.printStackTrace();
@@ -173,6 +211,8 @@ public class Seat extends HttpServlet {
 
 			out.println("</body>");
 			out.println("</html>");
+			
+			
 		}
 	}
 }

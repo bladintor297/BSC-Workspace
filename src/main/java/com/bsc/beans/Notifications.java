@@ -6,15 +6,21 @@ public class Notifications {
 	private String content;
 	private String title;
 	private String dateTime;
+	private int isRead;
+	private int userID;
 	
 	public Notifications() {}
-	
-	public Notifications(int notificationID, String content, String title, String dateTime) {
+
+	public Notifications(int notificationID, String title, String content, String dateTime, int isRead, int userID) {
 		this.notificationID = notificationID;
 		this.content = content;
 		this.title = title;
 		this.dateTime = dateTime;
+		this.isRead = isRead;
+		this.userID = userID;
 	}
+
+
 
 	public int getNotificationID() {
 		return notificationID;
@@ -46,6 +52,22 @@ public class Notifications {
 
 	public void setDateTime(String dateTime) {
 		this.dateTime = dateTime;
+	}
+
+	public int getIsRead() {
+		return isRead;
+	}
+
+	public void setIsRead(int isRead) {
+		this.isRead = isRead;
+	}
+
+	public int getUserID() {
+		return userID;
+	}
+
+	public void setUserID(int userID) {
+		this.userID = userID;
 	}
 
 
