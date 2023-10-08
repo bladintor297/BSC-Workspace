@@ -118,6 +118,12 @@
 		<description></description>
 		<servlet-class>com.bsc.controller.AddNewUser</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>MovieUpdate</servlet-name>
+		<display-name>MovieUpdate</display-name>
+		<description></description>
+		<servlet-class>com.bsc.controller.MovieUpdate</servlet-class>
+	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>Register</servlet-name>
@@ -190,6 +196,10 @@
 	<servlet-mapping>
 		<servlet-name>AddNewUser</servlet-name>
 		<url-pattern>/AddNewUser</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>MovieUpdate</servlet-name>
+		<url-pattern>/MovieUpdate</url-pattern>
 	</servlet-mapping>
 
 </web-app>

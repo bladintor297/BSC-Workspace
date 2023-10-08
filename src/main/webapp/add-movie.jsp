@@ -156,12 +156,81 @@
 						<td>
 							<div class="d-grid my-auto gap-3">
 								<a href="AddMovieSlot?movieID=<%=movies.get(i).getMovieID()%>" class="btn btn-warning btn-sm">Add slot</a>
+								<a href="MovieUpdate?movieID=<%=movies.get(i).getMovieID()%>"  class="btn btn-primary btn-sm me-1"
+								data-bs-toggle="modal" data-bs-target="#updateMovie">
+								Update
+								</a>
 								<a  href="ManageMovie?movieID=<%=movies.get(i).getMovieID()%>" class="btn btn-danger btn-lg btn-block btn-sm">Delete</a>
-								
 							
-							</div>
+
+						</div>
 						</td>
 				</tr>
+				
+			<div class="modal fade" id="updateMovie" tabindex="-1" aria-labelledby="updateMovieLabel" aria-hidden="true">
+			<div class="modal-dialog ">
+				<div class="modal-content ">
+					<div class="modal-header">
+						<h1 class="modal-title fs-5 " id="updateMovieLabel">Update Movie</h1>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<!-- Form -->
+					<form class="text-start" action="/bsc/MovieUpdate" method="get">
+					<div class="modal-body">
+						<div class="mb-3" >
+							<label for="updateTitle" class="form-label">Title
+							</label> <input name="Title" type="text" class="form-control"
+								id="updateTitle" value="<%=movies.get(i).getTitle()%> ">
+						</div>
+						<div class="mb-3">
+							<label for="updateDesc" class="form-label">Description</label>
+							<input name="Description" type="text" class="form-control" id="updateDesc" value="<%=movies.get(i).getDescription()%>"
+							>
+						</div>
+						<div class="mb-3">
+							<label for="updateDate" class="form-label">Release Date</label>
+							<input name="ReleaseDate" type="date" class="form-control"
+								id="updateDate" value="<%=movies.get(i).getReleaseDate()%>">
+						</div>
+						<div class="mb-3">
+							<label for="exampleFormControlTextarea1" class="form-label">Classification</label>
+							 <select name="Classification" class="form-select" id="updateClass">
+									<option selected><%=movies.get(i).getClassification()%></option>
+									<option value="13">13</option>
+									<option value="16">16</option>
+									<option value="18">18</option>
+								</select>
+							</div>
+						<div class="mb-3">
+							<label for="exampleFormControlInput1" class="form-label">Genre</label>
+							<input name="Genre" type="text" class="form-control" placeholder="Musical, Comedy"
+								id="updateGenre" value="<%=movies.get(i).getGenre()%>">
+								
+						</div>
+							<div class="mb-3">
+								<label for="exampleFormControlInput1" class="form-label">Landscape
+									image </label> <input name="ImageLandscape" type="text" class="form-control"
+									placeholder="https://www.kenosha.com/wp-content/uploads/2023/08/et00072466-jjadjvahwx-landscape-copy.png"
+									id="updateLandscape" value="<%=movies.get(i).getImageLandscape()%>">
+							</div>
+							<div class="mb-3">
+							<label for="exampleFormControlTextarea1" class="form-label">Portrait image</label>
+							<input name="ImagePortrait" type="text" class="form-control" placeholder="https://media-cache.cinematerial.com/p/500x/q63ztpjf/barbie-movie-poster.jpg?v=1687352716"
+								id="updatePortrait" value="<%=movies.get(i).getImagePortrait()%>" >
+						</div>
+					</div>
+					<!--  -->
+					
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-bs-dismiss="modal">Cancel</button>
+						<button type="submit" class="btn btn-warning">Update</button>
+					</div>
+					</form>
+				</div>
+			</div>
+		</div>
 	
 				<%}%>
 				
@@ -170,6 +239,14 @@
 			
 		</tbody>
 	</table>
+
+	<%-- 	<%
+		Movies movie = (Movies) request.getAttribute("movies");
+		%> --%>
+
+		<!-- Modal -->
+		
+		
 	</section>
 	
 	
