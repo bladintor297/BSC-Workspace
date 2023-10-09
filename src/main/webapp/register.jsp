@@ -13,7 +13,7 @@
 <!-- Body -->
 <body>
 
-    <main class="page-wrapper">
+    <main class="page-wrapper" style="height:100vh">
 		
 	<%@include file="inc/spinner.jsp" %>
 

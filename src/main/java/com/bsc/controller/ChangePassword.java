@@ -6,7 +6,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -55,17 +57,8 @@ public class ChangePassword extends HttpServlet {
 				PreparedStatement preparedStatement = con.prepareStatement(query);
 
 				preparedStatement.setInt(1, (int)session.getAttribute("id")); 
-				
+				preparedStatement.executeQuery();
 
-				// Execute the query
-				ResultSet resultSet = preparedStatement.executeQuery();
-
-
-				if (resultSet.next()) {
-				    // Retrieve the data from the result set and set it in the Users object
-				    user.setPassword(resultSet.getString("setPassword"));
-;
-				}
 
 
 			} catch (Exception e) {
@@ -107,11 +100,14 @@ public class ChangePassword extends HttpServlet {
 			// Step 3: Get variables (if neccessary)
 
 			/* Example: */
-			String Password = request.getParameter("cnp");
+			String Password = request.getParameter("password");
+			String ConfirmNewPassword = request.getParameter("cnp");
+			String NewPassword = request.getParameter("np");
+			String password = null;
 			HttpSession session = request.getSession();
 			Users user_passed  = new Users();
-			user_passed.setPassword(Password);
-			
+			user_passed.setPassword(ConfirmNewPassword);
+			int row = 0;
 			
 			
 			// String password = request.getParameter("password");
@@ -127,25 +123,54 @@ public class ChangePassword extends HttpServlet {
 				String query = null;
 				PreparedStatement preparedStatement = null;
 
+				String query2 = "SELECT password FROM users WHERE id = ?";
+				preparedStatement = con.prepareStatement(query2);
+				preparedStatement.setInt(1, ((int) session.getAttribute("id")));
+				ResultSet rs = preparedStatement.executeQuery();
+				
+				while (rs.next()) {
+					password = rs.getString("Password");
+				}
+
+
+				
+				if (!password.equals(Password))
+					request.setAttribute("invalidPasswordMessage", "Invalid Password");
+				
 				// Step 6: Run query
 				query = "UPDATE users SET password = ? WHERE id = ?";
 				preparedStatement = con.prepareStatement(query);
+				preparedStatement = con.prepareStatement(query);
+				
 
 				// Step 7: Create single variable from arraylist
-				
-
+	
 				// Step 8: Set data to variable
-				preparedStatement.setString(1, Password);
-				preparedStatement.setInt(2, Integer.parseInt((String) session.getAttribute("id"))); // Assuming 'id' is
-																									// an integer
+				preparedStatement.setString(1, ConfirmNewPassword);
+				preparedStatement.setInt(2, ((int) session.getAttribute("id"))); // Assuming 'id' is an integer
 				/* -- Add more here -- */
-
-				// Step 9: Execute Query
-				preparedStatement.executeUpdate();
-				ResultSet resultSet = preparedStatement.executeQuery();
 				
-				u.setName(resultSet.getString("setPassword"));
+				
+				
 
+				/* INSERT INTO TABLE NOTIFICATION */
+    			
+    			query = "INSERT INTO notifications "
+    					+ "(Title, Content, DateTime, UserID) "
+    					+ "VALUES (?, ?, ?, ?) ";
+
+    			preparedStatement = con.prepareStatement(query);
+
+                preparedStatement.setString(1, "Password Changed");
+                LocalDateTime now = LocalDateTime.now();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+                String formattedDateTime = now.format(formatter);
+                preparedStatement.setString(2, "Your password has been changed at " + formattedDateTime);
+                preparedStatement.setString(3, LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+                preparedStatement.setInt(4, (int)session.getAttribute("id"));
+                row = 1;
+                
+                preparedStatement.executeUpdate();
 
 				
 
@@ -153,8 +178,13 @@ public class ChangePassword extends HttpServlet {
 				e.printStackTrace();
 			}
 			
+            session.removeAttribute("notificationCount");
+			session.setAttribute("notificationCount", row);
+			
 			request.setAttribute("user", u);
-			response.sendRedirect("/bsc/change-password.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("change-password.jsp");
+			rd.forward(request, response);
+
 			out.println("</body>");
 			out.println("</html>");
 

@@ -15,7 +15,7 @@
 	
 		<%@include file="inc/spinner.jsp"%>
 		
-		<main class="page-wrapper">
+		<main class="page-wrapper" style="height:100vh">
 	
 	      <!-- Page content -->
 	      <section class="position-relative h-100 pt-5 pb-4">

@@ -6,7 +6,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -43,7 +45,8 @@ public class Profile extends HttpServlet {
 
 			Users user = new Users();
 			HttpSession session = request.getSession();
-	
+			int row = 0;
+			
 			try {
 
 				Class.forName("com.mysql.jdbc.Driver");
@@ -74,11 +77,13 @@ public class Profile extends HttpServlet {
 				    
 				    System.out.println(user);
 				}
-
+				
 
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			
+            
 			request.setAttribute("user", user);
 			RequestDispatcher rd = request.getRequestDispatcher("profile.jsp");
 			rd.forward(request, response);
@@ -123,6 +128,7 @@ public class Profile extends HttpServlet {
 			user_passed.setEmail(email);
 			user_passed.setName(name);
 			user_passed.setPhone(phone);
+			int row = 0;
 			
 			
 			// String password = request.getParameter("password");
@@ -160,13 +166,33 @@ public class Profile extends HttpServlet {
 				u.setName(resultSet.getString("name"));
 			    u.setEmail(resultSet.getString("email"));
 			    u.setPhone(resultSet.getString("phone"));
-
-
+			    
 				
+				/* INSERT INTO TABLE NOTIFICATION */
+    			
+    			query = "INSERT INTO notifications "
+    					+ "(Title, Content, DateTime, UserID) "
+    					+ "VALUES (?, ?, ?, ?) ";
+
+    			preparedStatement = con.prepareStatement(query);
+
+                preparedStatement.setString(1, "Profile Update");
+                LocalDateTime now = LocalDateTime.now();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+                String formattedDateTime = now.format(formatter);
+                preparedStatement.setString(2, "Your profile credentials has been updated at " + formattedDateTime);
+                preparedStatement.setString(3, LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+                preparedStatement.setInt(4, (int)session.getAttribute("id"));
+                row = 1;
+                
+                preparedStatement.executeUpdate();
 
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			
+            session.removeAttribute("notificationCount");
+			session.setAttribute("notificationCount", row);
 			
 			request.setAttribute("user", u);
 			response.sendRedirect("/bsc/Profile");

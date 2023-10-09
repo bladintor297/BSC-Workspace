@@ -54,7 +54,9 @@ public class Notification extends HttpServlet {
 						"jdbc:mysql://localhost:3306/bsc?allowPublicKeyRetrieval=true&useSSL=false", "root",
 						"@dmin123");
 
-				String query = "SELECT * FROM notifications";
+				String query = "SELECT * "
+						+ "FROM notifications "
+						+ "ORDER BY NotificationID DESC";
 				PreparedStatement preparedStatement = con.prepareStatement(query);
 
 				// Execute the query

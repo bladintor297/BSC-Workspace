@@ -19,9 +19,9 @@
 						
 						
 						<% if ((int)session.getAttribute("role") != 0 ){ %>
-						<li><a class="nav-link text-warning"> | </a> </li>
+						<li><a class="nav-link text-white"> | </a> </li>
 						<li class="nav-item ms-1"><a href="/bsc/AddNewMovie" id="movie" class="nav-link navigation">Manage Movies</a></li>
-							<%  if ((int)session.getAttribute("role") == 1 )  {%>
+							<%  if ((int)session.getAttribute("role") == 2 )  {%>
 							<li class="nav-item"><a href="/bsc/AddMall" id="mall" class="nav-link navigation">Manage Mall</a></li>
 							<li class="nav-item"><a href="/bsc/AddNewUser" id="users" class="nav-link navigation">Manage Users</a></li>
 							<%} %>

@@ -24,8 +24,15 @@
         <div class="row">
           <!-- Sidebar (User info + Account menu) -->
           <%@include file="profile-aside.jsp"%>
-          
-          
+          <%
+			String invalidPasswordMessage = (String) request.getAttribute("invalidPasswordMessage");
+			if (invalidPasswordMessage != null) {
+			%>
+			<script>
+			    alert("<%= invalidPasswordMessage %>");
+			</script>
+		  <% } %>
+		          
           <!-- Password -->
           <div class="col-md-8 offset-lg-1 pb-5 mb-2 mb-lg-4  mt-md-0">
             <div class="ps-md-3 ps-lg-0 mt-md-2 pb-md-4">
