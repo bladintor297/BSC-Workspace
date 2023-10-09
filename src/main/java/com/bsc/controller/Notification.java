@@ -56,8 +56,11 @@ public class Notification extends HttpServlet {
 
 				String query = "SELECT * "
 						+ "FROM notifications "
+						+ "WHERE UserID = ? "
 						+ "ORDER BY NotificationID DESC";
+
 				PreparedStatement preparedStatement = con.prepareStatement(query);
+				preparedStatement.setInt(1, (int)session.getAttribute("id"));
 
 				// Execute the query
 				ResultSet resultSet = preparedStatement.executeQuery();

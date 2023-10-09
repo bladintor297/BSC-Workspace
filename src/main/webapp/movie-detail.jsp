@@ -75,7 +75,7 @@
 						<% }else { %>
 							/bsc/Login
 								<% } %>
-							" class="btn btn-warning shadow-warning mt-2 px-5 rounded-pill">But Ticket Now</a>
+							" class="btn btn-warning shadow-warning mt-2 px-5 rounded-pill">Buy Ticket Now</a>
                   </div>
 
               </div>

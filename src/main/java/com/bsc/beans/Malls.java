@@ -17,6 +17,11 @@ public class Malls {
         this.Address = Address;
 	}
 	
+	public Malls (String MallName, String Address) {
+        this.MallName = MallName;
+        this.Address = Address;
+	}
+	
 	
 	public String getMallName() {
 		return MallName;

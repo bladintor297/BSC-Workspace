@@ -109,7 +109,7 @@ public class AddMall extends HttpServlet {
 			out.println("</head>");
 			out.println("<body>");
 
-			ArrayList<Malls> malls = new ArrayList<>();
+			ArrayList<Malls> malllist = new ArrayList<>();
 			// Variable dari form
 			String mallName = request.getParameter("MallName");
 			String address = request.getParameter("Address");
@@ -127,13 +127,6 @@ public class AddMall extends HttpServlet {
 				PreparedStatement preparedStatement = con.prepareStatement(query);
 				
 
-				// Call constructor
-				Malls mall = new Malls();
-				mall.setMallName(mallName);
-				mall.setAddress(address);
-				
-				malls.add(mall);
-
 				preparedStatement.setString(1, mallName);
 				preparedStatement.setString(2, address);
 
@@ -146,12 +139,12 @@ public class AddMall extends HttpServlet {
 				ResultSet resultSet = preparedStatement.executeQuery();
 				
 				while (resultSet.next()) {
-					int mallId = resultSet.getInt("MallID");
-					String mallName1 = resultSet.getString("MallName");
-					String address1 = resultSet.getString("Address");
+					int _mallID= resultSet.getInt("MallID");
+					String _mallName = resultSet.getString("MallName");
+					String _address = resultSet.getString("Address");
 
-					Malls mall1 = new Malls (mallId, mallName1, address1);
-					malls.add(mall1);
+					Malls mall = new Malls (_mallID, _mallName, _address);
+					malllist.add(mall);
 				}
 				
 
@@ -163,7 +156,7 @@ public class AddMall extends HttpServlet {
 				e.printStackTrace();
 			}
 
-			request.setAttribute("malls", malls);
+			request.setAttribute("malls", malllist);
 			RequestDispatcher rd = request.getRequestDispatcher("add-mall.jsp");
 
 			rd.forward(request, response);

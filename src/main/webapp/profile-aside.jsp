@@ -1,4 +1,4 @@
-<aside class="col-lg-3 col-md-4 border-end pb-5 mt-n5">
+<aside class="col-lg-3 col-md-4 border-end pb-5 mt-n5" style="min-height:100vh;" >
 	<div class="position-sticky top-0">
 		<div class="text-center pt-5">
 			<div class="d-table position-relative mx-auto mt-2 mt-lg-4 pt-5 mb-3">

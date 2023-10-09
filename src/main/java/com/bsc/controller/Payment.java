@@ -155,7 +155,9 @@ public class Payment extends HttpServlet {
                 preparedStatement.setString(2, "Your booking at " + movieDate +" is successfull");
                 preparedStatement.setString(3, LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
                 preparedStatement.setInt(4, userID);
-                row = 1;
+                if ((int)session.getAttribute("role") == 0) {
+                	row = 1;
+                }
 
 				preparedStatement.executeUpdate();
 				

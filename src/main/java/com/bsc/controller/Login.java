@@ -95,7 +95,8 @@ public class Login extends HttpServlet {
 				
 				session.setAttribute("notificationCount", row);
 				  
-				dispatcher = request.getRequestDispatcher("/Welcome");
+				//dispatcher = request.getRequestDispatcher("/Welcome");
+				response.sendRedirect("/bsc/Welcome");
 			} else {
 				session.setAttribute("status", "failed");
 				System.out.println("Wrong email or password");

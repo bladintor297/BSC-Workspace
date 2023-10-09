@@ -4,15 +4,20 @@ import java.io.IOException;
 
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.bsc.beans.*;
 import com.bsc.model.DBConnection;
@@ -37,39 +42,9 @@ public class Register extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-		PrintWriter out = response.getWriter();
-		out.println("Welcome to first servlet");
-		Connection con;
-		Statement stmt;
-		ResultSet rs;
-		String query = "select * from user";
-		ArrayList<Users> userlist = new ArrayList<Users>();
+		
+		response.sendRedirect("register.jsp");
 
-		DBConnection db = new DBConnection();
-		try {
-			con = db.getCon();
-			if (con == null) {
-				out.println("Failed with connection" + con);
-			} else {
-				out.println("Successful with connection" + con);
-				stmt = con.createStatement();
-				rs = stmt.executeQuery(query);
-				while (rs.next()) {
-					Users user = new Users();
-					user.setName(rs.getString("name"));
-					user.setEmail(rs.getString("email"));
-					user.setPassword(rs.getString("password"));
-					userlist.add(user);
-				}
-				request.setAttribute("UserData", userlist);
-				request.getRequestDispatcher("jsp/UserList.jsp").forward(request, response);
-			}
-
-		} catch (SQLException ex) {
-			ex.printStackTrace();
-		}
 	}
 
 	/**
@@ -84,7 +59,7 @@ public class Register extends HttpServlet {
 		String name = request.getParameter("name");
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
-
+		HttpSession session = request.getSession();
 		Users rb = new Users();
 
 		rb.setName(name);
@@ -92,9 +67,30 @@ public class Register extends HttpServlet {
 		rb.setPassword(password);
 
 		UserDB ud = new UserDB();
-		String s1 = ud.insertUser(rb);
+		int userID = ud.insertUser(rb); // Get the generated user ID
 
-		System.out.println(s1);
+		// Insert notification with the user ID
+		String query = "INSERT INTO notifications "
+		        + "(Title, Content, DateTime, UserID) "
+		        + "VALUES (?, ?, ?, ?) ";
+		
+		DBConnection db = new DBConnection();
+		try (Connection con = db.getCon();
+		     PreparedStatement preparedStatement = con.prepareStatement(query)) {
+		    preparedStatement.setString(1, "Set Phone Number");
+		    preparedStatement.setString(2, "Please set your phone number");
+		    preparedStatement.setString(3, LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+		    preparedStatement.setInt(4, userID);
+		    int rowsInserted = preparedStatement.executeUpdate();
+		    if (rowsInserted > 0) {
+		    	session.removeAttribute("notificationCount");
+				session.setAttribute("notificationCount", rowsInserted);
+		    }
+		} catch (SQLException ex) {
+		    ex.printStackTrace();
+		}
+		
+
 		// out.println(name);
 		// out.println(email);
 		// out.println(password);

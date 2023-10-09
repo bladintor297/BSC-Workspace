@@ -82,7 +82,8 @@ public class MovieSlot extends HttpServlet {
 				        + "JOIN hall ON movieslot.Hall = hall.HallID "
 				        + "JOIN mall ON movieslot.Mall = mall.MallID "
 				        + "JOIN movie ON movieslot.MovieID = movie.MovieID "
-				        + "WHERE movieslot.MovieID = ?";
+				        + "WHERE movieslot.MovieID = ? "
+				        + "AND movieslot.status = 0";
 
 			    PreparedStatement preparedStatement = con.prepareStatement(query);
 			    preparedStatement.setInt(1, movieID); // Set the movieID parameter

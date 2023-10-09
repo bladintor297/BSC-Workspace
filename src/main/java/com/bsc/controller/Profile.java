@@ -172,10 +172,9 @@ public class Profile extends HttpServlet {
 	                preparedStatement.setString(2, "Your profile credentials have been updated at " + formattedDateTime);
 	                preparedStatement.setString(3, LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 	                preparedStatement.setInt(4, userID);
-	                preparedStatement.executeQuery();
+	                preparedStatement.executeUpdate();
+	                row++;
 	            }
-                
-
                 
     			// Close resources
                 preparedStatement.close();

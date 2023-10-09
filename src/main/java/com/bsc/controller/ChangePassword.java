@@ -123,23 +123,10 @@ public class ChangePassword extends HttpServlet {
 				String query = null;
 				PreparedStatement preparedStatement = null;
 
-				String query2 = "SELECT password FROM users WHERE id = ?";
-				preparedStatement = con.prepareStatement(query2);
-				preparedStatement.setInt(1, ((int) session.getAttribute("id")));
-				ResultSet rs = preparedStatement.executeQuery();
-				
-				while (rs.next()) {
-					password = rs.getString("Password");
-				}
 
-
-				
-				if (!password.equals(Password))
-					request.setAttribute("invalidPasswordMessage", "Invalid Password");
 				
 				// Step 6: Run query
 				query = "UPDATE users SET password = ? WHERE id = ?";
-				preparedStatement = con.prepareStatement(query);
 				preparedStatement = con.prepareStatement(query);
 				
 
@@ -148,10 +135,11 @@ public class ChangePassword extends HttpServlet {
 				// Step 8: Set data to variable
 				preparedStatement.setString(1, ConfirmNewPassword);
 				preparedStatement.setInt(2, ((int) session.getAttribute("id"))); // Assuming 'id' is an integer
+				
+				preparedStatement.executeUpdate();
 				/* -- Add more here -- */
-				
-				
-				
+		
+
 
 				/* INSERT INTO TABLE NOTIFICATION */
     			

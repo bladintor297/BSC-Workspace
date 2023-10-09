@@ -37,7 +37,7 @@
 
 <%@include file="inc/spinner.jsp"%>
 <%@include file="inc/navbar.jsp"%>
-	<section class="container text-center pt-2 mt-2 mt-md-4">			
+	<section class="container text-center pt-2 mt-2 mt-md-4" style="min-height: 100vh;">			
 		<h2 class="h5 pt-2 pt-lg-0"> Manage Mall </h2>
 		
 		<!-- Button trigger modal -->

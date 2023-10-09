@@ -16,6 +16,7 @@
     <main class="page-wrapper" style="height:100vh">
 		
 	<%@include file="inc/spinner.jsp" %>
+	<%@include file="inc/navbar.jsp"%>
 
       <!-- Page content -->
       <section class="position-relative h-100 pt-5 pb-4">

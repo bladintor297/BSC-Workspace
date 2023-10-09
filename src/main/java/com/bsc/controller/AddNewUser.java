@@ -98,9 +98,9 @@ public class AddNewUser extends HttpServlet {
 
 
 		UserDB ud = new UserDB();
-		String s1 = ud.insertUser(rb);
 
-		System.out.println(s1);
+
+
 		// out.println(name);
 		// out.println(email);
 		// out.println(password);

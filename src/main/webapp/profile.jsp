@@ -27,18 +27,37 @@
          <%@include file="profile-aside.jsp"%>
 
           <!-- Account details -->
-          <div class="col-md-8 offset-lg-1 pb-5 mb-2 mb-lg-4  mt-md-0">
-            <div class="ps-md-3 ps-lg-0 mt-md-2 pb-md-4">
+          <div class="col-md-8 offset-lg-1 pb-5 mb-2 mb-lg-4 pt-lg-5 mt-md-0" >
+            <div class="ps-md-3 ps-lg-0 mt-md-2 pb-md-4 pt-lg-5 mt-5">
               <h1 class="h2 pb-3">Account Details</h1>
 
               <!-- Basic info -->
               <h2 class="h5 text-warning mb-4">Basic info</h2>
               
               <% 
-              Users user = (Users) request.getAttribute("user");  %>
+              Users user = (Users) request.getAttribute("user");  
+              int userID = (int) session.getAttribute("id"); 
+              int role = (int) session.getAttribute("role"); 
+              String userLabel = null; %>
               
               <form class="needs-validation border-bottom pb-3 pb-lg-4"  action="/bsc/Profile" method="POST"  novalidate>
                 <div class="row pb-2">
+                  <div class="col-sm-6 mb-4">
+                    <label for="fn" class="form-label fs-base">
+                    	<% if (role != 0) { 
+                    		userLabel = "ST";%>
+                    		Staff
+                    	<%} else { 
+                    		userLabel = "CS";%>
+                    		Customer
+                    	<%} %>
+                     ID</label>
+                    <input type="text" id="fn" name="name" class="form-control form-control-lg text-start" value="
+
+                    <%= String.format("%S%04d", userLabel.trim(), userID) %>" readonly>
+
+                  </div>
+                  
                   <div class="col-sm-6 mb-4">
                     <label for="fn" class="form-label fs-base">Full name</label>
                     <input type="text" id="fn" name="name" class="form-control form-control-lg" value="<%= user.getName() %>" required>

@@ -26,16 +26,22 @@
           <%@include file="profile-aside.jsp"%>
           <%
 			String invalidPasswordMessage = (String) request.getAttribute("invalidPasswordMessage");
+            String successPasswordMessage = (String) request.getAttribute("successPasswordMessage");
 			if (invalidPasswordMessage != null) {
 			%>
 			<script>
 			    alert("<%= invalidPasswordMessage %>");
 			</script>
+		  <% }else if (successPasswordMessage != null) { %>
+
+			<script>
+			    alert("<%= successPasswordMessage %>");
+			</script>
 		  <% } %>
 		          
           <!-- Password -->
-          <div class="col-md-8 offset-lg-1 pb-5 mb-2 mb-lg-4  mt-md-0">
-            <div class="ps-md-3 ps-lg-0 mt-md-2 pb-md-4">
+          <div class="col-md-8 offset-lg-1 pb-5 mb-2 mb-lg-4  mt-md-0 pt-lg-5 ">
+            <div class="ps-md-3 ps-lg-0 mt-md-2 pb-md-4  pt-lg-5 mt-5">
               <h1 class="h2 pb-3">Password</h1>
 
               <!-- Basic info -->
