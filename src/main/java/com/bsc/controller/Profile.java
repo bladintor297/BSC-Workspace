@@ -77,7 +77,7 @@ public class Profile extends HttpServlet {
 				    
 				    System.out.println(user);
 				}
-				
+				 
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -123,11 +123,11 @@ public class Profile extends HttpServlet {
 			String email = request.getParameter("email");
 			String name = request.getParameter("name");
 			String phone = request.getParameter("phone");
+			
 			HttpSession session = request.getSession();
-			Users user_passed  = new Users();
-			user_passed.setEmail(email);
-			user_passed.setName(name);
-			user_passed.setPhone(phone);
+			int userID = (int)session.getAttribute("id");
+			 Users user = new Users();
+			
 			int row = 0;
 			
 			
@@ -143,54 +143,50 @@ public class Profile extends HttpServlet {
 				// Step 5: Initialize MySQL Variables
 				String query = null;
 				PreparedStatement preparedStatement = null;
-
-				// Step 6: Run query
-				query = "UPDATE users SET name = ?, email = ?, phone = ? WHERE id = ?";
-				preparedStatement = con.prepareStatement(query);
-
-				// Step 7: Create single variable from arraylist
 				
+				// Update the user object with the new information
+	            user.setName(name);
+	            user.setEmail(email);
+	            user.setPhone(phone);
 
-				// Step 8: Set data to variable
-				preparedStatement.setString(1, name);
-				preparedStatement.setString(2, email);
-				preparedStatement.setString(3, phone);
-				preparedStatement.setInt(4, (int)session.getAttribute("id")); // Assuming 'id' is
-																									// an integer
-				/* -- Add more here -- */
+	            // Update the user object in the session
+	            session.setAttribute("user", user);
 
-				// Step 9: Execute Query
-				preparedStatement.executeUpdate();
-				ResultSet resultSet = preparedStatement.executeQuery();
-				
-				u.setName(resultSet.getString("name"));
-			    u.setEmail(resultSet.getString("email"));
-			    u.setPhone(resultSet.getString("phone"));
-			    
-				
-				/* INSERT INTO TABLE NOTIFICATION */
-    			
-    			query = "INSERT INTO notifications "
-    					+ "(Title, Content, DateTime, UserID) "
-    					+ "VALUES (?, ?, ?, ?) ";
+	            query = "UPDATE users SET name = ?, email = ?, phone = ? WHERE id = ?";
+	            preparedStatement = con.prepareStatement(query);
+	            preparedStatement.setString(1, name);
+	            preparedStatement.setString(2, email);
+	            preparedStatement.setString(3, phone);
+	            preparedStatement.setInt(4, userID); // Assuming 'id' is an integer
 
-    			preparedStatement = con.prepareStatement(query);
+	            int rowsUpdated = preparedStatement.executeUpdate();
 
-                preparedStatement.setString(1, "Profile Update");
-                LocalDateTime now = LocalDateTime.now();
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-                String formattedDateTime = now.format(formatter);
-                preparedStatement.setString(2, "Your profile credentials has been updated at " + formattedDateTime);
-                preparedStatement.setString(3, LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-                preparedStatement.setInt(4, (int)session.getAttribute("id"));
-                row = 1;
+	            // Insert a notification
+	            if (rowsUpdated > 0) {
+	                query = "INSERT INTO notifications (Title, Content, DateTime, UserID) VALUES (?, ?, ?, ?)";
+	                preparedStatement = con.prepareStatement(query);
+	                preparedStatement.setString(1, "Profile Update");
+	                LocalDateTime now = LocalDateTime.now();
+	                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+	                String formattedDateTime = now.format(formatter);
+	                preparedStatement.setString(2, "Your profile credentials have been updated at " + formattedDateTime);
+	                preparedStatement.setString(3, LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+	                preparedStatement.setInt(4, userID);
+	                preparedStatement.executeQuery();
+	            }
                 
-                preparedStatement.executeUpdate();
+
+                
+    			// Close resources
+                preparedStatement.close();
+                con.close();
+                
 
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			
+
             session.removeAttribute("notificationCount");
 			session.setAttribute("notificationCount", row);
 			
